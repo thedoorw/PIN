@@ -12,7 +12,7 @@
 - [永久創作及 CHAT／WORK 操作規則](./governance/PIN_OPERATING_RULES.md)。
 - [網站發布、備份與驗證規則](./governance/PIN_PUBLISH_RULES.md)。
 - [網站名稱與 Favicon](./governance/PIN_SITE_SETTINGS.md) — 本機預覽與正式公開設定。
-- [待整合 UI／型錄清理規格](./governance/PIN_UI_PENDING_REVIEW_20261011.md) — 先累積偏好，使用者確認後再統一實作。
+- [PIN 目前工作狀態／待辦](./governance/PIN_UI_PENDING_REVIEW_20261011.md) — 最新完成版本、未完成關卡、下個動作（換窗從此接續）。
 - [建立來源及移轉紀錄](./research/ORIGIN_AND_MIGRATION_20261011.md)。
 
 ## 工作分工
@@ -45,10 +45,10 @@
 
 **這是預定網址，不代表 Pages 已啟用或瀏覽器驗收完成。** 發布前後可執行 `node tools/verify.mjs`。用瀏覽器本機直接打開 HTML 可能受 `file://` 的 JSON fetch 限制，建議使用靜態 HTTP 伺服器。
 
-## 個人標記與移站
+## 個人標記及舊站退役
 
-勾選「不考慮」、個人文字備註與自行選擇的縮圖儲存在**瀏覽器本機**；不同網域不會自動同步。由 Val Town 舊站移至 GitHub Pages 之前，**先在舊站匯出含縮圖的 JSON，於新站匯入，再確認成果**。不要直接把備份檔提交到 Public Repo。
+目前正式 PIN 網站已部署於 [GitHub Pages](https://thedoorw.github.io/PIN/)，唯一正式來源為本 Repo `main`。個人「不考慮」等標記儲存在瀏覽器本機，請勿公開備份中的私人資料。
 
-在使用者驗收前保留舊的 https://ink-visual-catalog.val.run/ 可用，不自行關閉。保留研究來源、ID 與其他權威證據。
+**USER 已明確決定不轉移任何舊 Val Town 個人資料**，將直接在 PIN 重新篩選。原 Val Town `thedoorw/ink-visual-catalog-demo` 已獲刪除授權但**尚未刪除**。當前確切狀態及下一步，請先讀 [PIN 現況／待辦](./governance/PIN_UI_PENDING_REVIEW_20261011.md)。保留研究 ID 及歷史歸檔，不誤刪其他 Val 或 GitHub Repo。
 
-**禁止未經授權啟動 IMAGE。** 此 Repo 的工作方法持續以使用者創作目標和實際視覺品質為優先。
+**禁止未經授權啟動 IMAGE。** 本 Repo 工作方法持續以使用者創作目的與實際視覺品質為優先。

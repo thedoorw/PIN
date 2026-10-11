@@ -10,11 +10,11 @@
 
 ## 發布檢查
 
-執行 `node tools/verify.mjs`，確認 JSON 與 JavaScript、ID 唯一、沒有混入已知付費資料、作品來源及必要相對路徑。網站測試最少包含：ATN/JSX/SCRIPT/RECIPE 切換、風格多選、縮圖連結、詳細資料、備註勾選、匯入及匯出。對完整瀏覽器互動、來源圖是否可載入及部署版本身份不應推測。
+執行 `node tools/verify.mjs`，確認 JSON 與 JavaScript、ID 唯一、沒有混入已知付費資料、作品來源及必要相對路徑。網站測試最少包含：目前三類（海報／字體／成熟作品）篩選、縮圖原作連結、來源限定下拉、右側無文字篩除勾選、三點設定的 click-away／Escape、本機設定與正式外觀載入。對完整瀏覽器互動、來源圖是否可載入及部署版本身份不應推測。
 
-**先移轉個人資料再考慮關閉舊站：** Val Town 與 GitHub Pages 不是相同網域，私有 localStorage／IndexedDB 不會自動同步。舊站匯出含本機圖片的 JSON，在 Pages 新站匯入，確認沒有資料遺失。
+**USER 已放棄舊 Val Town 個人資料移轉**，改為在 GitHub Pages 的 PIN 重新篩選。舊專案刪除僅限 `thedoorw/ink-visual-catalog-demo`，先核實 Pages 狀況及真正刪除對象；不可刪除其他 Val、GitHub Repository 或歷史研究。
 
-未獲使用者同意前不刪除舊 Val Town 網站，也不改動 INK 主程式。
+舊 Val Town PIN 專案已有 USER 刪除授權，但尚未執行。任何 INK 主程式修改仍須遵守 INK-Browser-QA Private SSOT 與正式權責。
 
 ## 網站外觀設定
 

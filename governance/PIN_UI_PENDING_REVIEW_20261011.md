@@ -1,8 +1,42 @@
 # PIN UI 與型錄整理待辦 — 使用者意見彙整
 
-**狀態：58 筆型錄整理完成；三點設定、點留白關閉、卡片來源限定與右側無文字篩除框均已完成。下一階段等待 USER 提供 Recipe 網站案例。**
+**狀態：58 筆型錄與介面前三項已實作、Pages 發布成功；實際 USER 瀏覽器互動驗收尚未回報；Val Town 舊專案刪除待執行；後續等待 USER 提供 Recipe 參考網站。**
 
 此文件保留歷次 PIN UI 討論與已執行結果；早期待辦文字是原始決策背景，**實際完成狀態以頂部與 E 節為準**。PIN 主資料與網站仍以本 Repo main 為唯一 SSOT。
+
+## 0. 視窗結束前的 PR 現況登錄（2026-10-11）
+
+```text
+OWNER_ROLE                = PR / Produce + PIN + reciPe Review
+TASK                      = PIN static gallery UI simplification and Val Town retirement
+AUTHORITY_REPO            = thedoorw/PIN
+CURRENT_BRANCH            = main
+BASE_SHA                  = 9bef98fc5559107cbd59cf29554256a292d037ae
+UI_IMPLEMENTATION_SHA     = 51b54e4c769cf9e2ae7063abecf46627ec79c47d
+LAST_VERIFIED_PRE_HANDOFF = b206f02824a0e6e7bc95e335f4058ffc36c66354
+PAGES_RUN                 = 38139705177 / SUCCESS (for b206f028...)
+PIN_ACTIVE_RECORDS        = 58 (海報、字體、成熟作品)
+UI_STATUS                 = SOURCE_IMPLEMENTED / PAGES_SUCCESS
+USER_VISUAL_ACCEPTANCE    = NOT_YET_VERIFIED_IN_THIS_WINDOW
+VAL_TOWN_RETIREMENT       = PENDING; exact target thedoorw/ink-visual-catalog-demo
+USER_CHECKPOINT_REQUIRED  = USER supplies website references before new Recipe discovery; deletion tool confirmation if required
+NEXT_EXECUTABLE_ACTION    = confirm live UI behavior + delete only obsolete Val Town catalog; then wait for USER examples
+```
+
+**本次換窗只作 GitHub SSOT 狀態登錄，沒有新增 UI 功能、沒有刪除 Val Town。**
+
+已完成的三項（不可在新視窗誤判為未開始）：
+1. 網頁右上角的 36px 級別 `⋯` 設定按鈕；設定打開後可點面板外或按 Escape 關閉，原設定內容保留。
+2. 每張 PIN 展開欄位只呈現來源連結；過時的備註、測試、標籤編輯及縮圖管理不再在卡片詳細區呈現。
+3. 無文字的「不考慮」勾取方塊移到研究 ID 右側、下拉上方，原 localStorage 標記機制仍在。
+
+以上有 GitHub source commit 與 Pages SUCCESS，**尚不代表真實瀏覽器點擊、可見對齊、個人標記等全面 PASS**；新視窗先查看當前網站 `https://thedoorw.github.io/PIN/` 及必要的互動證據，不能只因 Actions SUCCESS 宣稱使用者已驗收。
+
+USER 已表示不需要 Val Town 舊資料，明確要求完全移除過時網站；只授權處理原 PIN 舊 Val `thedoorw/ink-visual-catalog-demo`，不得誤刪其他 Val 或 GitHub 資料。確認 GitHub Pages 仍獨立可用後可依工具的永久刪除確認流程處理，並核實刪除結果。此動作**目前尚未執行**。
+
+下一輪研究方向：USER 認為先前收集成果多數不成熟、不完整且不是預期 Recipe 形式。**等 USER 自行提供幾組網站並討論審美與 Recipe 定義後才啟動新一輪研究**；不可自動恢復舊批次大蒐集或把舊研究候選稱為可執行 Recipe。
+
+相關 INK 角色權威：`thedoorw/INK-Browser-QA/governance/roles/INK_SMR_STUDIO_TRANSLATION_MR.md`。舊研究 Pull Request `INK-Browser-QA#218` 仍 Open／未合併，屬來源與可追溯研究，不是 PIN 網站的即時工作指令；不得為完成 PIN 工作擅自修改 INK Core 或公開 `/INK/`。
 
 ## A. 已確認的 UI 修改偏好
 
