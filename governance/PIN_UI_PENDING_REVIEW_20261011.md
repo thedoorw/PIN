@@ -112,3 +112,9 @@ USER 已提供四個明確的成熟作品網站，並確認「成熟作品參考
 - 後續工作採雙軌、小批量：A 成熟完整作品及個人視覺風格；B 可取得、有實際成果展示的工具／原始碼／技法與可重現流程。可沿用現有 `ATN`／`JSX`／`SCRIPT`／`WORKFLOW`／`RECIPE` 類型，與 A 一起進同一 `catalog/entries.json`，嚴守現行三類主頁展示限制。
 - 每批先刊登已核實來源，提供 USER 在 PIN 觀看、篩選及討論；再按回饋調整下一批。不可用研究候選數推估 Runtime 支援度，亦不可把付費下載品標成免費。
 - 此批為資料收錄，沒有使用 IMAGE、沒有更動 INK Core，亦沒有獲得 USER 瀏覽器視覺驗收。
+
+## G. 2026-10-11 USER clarification — collect actual Recipe/JSX, not reference websites
+
+USER clarified that Sanna Annukka / Evan Hecox / PosterLad / Tony Sjöman are style search references only, NOT the items to be shown in PIN. The four `PR-001`–`PR-004` portfolio cards were removed from the active catalog. New source commit `024ea304c5839da7a599bb7856e9443ce8e30b25` adds three source-traceable Illustrator JSX candidates: `R-JSX-001` RepeatAfterMe grid/brick repeats, `R-JSX-002` IllustratorArt CMYK random rectangles, and `R-JSX-003` creold Illustrator scripts (library lead; requires per-script qualification). Existing `G007`/`X002` Processing Posters and `X001` generative-poster were already in PIN, so they were not duplicated. Active catalog = 61 records.
+
+Source research is NOT INK Runtime support: three additions are `untested` and must be assessed per-script for external dependencies, translation boundary and artwork quality before runtime or visual reproduction claims. Keep artist websites as SEARCH CRITERIA only; continue finding finished-output-backed technical recipes/JSX in small batches. No IMAGE generation.
