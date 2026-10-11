@@ -11,7 +11,7 @@ const imageSelect = document.getElementById("image-filter");
 const testSelect = document.getElementById("test-filter");
 const hideExcluded = document.getElementById("hide-excluded");
 const statusLine = document.getElementById("saved-state");
-let items = [], type = "ALL", term = "", access = "all", test = "all", imageMode = "pictured", visibleLimit = 40;
+let items = [], type = "ALL", term = "", access = "all", test = "all", imageMode = "all", visibleLimit = 40;
 const loadMore = document.getElementById("load-more");
 let annotations = Object.create(null);
 const IMAGE_MAX_BYTES = 5 * 1024 * 1024;
@@ -234,7 +234,7 @@ function render() {
   const groups=[...grouped.entries()].map(([key,records])=>{
     const candidates=[...records].sort((a,b)=>Number(localImageIds.has(b.id)||!!getAnnotation(b.id).imageUrl)-Number(localImageIds.has(a.id)||!!getAnnotation(a.id).imageUrl)||imagePriority(b)-imagePriority(a));
     return {primary:candidates[0],linked:allByKey.get(key)||records,rank:imagePriority(candidates[0])};
-  }).sort((a,b)=>Number(currentImageAvailable(b.primary))-Number(currentImageAvailable(a.primary))||b.rank-a.rank||a.primary.id.localeCompare(b.primary.id));
+  }).sort((a,b)=>Number(/^PR-00[1-4]$/.test(b.primary.id))-Number(/^PR-00[1-4]$/.test(a.primary.id))||Number(currentImageAvailable(b.primary))-Number(currentImageAvailable(a.primary))||b.rank-a.rank||a.primary.id.localeCompare(b.primary.id));
   counter.textContent=groups.length+" 個 PIN · "+searchable.length+" 筆研究";
   root.replaceChildren();
   const frag=document.createDocumentFragment();
@@ -247,8 +247,8 @@ function render() {
   updateCounts();syncImageCount();
 }
 function resetFilters() {
-  type="ALL";term="";access="all";test="all";imageMode="pictured";visibleLimit=40;
-  search.value="";accessSelect.value="all";testSelect.value="all";imageSelect.value="pictured";
+  type="ALL";term="";access="all";test="all";imageMode="all";visibleLimit=40;
+  search.value="";accessSelect.value="all";testSelect.value="all";imageSelect.value="all";
   hideExcluded.checked=false;
   document.querySelectorAll("[data-type]").forEach(b=>{
     const active=b.dataset.type==="ALL";
