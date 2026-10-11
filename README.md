@@ -12,6 +12,7 @@
 - [永久創作及 CHAT／WORK 操作規則](./governance/PIN_OPERATING_RULES.md)。
 - [網站發布、備份與驗證規則](./governance/PIN_PUBLISH_RULES.md)。
 - [網站名稱與 Favicon](./governance/PIN_SITE_SETTINGS.md) — 本機預覽與正式公開設定。
+- [待整合 UI／型錄清理規格](./governance/PIN_UI_PENDING_REVIEW_20261011.md) — 先累積偏好，使用者確認後再統一實作。
 - [建立來源及移轉紀錄](./research/ORIGIN_AND_MIGRATION_20261011.md)。
 
 ## 工作分工
