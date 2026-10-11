@@ -35,11 +35,12 @@ if (!html.includes('data-type="POSTER"') || !html.includes('data-type="TYPOGRAPH
 if (html.includes('data-style="3D"') || html.includes('data-style="幾何形"')) errors.push("Retired style tabs still displayed");
 if (!read("README.md").includes("我說.md")) errors.push("Root README must link user notes");
 const illustrated = entries.filter(x => x.image).length;
-console.log(JSON.stringify({catalog:"PIN",items:entries.length,illustrated,linkOnly:entries.length-illustrated,errors},null,2));
-if (errors.length) process.exitCode = 1;
-
 const settingsSource = read("site-settings.js");
 if (!html.includes('class="site-settings-trigger"') || !html.includes("⋯")) errors.push("Missing three-dot settings button");
 if (!settingsSource.includes('document.addEventListener("pointerdown"') || !settingsSource.includes('event.key === "Escape"')) errors.push("Missing settings click-away or Escape support");
 if (!js.includes('className = "pin-reject"') || !js.includes('"detail-toggle", "來源"')) errors.push("Missing source-only PIN card layout");
 if (js.includes('"image-edit-trigger"') || js.includes('"memo-label"') || js.includes('"linked-record"')) errors.push("Legacy per-card editor remains in render function");
+
+console.log(JSON.stringify({catalog:"PIN",items:entries.length,illustrated,linkOnly:entries.length-illustrated,errors},null,2));
+if (errors.length) process.exitCode = 1;
+
