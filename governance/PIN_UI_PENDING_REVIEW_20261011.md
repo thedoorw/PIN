@@ -1,6 +1,6 @@
 # PIN UI 與型錄整理待辦 — 使用者意見彙整
 
-**狀態：58 筆型錄與介面前三項已實作、Pages 發布成功；公開 PIN Live 已再次取得 HTTP 200；實際 USER 瀏覽器互動驗收尚未回報；Val Town 舊專案已刪除並驗證 404；後續等待 USER 提供 Recipe 參考網站。**
+**狀態：58 筆型錄與介面前三項已實作、Pages 發布成功；公開 PIN Live 已再次取得 HTTP 200；實際 USER 瀏覽器互動驗收尚未回報；Val Town 舊專案已刪除並驗證 404；四個 USER 參考網站已收錄；雙軌小批量 Recipe 研究已獲啟動。**
 
 此文件保留歷次 PIN UI 討論與已執行結果；早期待辦文字是原始決策背景，**實際完成狀態以頂部與 E 節為準**。PIN 主資料與網站仍以本 Repo main 為唯一 SSOT。
 
@@ -102,3 +102,13 @@ USER 要求設定按鈕比照 ChatGPT 再提高，以及保留 PIN 核取方塊�
 ## G. 2026-10-11 右上角設定定位修正
 
 USER 提供實際 Chrome 截圖確認上一版設定按鈕仍靠近 PIN 標題，未達預期。已修正 `index.html`：以 `header{position:relative}` 及 `.site-settings{position:absolute;right:0;top:-16px;margin:0}` 將按鈕定位到頁首右上，而非以標題列負邊距微調。保留 36×36px 按鈕、13×13px PIN 勾選方塊及既有互動。Exact implementation commit `b51db9e5d58ca3216f41ee407a57631f184e0a21`；Pages run `38143074611` 檢查時 IN_PROGRESS，USER 截圖視覺驗收仍待確認。
+
+## F. 2026-10-11 PR 新一輪雙軌研究啟動
+
+USER 已提供四個明確的成熟作品網站，並確認「成熟作品參考」及「現成工具／程式／操作流程」兩類同時蒐集；優先確認來源真實存在並先刊登 PIN，之後再逐批討論方向。不必先決定固定風格配額或一次大量研究。
+
+- 新增於唯一型錄 `catalog/entries.json`：`PR-001` Sanna Annukka、`PR-002` Evan Hecox、`PR-003` PosterLad、`PR-004` Tony Sjöman；source commit `32f786534f086656681a642405921e07f3eeacf2`。
+- 四筆屬 `MATURE`／USER reference，原站網址已確認可取得；未加入未核實圖片；`testStatus=untested`、`access=unknown`，不表示可下載或重製作品，也不表示已找到對應 INK Runtime Recipe。
+- 後續工作採雙軌、小批量：A 成熟完整作品及個人視覺風格；B 可取得、有實際成果展示的工具／原始碼／技法與可重現流程。可沿用現有 `ATN`／`JSX`／`SCRIPT`／`WORKFLOW`／`RECIPE` 類型，與 A 一起進同一 `catalog/entries.json`，嚴守現行三類主頁展示限制。
+- 每批先刊登已核實來源，提供 USER 在 PIN 觀看、篩選及討論；再按回饋調整下一批。不可用研究候選數推估 Runtime 支援度，亦不可把付費下載品標成免費。
+- 此批為資料收錄，沒有使用 IMAGE、沒有更動 INK Core，亦沒有獲得 USER 瀏覽器視覺驗收。
