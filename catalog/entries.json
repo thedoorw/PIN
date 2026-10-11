@@ -1331,28 +1331,26 @@
     },
     {
       "id": "R-JSX-003",
-      "title": "creold — Illustrator JSX 圖形處理腳本庫",
-      "url": "https://github.com/creold/illustrator-scripts",
+      "title": "RandomScribble — Illustrator 隨機線條 JSX",
+      "url": "https://github.com/creold/illustrator-scripts/blob/master/md/Draw.md#randomscribble",
       "type": "JSX",
-      "description": "可取得多項 Illustrator JSX 腳本及使用說明，作為幾何圖形、物件操作與版面流程候選庫；需逐支挑選後才能稱作具體 Recipe。",
-      "credit": "creold / illustrator-scripts; MIT license",
+      "description": "RandomScribble.jsx 使用可指定點數的隨機折線／塗鴉路徑，限制在畫板或選取物件邊界內；原作者提供 GIF 操作示範。",
+      "credit": "creold / RandomScribble official documentation GIF",
       "styleTags": [
         "海報"
       ],
       "batch": 10,
-      "image": "",
-      "imageEvidence": "",
-      "sourceStatus": "SOURCE_CODE_VERIFIED / RECIPE_CANDIDATE / INK_UNTESTED",
+      "image": "https://i.ibb.co/b6FftPk/Random-Scribble.gif",
+      "imageEvidence": "SOURCE_README",
+      "sourceStatus": "SOURCE_CODE_DOCUMENTED / SOURCE_DOC_DEMO / INK_UNTESTED",
       "access": "free",
       "accessLabel": "公開原始碼可取得",
       "accessDetail": "公開 repository 可讀；使用與再散布依原授權及各檔規定。",
       "testStatus": "untested",
       "testLabel": "INK 未測試",
       "testDetail": "Illustrator JSX 存在不代表 INK Translator 可執行此腳本；需要另行逐項轉譯驗證。",
-      "imageMissingReason": "未使用非原作品縮圖；原始碼與示範於來源網站檢視",
-      "imageGapCode": "CODE_OR_WORKFLOW",
-      "showcaseUrl": "https://github.com/creold/illustrator-scripts",
-      "showcaseKind": "source-code-with-examples"
+      "showcaseUrl": "https://github.com/creold/illustrator-scripts/blob/master/md/Draw.md#randomscribble",
+      "showcaseKind": "original-script-demo"
     }
   ],
   "curation": {
