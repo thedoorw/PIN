@@ -105,5 +105,18 @@
     } catch {}
     fill(v); apply(v);
   }
+  // Click-away and Escape close the settings panel without disturbing its controls.
+  const panel = el("site-settings-panel");
+  if (panel) {
+    document.addEventListener("pointerdown", event => {
+      if (panel.open && !panel.contains(event.target)) panel.open = false;
+    });
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && panel.open) {
+        panel.open = false;
+        panel.querySelector("summary")?.focus();
+      }
+    });
+  }
   init();
 })();

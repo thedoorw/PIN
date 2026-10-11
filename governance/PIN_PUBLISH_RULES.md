@@ -19,3 +19,7 @@
 ## 網站外觀設定
 
 公開名稱與 Favicon 以 `config/site.json` 為準；網站面板可先在瀏覽器本機預覽，匯出 JSON 並提交 Repo 後才會公開。參考 [PIN_SITE_SETTINGS.md](./PIN_SITE_SETTINGS.md)。
+
+## PIN 2026-10-11 瀏覽介面
+
+每張 PIN 的詳細資料下拉只呈現作者／作品來源連結，勾選篩除移到來源下拉上方右側。其他過時的每卡操作不再顯示。三點設定點留白關閉；資料仍由 `catalog/entries.json` 提供。

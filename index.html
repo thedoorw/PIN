@@ -186,10 +186,41 @@ footer{font-size:11px;color:#7e8c7f;border-top:1px solid #dee7de;margin-top:35px
 .site-settings-actions .settings-primary{background:#2f513c;border-color:#2f513c;color:#fff}
 .site-settings-status{font-size:11px;line-height:1.55;color:#718479;margin:0}
 @media(max-width:640px){.site-brand-row h1{font-size:33px}.site-settings-sheet{width:min(350px,calc(100vw - 24px))}}
+
+/* PIN compact source-only cards + top-right ChatGPT-style menu */
+.site-brand-row{position:relative;align-items:flex-start}
+.site-settings{margin-left:auto}
+.site-settings>.site-settings-trigger{
+  width:36px;height:36px;min-width:36px;min-height:36px;padding:0;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:10px;background:transparent;border:1px solid transparent;
+  font:700 24px/1 system-ui,sans-serif;color:#465c4f;
+}
+.site-settings>.site-settings-trigger:hover,
+.site-settings>.site-settings-trigger:focus-visible,
+.site-settings[open]>.site-settings-trigger{background:#ecf1eb;border-color:#dce6dc}
+.site-settings>.site-settings-trigger span{display:block;transform:translateY(-3px)}
+.cardbody .cardline{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:24px;margin:0}
+.cardbody .pin-reject{
+  display:block;position:relative;flex:0 0 17px;min-width:17px;max-width:17px;
+  width:17px;height:17px;margin:0;padding:0;
+  accent-color:#466b51;cursor:pointer;
+}
+.cardbody .pin-reject:focus-visible{outline:2px solid #416b50;outline-offset:3px}
+.cardbody .card-detail{margin-top:4px}
+.card-detail>summary{padding:7px 0 2px}
+.card-detail .detail-body{padding:6px 0 3px;display:flex;flex-direction:column;gap:4px}
+.card-detail .pin-source-link{
+  display:block;color:#355f46;font-size:11px;line-height:1.4;
+  padding:4px 0;text-decoration:none;overflow-wrap:anywhere;
+}
+.card-detail .pin-source-link:hover{text-decoration:underline}
+.card-detail .pin-source-empty{font-size:11px;color:#89978c}
+
 </style></head><body><main>
 <header><div class="kicker">INK / PERSONAL VISUAL RESEARCH</div><div class="site-brand-row"><h1 id="site-name">PIN</h1>
 <details id="site-settings-panel" class="site-settings">
-<summary aria-label="網站外觀設定">設定 <span aria-hidden="true">⌄</span></summary>
+<summary class="site-settings-trigger" aria-label="網站設定" title="網站設定"><span aria-hidden="true">⋯</span></summary>
 <div class="site-settings-sheet">
 <h2>網站外觀</h2>
 <label for="site-name-input">網頁名稱</label>
@@ -225,7 +256,7 @@ footer{font-size:11px;color:#7e8c7f;border-top:1px solid #dee7de;margin-top:35px
 <span id="saved-state" role="status" aria-live="polite">個人記號儲存在此瀏覽器</span>
 </div></details><span id="counter"></span>
 </div></div>
-<div class="pin-note">點作品縮圖直接開啟原始作品展示；沒有作品展示的程式／工具，請展開技術來源。縮圖框固定 3:2，不裁切作品。點「詳細資料 ▾」編輯備註、標記不考慮，或加入個人縮圖。目前只保留海報、字體及成熟作品三類。</div>
+<div class="pin-note">點作品縮圖直接開啟原始作品展示；沒有作品展示的程式／工具，請展開技術來源。縮圖框固定 3:2，不裁切作品。勾選研究編號右側方框可標記不考慮；「來源」下拉只顯示作品來源。目前只保留海報、字體及成熟作品三類。</div>
 <section id="cards" class="grid"></section><div class="load-wrap"><button id="load-more" type="button" hidden>顯示更多</button></div>
 <footer><span id="footer-site-name">PIN</span> — INK 個人視覺研究型錄。已確認須付費的來源從本型錄排除；價格／授權未確認的個案仍需另行核查。清理前的研究資料另存於 PIN Repo 的歷史歸檔。個人標記、備註與自選縮圖只儲存在目前瀏覽器；搬遷前請先匯出備份。</footer>
-</main><script src="./site-settings.js?v=20261011-1" defer></script><script src="./app.js?v=pin-curated-20261011-1" defer></script></body></html>
+</main><script src="./site-settings.js?v=20261011-2" defer></script><script src="./app.js?v=pin-sources-only-20261011-2" defer></script></body></html>

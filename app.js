@@ -134,233 +134,86 @@ function buildCard(item, related = [item]) {
   const primaryStyle = (item.styleTags || []).find(tag => tag !== "其他");
   if (primaryStyle) {
     const styleBadge = make("span", "style-badge", primaryStyle);
-    styleBadge.title = "主要視覺風格（暫定分類）";
+    styleBadge.title = "主要視覺風格";
     art.append(styleBadge);
   }
-  const personalUrl = annotation.imageUrl || "";
   const personalFile = localImageIds.has(item.id);
-  const chosenUrl = personalFile ? null : (personalUrl || item.image);
-  const showcase=isValidImageUrl(item.showcaseUrl||"")?item.showcaseUrl:"";
-  if(personalFile||chosenUrl) {
-    const img=document.createElement("img");
-    img.alt=(personalFile||personalUrl?"我的個人縮圖":(item.credit||"來源圖片"))+" 預覽";
-    img.loading="lazy";
-    img.onerror=()=>{img.remove();art.append(make("div","pending","圖片無法載入，可更換縮圖"));};
-    if(showcase){
-      const link=make("a","preview-link");
-      link.href=showcase;link.target="_blank";link.rel="noopener noreferrer";
-      link.title="查看原始作品："+item.title;
-      link.setAttribute("aria-label","開啟原始作品："+item.title);
-      link.append(img);art.append(link);
-    }else art.append(img);
-    if(personalFile){
-      getLocalObjectUrl(item.id).then(url=>{if(card.isConnected)img.src=url;})
-        .catch(()=>{if(card.isConnected)art.append(make("div","pending","本機縮圖無法讀取"));});
-    }else img.src=chosenUrl;
-    art.append(make("span","source-image-type",personalFile?"我的縮圖":personalUrl?"我的圖片網址":item.imageEvidence==="SOURCE_COLLECTION"?"來源總覽":item.imageEvidence==="RESEARCH_SHEET_PREVIEW"?"研究示意":"原作預覽"));
-  }else{
-    const empty=make("div","image-empty");
-    empty.append(make("div","pending","尚無作品預覽"));
-    if(showcase){
-      const open=make("a","source-only","查看原始示範 ↗");
-      open.href=showcase;open.target="_blank";open.rel="noopener noreferrer";
-      empty.append(open);
-    }else empty.append(make("span","pending","技術來源請展開資料"));
+  const personalUrl = annotation.imageUrl || "";
+  const imageUrl = personalFile ? null : (personalUrl || item.image);
+  const showcase = isValidImageUrl(item.showcaseUrl || "") ? item.showcaseUrl : "";
+  if (personalFile || imageUrl) {
+    const img = document.createElement("img");
+    img.loading = "lazy";
+    img.alt = item.title + " — 作品預覽";
+    img.onerror = () => { img.remove(); art.append(make("span", "pending", "預覽無法載入")); };
+    if (showcase) {
+      const preview = make("a", "preview-link");
+      preview.href = showcase;
+      preview.target = "_blank";
+      preview.rel = "noopener noreferrer";
+      preview.setAttribute("aria-label", "開啟作品來源：" + item.title);
+      preview.append(img);
+      art.append(preview);
+    } else art.append(img);
+    if (personalFile) {
+      getLocalObjectUrl(item.id).then(url => {
+        if (card.isConnected) img.src = url;
+      }).catch(() => {
+        if (card.isConnected) art.append(make("span", "pending", "個人縮圖無法載入"));
+      });
+    } else img.src = imageUrl;
+    art.append(make("span", "source-image-type",
+      personalFile ? "我的縮圖" : personalUrl ? "自選網址" : item.imageEvidence === "SOURCE_COLLECTION" ? "來源總覽" : item.imageEvidence === "RESEARCH_SHEET_PREVIEW" ? "研究示意" : "原作預覽"));
+  } else {
+    const empty = make("div", "image-empty");
+    empty.append(make("span", "pending", "尚無作品預覽"));
+    if (showcase) {
+      const link = make("a", "source-only", "查看作品來源 ↗");
+      link.href = showcase;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      empty.append(link);
+    }
     art.append(empty);
   }
-  const changeImage = make("button", "image-edit-trigger", personalFile || personalUrl ? "更換縮圖" : (!item.image ? "＋ 加入縮圖" : "自選縮圖"));
-  changeImage.type = "button";
-  art.append(changeImage);
   card.append(art);
   const body = make("div", "cardbody");
   body.append(make("div", "name", item.title));
   const line = make("div", "cardline");
-  line.append(make("span", "", item.id));
-
-  body.append(line);
-  const detail = make("details", "card-detail");
-  const summary = make("summary", "detail-toggle", "詳細資料 ▾");
-  detail.append(summary);
-  const detailBody = make("div", "detail-body");
-  const styleTags = Array.isArray(item.styleTags) ? item.styleTags : [];
-  if (styleTags.length) {
-    const styleGroup = make("div", "detail-style-tags");
-    styleGroup.append(make("span", "detail-meta-label", "視覺風格／題材"));
-    styleTags.forEach(tag => styleGroup.append(make("span", "detail-style-tag", tag)));
-    detailBody.append(styleGroup);
-  }
-  if (related.length > 1 || related.some(x => getAnnotation(x.id).note.trim())) {
-    const meta = make("div", "detail-record-meta");
-    if (related.length > 1) meta.append(make("span", "related-tag", "關聯 " + related.length + " 筆研究"));
-    if (related.some(x => getAnnotation(x.id).note.trim())) meta.append(make("span", "saved-tag", "已有備註"));
-    detailBody.append(meta);
-  }
-  const editor = make("div", "image-editor");
-  editor.hidden = true;
-  editor.append(make("div", "image-editor-heading", "我的縮圖（僅儲存在本瀏覽器）"));
-  const upload = make("button", "image-upload", "從電腦選擇圖片");
-  upload.type = "button";
-  const fileInput = document.createElement("input");
-  fileInput.type = "file";
-  fileInput.accept = ".jpg,.jpeg,.png,.webp,.gif,image/jpeg,image/png,image/webp,image/gif";
-  fileInput.hidden = true;
-  editor.append(upload, fileInput);
-  const imageUrlInput = document.createElement("input");
-  imageUrlInput.className = "image-url-input";
-  imageUrlInput.type = "url";
-  imageUrlInput.placeholder = "或貼上圖片網址（https://…）";
-  imageUrlInput.setAttribute("aria-label", item.title + " 的縮圖網址");
-  imageUrlInput.value = annotation.imageUrl || "";
-  const saveImageUrl = make("button", "image-save-url", "套用網址");
-  saveImageUrl.type = "button";
-  editor.append(imageUrlInput, saveImageUrl);
-  if (personalFile || personalUrl) {
-    const reset = make("button", "image-reset", "移除自選縮圖");
-    reset.type = "button";
-    editor.append(reset);
-    reset.addEventListener("click", async () => {
-      try {
-        if (localImageIds.has(item.id)) {
-          await imageStore("delete", item.id);
-          localImageIds.delete(item.id);
-          clearLocalObjectUrl(item.id);
-        }
-        const previous = getAnnotation(item.id);
-        annotations[item.id] = { ...previous, imageUrl: "" };
-        persist(); render();
-        statusLine.textContent = "已移除自選縮圖，保留原作及原有備註";
-      } catch (error) { statusLine.textContent = "圖片移除失敗：" + error.message; }
-    });
-  }
-  changeImage.addEventListener("click", () => {
-    detail.open = true;
-    editor.hidden = !editor.hidden;
-    if (!editor.hidden) imageUrlInput.focus();
-  });
-  upload.addEventListener("click", () => fileInput.click());
-  fileInput.addEventListener("change", async () => {
-    const file = fileInput.files?.[0];
-    fileInput.value = "";
-    if (!file) return;
-    if (!isAllowedImage(file)) {
-      statusLine.textContent = "請選擇 5 MB 以內的 JPG、PNG、WebP 或 GIF";
-      return;
-    }
-    try {
-      await imageStore("put", item.id, { blob: file, name: file.name, mime: file.type });
-      localImageIds.add(item.id);
-      clearLocalObjectUrl(item.id);
-      const previous = getAnnotation(item.id);
-      annotations[item.id] = { ...previous, imageUrl: "" };
-      persist(); render();
-      statusLine.textContent = item.id + "：已儲存個人圖片於本瀏覽器，未上傳網站";
-    } catch (error) { statusLine.textContent = "儲存失敗：" + error.message; }
-  });
-  saveImageUrl.addEventListener("click", async () => {
-    const url = imageUrlInput.value.trim();
-    if (!isValidImageUrl(url)) { statusLine.textContent = "請提供有效的 http／https 圖片網址"; return; }
-    try {
-      if (localImageIds.has(item.id)) {
-        await imageStore("delete", item.id);
-        localImageIds.delete(item.id);
-        clearLocalObjectUrl(item.id);
-      }
-      const previous = getAnnotation(item.id);
-      annotations[item.id] = { ...previous, imageUrl: url.slice(0, 2048) };
-      persist(); render();
-      statusLine.textContent = item.id + "：已保存圖片網址於本瀏覽器";
-    } catch (error) { statusLine.textContent = "儲存失敗：" + error.message; }
-  });
-  detailBody.append(editor);
-  const pills = make("div", "info-pills");
-  const cost = make("span", "info-pill " + (item.access || "unknown"), item.accessLabel || "費用待確認");
-  cost.title = item.accessDetail || "費用待確認";
-  const testBadge = make("span", "info-pill " + (item.testStatus || "untested"), item.testLabel || "INK 未測試");
-  testBadge.title = item.testDetail || "尚無 INK Runtime 證據";
-  pills.append(cost, testBadge);
-  detailBody.append(pills);
-  const details = make("div", "mini-detail", item.testDetail || "");
-  detailBody.append(details);
-  detailBody.append(make("p", "description", item.description));
-  if (!item.image && item.imageMissingReason) detailBody.append(make("div","image-reason",item.imageMissingReason));
-  const mark = make("div", "annotation-area");
-  const reject = make("label", "reject-label");
-  const cb = document.createElement("input");
-  cb.type = "checkbox";
-  cb.checked = annotation.rejected;
-  cb.setAttribute("aria-label", "不考慮：" + item.title);
-  reject.append(cb, make("span", "", "不考慮這件作品"));
-  mark.append(reject);
-  const memoLabel = make("label", "memo-label", "我的備註（僅本機保存）");
-  const memo = make("textarea", "memo");
-  memo.rows = 2;
-  memo.maxLength = 1200;
-  memo.placeholder = "不喜歡的原因／希望調整的方向／值得保留的部分…";
-  memo.value = annotation.note;
-  memo.setAttribute("aria-label", item.title + " 的個人備註");
-  memoLabel.append(memo);
-  mark.append(memoLabel);
-  cb.addEventListener("change", () => {
-    const prev = getAnnotation(item.id);
-    annotations[item.id] = { ...prev, rejected: cb.checked };
-    card.classList.toggle("is-excluded", cb.checked);
+  line.append(make("span", "pin-id", item.id));
+  const reject = document.createElement("input");
+  reject.type = "checkbox";
+  reject.className = "pin-reject";
+  reject.checked = annotation.rejected;
+  reject.title = "不考慮此 PIN";
+  reject.setAttribute("aria-label", "不考慮：" + item.title);
+  reject.addEventListener("change", () => {
+    const next = reject.checked;
+    annotations[item.id] = { ...getAnnotation(item.id), rejected: next };
+    card.classList.toggle("is-excluded", next);
     persist();
     updateCounts();
     if (hideExcluded.checked) render();
   });
-  memo.addEventListener("input", () => {
-    annotations[item.id] = { ...getAnnotation(item.id), rejected: cb.checked, note: memo.value };
-    persist();
-  });
-  detailBody.append(mark);
-  detailBody.append(make("div", "credit", item.credit || ""));
-  const source = make("a", "link", "查看原始技術／研究資料 ↗");
-  if (item.url && item.url !== showcase) {
-    source.href=item.url;source.target="_blank";source.rel="noopener noreferrer";
-    detailBody.append(source);
+  line.append(reject);
+  body.append(line);
+  const detail = make("details", "card-detail");
+  detail.append(make("summary", "detail-toggle", "來源"));
+  const detailBody = make("div", "detail-body");
+  const seen = new Set();
+  const sources = [item, ...related.filter(record => record.id !== item.id)];
+  for (const record of sources) {
+    const url = (isValidImageUrl(record.showcaseUrl || "") && record.showcaseUrl) || (isValidImageUrl(record.url || "") && record.url);
+    if (!url || seen.has(url)) continue;
+    seen.add(url);
+    const label = sources.length > 1 ? "來源 · " + record.id + " ↗" : "開啟原始來源 ↗";
+    const anchor = make("a", "pin-source-link", label);
+    anchor.href = url;
+    anchor.target = "_blank";
+    anchor.rel = "noopener noreferrer";
+    detailBody.append(anchor);
   }
-  if (related.length > 1) {
-    const linked = make("div", "linked-group");
-    linked.append(make("strong", "", "相同縮圖／來源的關聯紀錄（" + related.length + " 筆，分別保存備註）"));
-    for (const other of related) {
-      if (other.id === item.id) continue;
-      const r = make("details", "linked-record");
-      r.append(make("summary", "", other.id + " · " + other.title));
-      const pane = make("div", "linked-record-body");
-      pane.append(make("div", "mini-detail", (other.testLabel || "研究候選") + (other.access === "paid" ? " · 付費來源" : "")));
-      if (other.url) {
-        const a = make("a", "", "查看這筆研究的來源 ↗");
-        a.href = other.url;
-        a.target = "_blank";
-        a.rel = "noopener noreferrer";
-        pane.append(a);
-      }
-      const otherLabel = make("label", "reject-label");
-      const otherCheck = document.createElement("input");
-      otherCheck.type = "checkbox";
-      otherCheck.checked = getAnnotation(other.id).rejected;
-      otherLabel.append(otherCheck, make("span", "", "不考慮此研究紀錄"));
-      pane.append(otherLabel);
-      const otherMemo = make("textarea", "memo");
-      otherMemo.rows = 2;
-      otherMemo.maxLength = 1200;
-      otherMemo.placeholder = "這筆研究的備註…";
-      otherMemo.value = getAnnotation(other.id).note;
-      otherMemo.setAttribute("aria-label", other.id + " 的備註");
-      pane.append(otherMemo);
-      otherCheck.addEventListener("change", () => {
-        annotations[other.id] = { ...getAnnotation(other.id), rejected: otherCheck.checked };
-        persist(); updateCounts();
-      });
-      otherMemo.addEventListener("input", () => {
-        annotations[other.id] = { ...getAnnotation(other.id), note: otherMemo.value };
-        persist();
-      });
-      r.append(pane);
-      linked.append(r);
-    }
-    detailBody.append(linked);
-  }
+  if (!seen.size) detailBody.append(make("span", "pin-source-empty", "來源待補"));
   detail.append(detailBody);
   body.append(detail);
   card.append(body);
