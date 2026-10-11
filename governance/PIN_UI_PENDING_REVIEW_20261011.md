@@ -1,6 +1,6 @@
 # PIN UI 與型錄整理待辦 — 使用者意見彙整
 
-**狀態：58 筆型錄與介面前三項已實作、Pages 發布成功；實際 USER 瀏覽器互動驗收尚未回報；Val Town 舊專案刪除待執行；後續等待 USER 提供 Recipe 參考網站。**
+**狀態：58 筆型錄與介面前三項已實作、Pages 發布成功；公開 PIN Live 已再次取得 HTTP 200；實際 USER 瀏覽器互動驗收尚未回報；Val Town 舊專案已刪除並驗證 404；後續等待 USER 提供 Recipe 參考網站。**
 
 此文件保留歷次 PIN UI 討論與已執行結果；早期待辦文字是原始決策背景，**實際完成狀態以頂部與 E 節為準**。PIN 主資料與網站仍以本 Repo main 為唯一 SSOT。
 
@@ -18,12 +18,13 @@ PAGES_RUN                 = 38139705177 / SUCCESS (for b206f028...)
 PIN_ACTIVE_RECORDS        = 58 (海報、字體、成熟作品)
 UI_STATUS                 = SOURCE_IMPLEMENTED / PAGES_SUCCESS
 USER_VISUAL_ACCEPTANCE    = NOT_YET_VERIFIED_IN_THIS_WINDOW
-VAL_TOWN_RETIREMENT       = PENDING; exact target thedoorw/ink-visual-catalog-demo
-USER_CHECKPOINT_REQUIRED  = USER supplies website references before new Recipe discovery; deletion tool confirmation if required
-NEXT_EXECUTABLE_ACTION    = confirm live UI behavior + delete only obsolete Val Town catalog; then wait for USER examples
+PIN_LIVE_HTTP             = 200 / public fetch rechecked 2026-10-11; rendered copy reflects current simplified UI
+VAL_TOWN_RETIREMENT       = COMPLETE; exact target thedoorw/ink-visual-catalog-demo; project f1c6dd03-a4c6-44a0-b57c-3fccb58a8b2e deleted 2026-10-11T13:00:29.971Z; listing count 0; endpoint 404
+USER_CHECKPOINT_REQUIRED  = USER supplies website references before new Recipe discovery; USER browser visual / interaction acceptance remains separate
+NEXT_EXECUTABLE_ACTION    = wait for USER example websites and browser acceptance feedback; do not resume broad Recipe acquisition
 ```
 
-**本次換窗只作 GitHub SSOT 狀態登錄，沒有新增 UI 功能、沒有刪除 Val Town。**
+**本次 PR 接續已完成 Val Town 退役收尾；沒有新增 UI 功能。公開 PIN Live 再驗證為 HTTP 200，但此非 USER 瀏覽器互動驗收。**
 
 已完成的三項（不可在新視窗誤判為未開始）：
 1. 網頁右上角的 36px 級別 `⋯` 設定按鈕；設定打開後可點面板外或按 Escape 關閉，原設定內容保留。
@@ -32,7 +33,7 @@ NEXT_EXECUTABLE_ACTION    = confirm live UI behavior + delete only obsolete Val 
 
 以上有 GitHub source commit 與 Pages SUCCESS，**尚不代表真實瀏覽器點擊、可見對齊、個人標記等全面 PASS**；新視窗先查看當前網站 `https://thedoorw.github.io/PIN/` 及必要的互動證據，不能只因 Actions SUCCESS 宣稱使用者已驗收。
 
-USER 已表示不需要 Val Town 舊資料，明確要求完全移除過時網站；只授權處理原 PIN 舊 Val `thedoorw/ink-visual-catalog-demo`，不得誤刪其他 Val 或 GitHub 資料。確認 GitHub Pages 仍獨立可用後可依工具的永久刪除確認流程處理，並核實刪除結果。此動作**目前尚未執行**。
+USER 已表示不需要 Val Town 舊資料，並只授權處理原 PIN 舊 Val `thedoorw/ink-visual-catalog-demo`。2026-10-11 已先重新確認 `https://thedoorw.github.io/PIN/` 可獨立取得 HTTP 200，再刪除精確 Val 專案 `f1c6dd03-a4c6-44a0-b57c-3fccb58a8b2e`。刪除後同名 Val listing count = 0，舊 `https://ink-visual-catalog.val.run/` endpoint = HTTP 404。其餘 Val 與 GitHub 資料均未處理。
 
 下一輪研究方向：USER 認為先前收集成果多數不成熟、不完整且不是預期 Recipe 形式。**等 USER 自行提供幾組網站並討論審美與 Recipe 定義後才啟動新一輪研究**；不可自動恢復舊批次大蒐集或把舊研究候選稱為可執行 Recipe。
 
@@ -92,4 +93,4 @@ USER 直接授權：先完成網站設定三點選單、點擊留白或 Escape �
 
 後續收集策略：USER 將自行提供幾組喜歡的網站後再討論成熟、完整、值得研究的 Recipe 類型；**在提供網站前不要自行大規模重新搜尋或採集**。
 
-舊 Val Town 僅限 `thedoorw/ink-visual-catalog-demo` 作為待刪除對象，須先證明 GitHub Pages 新版可發布，再依 Val Town 刪除工具的永久刪除確認要求完成（其餘專案不可動）。
+舊 Val Town 僅限 `thedoorw/ink-visual-catalog-demo`；此退役已於 2026-10-11 完成並以 listing count 0 + endpoint 404 核實。其餘 Val 專案不可動。
