@@ -12,7 +12,6 @@ const testSelect = document.getElementById("test-filter");
 const hideExcluded = document.getElementById("hide-excluded");
 const statusLine = document.getElementById("saved-state");
 let items = [], type = "ALL", term = "", access = "all", test = "all", imageMode = "pictured", visibleLimit = 40;
-const selectedStyles = new Set();
 const loadMore = document.getElementById("load-more");
 let annotations = Object.create(null);
 const IMAGE_MAX_BYTES = 5 * 1024 * 1024;
@@ -369,12 +368,11 @@ function buildCard(item, related = [item]) {
 }
 function render() {
   const searchable=items.filter(x=>
-    (type==="ALL"||x.type===type) &&
+    (type==="ALL" || (type==="MATURE" ? x.type==="MATURE" : (x.styleTags||[]).includes(type==="POSTER"?"海報":"字體"))) &&
     (access==="all"||(x.access||"unknown")===access) &&
     (imageMode==="all"||(imageMode==="pictured"?currentImageAvailable(x):!currentImageAvailable(x))) &&
     (test==="all"||(x.testStatus||"untested")===test) &&
     (!hideExcluded.checked||!getAnnotation(x.id).rejected) &&
-    (!selectedStyles.size||(x.styleTags||[]).some(tag=>selectedStyles.has(tag))) &&
     [x.id,x.title,x.description,x.credit,x.accessLabel,x.testLabel,getAnnotation(x.id).note].join(" ").toLowerCase().includes(term)
   );
   const allByKey=new Map(),grouped=new Map();
@@ -397,10 +395,12 @@ function render() {
 }
 function resetFilters() {
   type="ALL";term="";access="all";test="all";imageMode="pictured";visibleLimit=40;
-  selectedStyles.clear();search.value="";accessSelect.value="all";testSelect.value="all";imageSelect.value="pictured";
+  search.value="";accessSelect.value="all";testSelect.value="all";imageSelect.value="pictured";
   hideExcluded.checked=false;
-  document.querySelectorAll("[data-type]").forEach(b=>{const active=b.dataset.type==="ALL";b.classList.toggle("active",active);b.setAttribute("aria-pressed",String(active));});
-  document.querySelectorAll("[data-style]").forEach(b=>{const active=b.dataset.style==="全部風格";b.classList.toggle("active",active);b.setAttribute("aria-pressed",String(active));});
+  document.querySelectorAll("[data-type]").forEach(b=>{
+    const active=b.dataset.type==="ALL";
+    b.classList.toggle("active",active);b.setAttribute("aria-pressed",String(active));
+  });
   render();
 }
 async function exportNotes() {
@@ -485,17 +485,6 @@ document.querySelectorAll("[data-type]").forEach(b=>b.addEventListener("click",(
   type=b.dataset.type;visibleLimit=40;
   document.querySelectorAll("[data-type]").forEach(other=>{const active=other===b;other.classList.toggle("active",active);other.setAttribute("aria-pressed",String(active));});
   render();
-}));
-document.querySelectorAll("[data-style]").forEach(b=>b.addEventListener("click",()=>{
-  const t=b.dataset.style;
-  if(t==="全部風格")selectedStyles.clear();
-  else if(selectedStyles.has(t))selectedStyles.delete(t);
-  else selectedStyles.add(t);
-  document.querySelectorAll("[data-style]").forEach(other=>{
-    const active=other.dataset.style==="全部風格"?!selectedStyles.size:selectedStyles.has(other.dataset.style);
-    other.classList.toggle("active",active);other.setAttribute("aria-pressed",String(active));
-  });
-  visibleLimit=40;render();
 }));
 document.getElementById("clear-filters").addEventListener("click",resetFilters);
 accessSelect.addEventListener("change",e=>{access=e.target.value;visibleLimit=40;render();});

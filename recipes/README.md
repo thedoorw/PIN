@@ -2,9 +2,9 @@
 
 PIN 的 Recipe 與型錄是同一套長期創作資料庫，**不必跨 Repo Publish**。
 
-- 正式索引：[catalog/entries.json](../catalog/entries.json)（以 `type: RECIPE` 篩選）。
+- 正式索引：[catalog/entries.json](../catalog/entries.json)（目前無 RECIPE 類別，未來再依新的收藏結果建立）。
 - [Recipe 格式 v0.1](./RECIPE_FORMAT_v0.1.md)：研究轉譯的資訊與驗證要求。
-- [初始草稿](./drafts/)：G001–G005 五件獨立研究案例，尚未證實能在 INK 執行。
+- [原始研究草稿](../research/archive/recipes/)：G001–G005 因本輪僅保留海報、字體及成熟作品，已移至歷史歸檔；尚未證實能在 INK 執行。
 
 ## 工作狀態
 

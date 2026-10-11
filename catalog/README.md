@@ -9,7 +9,7 @@
 - `url`：原始研究或技術來源（可以是 GitHub repository，但放在「詳細資料」）。
 - `image`：來源圖片網址；`showcaseUrl`：縮圖應連到的作品展示／原始預覽，不能隨意指向 GitHub 資料夾。
 - `imageEvidence`、`showcaseKind`、`credit`：來源性質；來源總覽圖不等於特定作品成品。
-- `styleTags`：幾何形、人物、臉孔、靜物、立體派、Collage 等可複選的**暫定**視覺分類。
+- `styleTags`：現行型錄只保留 `海報` 和 `字體`；`成熟作品` 對應 `type: MATURE`。舊的其他風格資訊已保存於清理前的歷史快照。
 - `access`：free / paid / unknown。**unknown 不等於免費**；已確認須付費者不納入活躍型錄。
 - `testStatus`：是否已有 INK 執行證據；未試作不得宣稱已經重現。
 
@@ -20,3 +20,7 @@
 Recipe 相關詳細轉譯存在 [recipes](../recipes/README.md)，但每一份的 PIN-ID 都必須指回本索引；完整 Recipe 不須直接重複塞進卡片元資料。
 
 私人匯出備份不在本公開型錄資料內。
+
+## 2026-10-11 初步清理基線
+
+現行 `entries.json` 僅保留 **58 筆**：`type=MATURE`，或 `styleTags` 含 `海報`／`字體`。其他 152 筆已自正式型錄移除；完整 210 筆原始資料在 [歸檔](../research/archive/PIN_CATALOG_BEFORE_THREE_CATEGORY_REDUCTION_20261011.json)。每筆保留原有 ID，供日後恢復、重分類或重新搜尋。不得在主型錄恢復 3D 類別，除非 USER 重新授權。

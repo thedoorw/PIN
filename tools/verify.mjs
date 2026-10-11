@@ -19,6 +19,8 @@ for (const item of Array.isArray(entries) ? entries : []) {
   if (item.image && !/^https?:\/\//.test(item.image)) errors.push(item.id + ": invalid thumbnail URL");
   if (item.showcaseUrl && !/^https?:\/\//.test(item.showcaseUrl)) errors.push(item.id + ": invalid artwork URL");
   if (!Array.isArray(item.styleTags)) errors.push(item.id + ": styleTags is missing");
+  if (!(item.type === "MATURE" || item.styleTags?.includes("海報") || item.styleTags?.includes("字體"))) errors.push(item.id + ": outside the three retained categories");
+  if (item.styleTags?.some(t => !["海報","字體"].includes(t))) errors.push(item.id + ": disallowed style after curation");
 }
 const html = read("index.html"), js = read("app.js");
 const setting = JSON.parse(read("config/site.json"));
@@ -29,6 +31,8 @@ if (!read("assets/favicon.svg").includes("<svg")) errors.push("Missing default f
 if (!html.includes("./app.js?v=")) errors.push("GitHub Pages JS script is not relative");
 if (!js.includes('fetch("./catalog/entries.json"')) errors.push("JS must fetch its own catalog");
 if (!html.includes("aspect-ratio:3/2")) errors.push("Missing 3:2 image grid");
+if (!html.includes('data-type="POSTER"') || !html.includes('data-type="TYPOGRAPHY"') || !html.includes('data-type="MATURE"')) errors.push("Three-category tabs missing");
+if (html.includes('data-style="3D"') || html.includes('data-style="幾何形"')) errors.push("Retired style tabs still displayed");
 if (!read("README.md").includes("我說.md")) errors.push("Root README must link user notes");
 const illustrated = entries.filter(x => x.image).length;
 console.log(JSON.stringify({catalog:"PIN",items:entries.length,illustrated,linkOnly:entries.length-illustrated,errors},null,2));

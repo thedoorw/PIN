@@ -208,13 +208,12 @@ footer{font-size:11px;color:#7e8c7f;border-top:1px solid #dee7de;margin-top:35px
 <button id="site-settings-reset" type="button">還原公開版本</button>
 </div>
 <p id="site-settings-status" class="site-settings-status" role="status" aria-live="polite">儲存本機只影響此瀏覽器。公開設定需要把 site.json 提交至 PIN Repo。</p>
-</div></details></div><p class="subhead">先看作品，再決定值得保留的 Recipe、技術與工具。來源與個人註記只在需要時展開。</p>
+</div></details></div><p class="subhead">先集中瀏覽海報、字體與成熟作品，其他研究資料已退出現行型錄。</p>
 <div class="stats"><div class="stat"><b id="listed">—</b>非付費研究紀錄</div><div class="stat"><b id="thumbnailCount">—</b>附圖紀錄</div><div class="stat"><b id="excludedCount">0</b>已標記不考慮</div></div></header>
 <div class="filter-shell">
-<nav class="category-bar" aria-label="技術分類"><button type="button" data-type="ALL" class="active" aria-pressed="true">全部</button><button type="button" data-type="ATN" class="" aria-pressed="false">ATN</button><button type="button" data-type="JSX" class="" aria-pressed="false">JSX</button><button type="button" data-type="SCRIPT" class="" aria-pressed="false">SCRIPT</button><button type="button" data-type="RECIPE" class="" aria-pressed="false">RECIPE</button><button type="button" data-type="WORKFLOW" class="" aria-pressed="false">WORKFLOW</button><button type="button" data-type="MATURE" class="" aria-pressed="false">成熟作品</button><button type="button" data-type="SUPPORT" class="" aria-pressed="false">支援研究</button></nav>
-<nav class="style-bar" aria-label="視覺風格篩選"><span class="style-intro">風格 / 題材（可複選）</span><button type="button" data-style="全部風格" class="active" aria-pressed="true">全部風格</button><button type="button" data-style="幾何形" class="" aria-pressed="false">幾何形</button><button type="button" data-style="人物" class="" aria-pressed="false">人物</button><button type="button" data-style="臉孔" class="" aria-pressed="false">臉孔</button><button type="button" data-style="靜物" class="" aria-pressed="false">靜物</button><button type="button" data-style="立體派" class="" aria-pressed="false">立體派</button><button type="button" data-style="Collage" class="" aria-pressed="false">Collage</button><button type="button" data-style="花卉" class="" aria-pressed="false">花卉</button><button type="button" data-style="圖案" class="" aria-pressed="false">圖案</button><button type="button" data-style="字體" class="" aria-pressed="false">字體</button><button type="button" data-style="抽象" class="" aria-pressed="false">抽象</button><button type="button" data-style="海報" class="" aria-pressed="false">海報</button><button type="button" data-style="風景" class="" aria-pressed="false">風景</button><button type="button" data-style="3D" class="" aria-pressed="false">3D</button><button type="button" data-style="其他" class="" aria-pressed="false">其他</button></nav>
+<nav class="category-bar" aria-label="保留作品類別"><button type="button" data-type="ALL" class="active" aria-pressed="true">全部</button><button type="button" data-type="POSTER" aria-pressed="false">海報</button><button type="button" data-type="TYPOGRAPHY" aria-pressed="false">字體</button><button type="button" data-type="MATURE" aria-pressed="false">成熟作品</button></nav>
 <div class="pin-controls">
-<input id="q" type="search" placeholder="搜尋作品、研究編號、技法…">
+<input id="q" type="search" placeholder="搜尋海報、字體、成熟作品…">
 <label for="image-filter" class="visually-small"></label>
 <select id="image-filter" aria-label="圖片呈現"><option value="pictured">只看有圖</option><option value="all">包含無圖</option><option value="pending">只看無圖</option></select>
 <label class="hide-checkbox"><input id="hide-excluded" type="checkbox">隱藏不考慮</label>
@@ -226,7 +225,7 @@ footer{font-size:11px;color:#7e8c7f;border-top:1px solid #dee7de;margin-top:35px
 <span id="saved-state" role="status" aria-live="polite">個人記號儲存在此瀏覽器</span>
 </div></details><span id="counter"></span>
 </div></div>
-<div class="pin-note">點作品縮圖直接開啟原始作品展示；沒有作品展示的程式／工具，請展開技術來源。縮圖框固定 3:2，不裁切作品。點「詳細資料 ▾」編輯備註、標記不考慮，或加入個人縮圖。風格標籤為初步分類，可交叉篩選。</div>
+<div class="pin-note">點作品縮圖直接開啟原始作品展示；沒有作品展示的程式／工具，請展開技術來源。縮圖框固定 3:2，不裁切作品。點「詳細資料 ▾」編輯備註、標記不考慮，或加入個人縮圖。目前只保留海報、字體及成熟作品三類。</div>
 <section id="cards" class="grid"></section><div class="load-wrap"><button id="load-more" type="button" hidden>顯示更多</button></div>
-<footer><span id="footer-site-name">PIN</span> — INK 個人視覺研究型錄。已確認須付費的來源從本型錄排除；價格／授權未確認的個案仍需另行核查。研究基線留在 GitHub，不影響原始資料。個人標記、備註與自選縮圖只儲存在目前瀏覽器；搬遷前請先匯出備份。</footer>
-</main><script src="./site-settings.js?v=20261011-1" defer></script><script src="./app.js?v=pin-pages-20261011" defer></script></body></html>
+<footer><span id="footer-site-name">PIN</span> — INK 個人視覺研究型錄。已確認須付費的來源從本型錄排除；價格／授權未確認的個案仍需另行核查。清理前的研究資料另存於 PIN Repo 的歷史歸檔。個人標記、備註與自選縮圖只儲存在目前瀏覽器；搬遷前請先匯出備份。</footer>
+</main><script src="./site-settings.js?v=20261011-1" defer></script><script src="./app.js?v=pin-curated-20261011-1" defer></script></body></html>
