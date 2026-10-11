@@ -1351,6 +1351,75 @@
       "testDetail": "Illustrator JSX 存在不代表 INK Translator 可執行此腳本；需要另行逐項轉譯驗證。",
       "showcaseUrl": "https://github.com/creold/illustrator-scripts/blob/master/md/Draw.md#randomscribble",
       "showcaseKind": "original-script-demo"
+    },
+    {
+      "id": "R-PDE-001",
+      "title": "Spiral Dots — Processing Poster",
+      "type": "SCRIPT",
+      "batch": 11,
+      "url": "https://github.com/Zhytniakov/Processing-posters/blob/Processing-posters/poster%201%20-%20spiral%20dots/poster_1_spiral_dots.pde",
+      "image": "https://raw.githubusercontent.com/Zhytniakov/Processing-posters/Processing-posters/poster%201%20-%20spiral%20dots/poster_1_spiral dots.png",
+      "description": "以螺旋排列點陣構成幾何海報，原作者提供成果 PNG 與對應 Processing PDE 草圖。",
+      "credit": "Zhytniakov / Processing-posters, matched image and PDE script from same project folder",
+      "imageEvidence": "SOURCE_ORIGINAL_IMAGE",
+      "sourceStatus": "ORIGINAL_PNG_AND_PDE_VERIFIED / INK_UNTESTED",
+      "access": "free",
+      "accessLabel": "公開原始碼可取得",
+      "accessDetail": "程式及示範 PNG 在公開 repository；是否可再利用需另確認授權，未經核實不得重製散布。",
+      "testStatus": "untested",
+      "testLabel": "INK 未測試",
+      "testDetail": "可在 Processing 研究；不是 Illustrator JSX，亦未經 INK 執行驗證。",
+      "styleTags": [
+        "海報"
+      ],
+      "showcaseUrl": "https://raw.githubusercontent.com/Zhytniakov/Processing-posters/Processing-posters/poster%201%20-%20spiral%20dots/poster_1_spiral dots.png",
+      "showcaseKind": "original-preview-asset"
+    },
+    {
+      "id": "R-PDE-002",
+      "title": "Fractal Circles — Processing Poster",
+      "type": "SCRIPT",
+      "batch": 11,
+      "url": "https://github.com/Zhytniakov/Processing-posters/blob/Processing-posters/poster%202%20-%20fractal%20circles/poster_2_fractal_circles.pde",
+      "image": "https://raw.githubusercontent.com/Zhytniakov/Processing-posters/Processing-posters/poster%202%20-%20fractal%20circles/poster_2_fractal_circles.png",
+      "description": "以圓形遞迴與尺度變化構成幾何海報，原作者提供成果 PNG 與對應 Processing PDE 草圖。",
+      "credit": "Zhytniakov / Processing-posters, matched image and PDE script from same project folder",
+      "imageEvidence": "SOURCE_ORIGINAL_IMAGE",
+      "sourceStatus": "ORIGINAL_PNG_AND_PDE_VERIFIED / INK_UNTESTED",
+      "access": "free",
+      "accessLabel": "公開原始碼可取得",
+      "accessDetail": "程式及示範 PNG 在公開 repository；是否可再利用需另確認授權，未經核實不得重製散布。",
+      "testStatus": "untested",
+      "testLabel": "INK 未測試",
+      "testDetail": "可在 Processing 研究；不是 Illustrator JSX，亦未經 INK 執行驗證。",
+      "styleTags": [
+        "海報"
+      ],
+      "showcaseUrl": "https://raw.githubusercontent.com/Zhytniakov/Processing-posters/Processing-posters/poster%202%20-%20fractal%20circles/poster_2_fractal_circles.png",
+      "showcaseKind": "original-preview-asset"
+    },
+    {
+      "id": "R-PDE-003",
+      "title": "Noise Circle — Processing Poster",
+      "type": "SCRIPT",
+      "batch": 11,
+      "url": "https://github.com/Zhytniakov/Processing-posters/blob/Processing-posters/poster%203%20-%20noise%20circle/poster_3_noise_circle.pde",
+      "image": "https://raw.githubusercontent.com/Zhytniakov/Processing-posters/Processing-posters/poster%203%20-%20noise%20circle/poster_3_noise_circles.png",
+      "description": "以雜訊變化處理圓形圖案，原作者提供成果 PNG 與對應 Processing PDE 草圖。",
+      "credit": "Zhytniakov / Processing-posters, matched image and PDE script from same project folder",
+      "imageEvidence": "SOURCE_ORIGINAL_IMAGE",
+      "sourceStatus": "ORIGINAL_PNG_AND_PDE_VERIFIED / INK_UNTESTED",
+      "access": "free",
+      "accessLabel": "公開原始碼可取得",
+      "accessDetail": "程式及示範 PNG 在公開 repository；是否可再利用需另確認授權，未經核實不得重製散布。",
+      "testStatus": "untested",
+      "testLabel": "INK 未測試",
+      "testDetail": "可在 Processing 研究；不是 Illustrator JSX，亦未經 INK 執行驗證。",
+      "styleTags": [
+        "海報"
+      ],
+      "showcaseUrl": "https://raw.githubusercontent.com/Zhytniakov/Processing-posters/Processing-posters/poster%203%20-%20noise%20circle/poster_3_noise_circles.png",
+      "showcaseKind": "original-preview-asset"
     }
   ],
   "curation": {
