@@ -234,7 +234,7 @@ function render() {
   const groups=[...grouped.entries()].map(([key,records])=>{
     const candidates=[...records].sort((a,b)=>Number(localImageIds.has(b.id)||!!getAnnotation(b.id).imageUrl)-Number(localImageIds.has(a.id)||!!getAnnotation(a.id).imageUrl)||imagePriority(b)-imagePriority(a));
     return {primary:candidates[0],linked:allByKey.get(key)||records,rank:imagePriority(candidates[0])};
-  }).sort((a,b)=>Number(/^PR-00[1-4]$/.test(b.primary.id))-Number(/^PR-00[1-4]$/.test(a.primary.id))||Number(currentImageAvailable(b.primary))-Number(currentImageAvailable(a.primary))||b.rank-a.rank||a.primary.id.localeCompare(b.primary.id));
+  }).sort((a,b)=>Number(/^R-PDE-00[1-3]$/.test(b.primary.id))-Number(/^R-PDE-00[1-3]$/.test(a.primary.id))||Number(currentImageAvailable(b.primary))-Number(currentImageAvailable(a.primary))||b.rank-a.rank||a.primary.id.localeCompare(b.primary.id));
   counter.textContent=groups.length+" 個 PIN · "+searchable.length+" 筆研究";
   root.replaceChildren();
   const frag=document.createDocumentFragment();
