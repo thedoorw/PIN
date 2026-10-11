@@ -1,0 +1,8 @@
+ink-visual-catalog-my-notes.json
+pin-private-*.json
+*.local.json
+.env
+.env.*
+node_modules/
+.DS_Store
+Thumbs.db
