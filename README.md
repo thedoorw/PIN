@@ -38,7 +38,7 @@
 
 管理者可於 **Settings → Pages → Build and deployment → Deploy from a branch → main / (root)** 啟用預期網址：
 
-https://thedoorw.github.io/PIN/
+[開啟 PIN 網站](https://thedoorw.github.io/PIN/)
 
 **這是預定網址，不代表 Pages 已啟用或瀏覽器驗收完成。** 發布前後可執行 `node tools/verify.mjs`。用瀏覽器本機直接打開 HTML 可能受 `file://` 的 JSON fetch 限制，建議使用靜態 HTTP 伺服器。
 
