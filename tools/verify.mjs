@@ -21,6 +21,11 @@ for (const item of Array.isArray(entries) ? entries : []) {
   if (!Array.isArray(item.styleTags)) errors.push(item.id + ": styleTags is missing");
 }
 const html = read("index.html"), js = read("app.js");
+const setting = JSON.parse(read("config/site.json"));
+if (!setting.siteName || !setting.faviconUrl) errors.push("Incomplete public site configuration");
+if (!html.includes("./site-settings.js?")) errors.push("Missing site settings script");
+if (!read("site-settings.js").includes('fetch("./config/site.json"')) errors.push("Wrong site-config path");
+if (!read("assets/favicon.svg").includes("<svg")) errors.push("Missing default favicon");
 if (!html.includes("./app.js?v=")) errors.push("GitHub Pages JS script is not relative");
 if (!js.includes('fetch("./catalog/entries.json"')) errors.push("JS must fetch its own catalog");
 if (!html.includes("aspect-ratio:3/2")) errors.push("Missing 3:2 image grid");

@@ -11,6 +11,7 @@
 - [ATN／JSX／Script 研究規則](./library/README.md)。
 - [永久創作及 CHAT／WORK 操作規則](./governance/PIN_OPERATING_RULES.md)。
 - [網站發布、備份與驗證規則](./governance/PIN_PUBLISH_RULES.md)。
+- [網站名稱與 Favicon](./governance/PIN_SITE_SETTINGS.md) — 本機預覽與正式公開設定。
 - [建立來源及移轉紀錄](./research/ORIGIN_AND_MIGRATION_20261011.md)。
 
 ## 工作分工

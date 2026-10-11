@@ -15,3 +15,7 @@
 **先移轉個人資料再考慮關閉舊站：** Val Town 與 GitHub Pages 不是相同網域，私有 localStorage／IndexedDB 不會自動同步。舊站匯出含本機圖片的 JSON，在 Pages 新站匯入，確認沒有資料遺失。
 
 未獲使用者同意前不刪除舊 Val Town 網站，也不改動 INK 主程式。
+
+## 網站外觀設定
+
+公開名稱與 Favicon 以 `config/site.json` 為準；網站面板可先在瀏覽器本機預覽，匯出 JSON 並提交 Repo 後才會公開。參考 [PIN_SITE_SETTINGS.md](./PIN_SITE_SETTINGS.md)。
