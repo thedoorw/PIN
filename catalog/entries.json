@@ -1289,24 +1289,22 @@
       "url": "https://github.com/joshbduncan/illustrator-scripts/blob/main/jsx/RepeatAfterMe.jsx",
       "type": "JSX",
       "description": "現成 ExtendScript：Grid、Brick by Row、Brick by Column 重複排列；有可調列距、欄距、畫板填滿與預覽，可作幾何／裝飾圖案的製作步驟研究。",
-      "credit": "Josh Duncan / RepeatAfterMe.jsx; MIT license",
+      "credit": "Josh Duncan / RepeatAfterMe official README example",
       "styleTags": [
         "海報"
       ],
       "batch": 10,
-      "image": "",
-      "imageEvidence": "",
-      "sourceStatus": "SOURCE_CODE_VERIFIED / RECIPE_CANDIDATE / INK_UNTESTED",
+      "image": "https://github.com/user-attachments/assets/7a4281d0-3619-460f-b9ce-6cbd0bcfe060",
+      "imageEvidence": "SOURCE_README",
+      "sourceStatus": "SOURCE_CODE_VERIFIED / SOURCE_README_PREVIEW / INK_UNTESTED",
       "access": "free",
       "accessLabel": "公開原始碼可取得",
       "accessDetail": "公開 repository 可讀；使用與再散布依原授權及各檔規定。",
       "testStatus": "untested",
       "testLabel": "INK 未測試",
       "testDetail": "Illustrator JSX 存在不代表 INK Translator 可執行此腳本；需要另行逐項轉譯驗證。",
-      "imageMissingReason": "未使用非原作品縮圖；原始碼與示範於來源網站檢視",
-      "imageGapCode": "CODE_OR_WORKFLOW",
-      "showcaseUrl": "https://github.com/joshbduncan/illustrator-scripts/blob/main/jsx/RepeatAfterMe.jsx",
-      "showcaseKind": "source-code-with-examples"
+      "showcaseUrl": "https://github.com/joshbduncan/illustrator-scripts#repeatafterme",
+      "showcaseKind": "original-script-demo"
     },
     {
       "id": "R-JSX-002",
@@ -1314,24 +1312,22 @@
       "url": "https://github.com/jsmentch/IllustratorArt",
       "type": "JSX",
       "description": "現成 Illustrator ExtendScript 教學案例：03-random-cmyk-rectangles.jsx 使用迴圈及隨機色塊層疊；附 PNG/SVG 作品範例。",
-      "credit": "jsmentch / IllustratorArt",
+      "credit": "jsmentch / IllustratorArt README gallery random CMYK rectangles (related sample, not guaranteed exact run of example 03)",
       "styleTags": [
         "海報"
       ],
       "batch": 10,
-      "image": "",
-      "imageEvidence": "",
-      "sourceStatus": "SOURCE_CODE_VERIFIED / RECIPE_CANDIDATE / INK_UNTESTED",
+      "image": "https://raw.githubusercontent.com/jsmentch/IllustratorArt/master/png/script4-1-01.png",
+      "imageEvidence": "SOURCE_README",
+      "sourceStatus": "SOURCE_CODE_VERIFIED / RELATED_PROJECT_GALLERY_PREVIEW / INK_UNTESTED",
       "access": "free",
       "accessLabel": "公開原始碼可取得",
       "accessDetail": "公開 repository 可讀；使用與再散布依原授權及各檔規定。",
       "testStatus": "untested",
       "testLabel": "INK 未測試",
       "testDetail": "Illustrator JSX 存在不代表 INK Translator 可執行此腳本；需要另行逐項轉譯驗證。",
-      "imageMissingReason": "未使用非原作品縮圖；原始碼與示範於來源網站檢視",
-      "imageGapCode": "CODE_OR_WORKFLOW",
-      "showcaseUrl": "https://github.com/jsmentch/IllustratorArt",
-      "showcaseKind": "source-code-with-examples"
+      "showcaseUrl": "https://github.com/jsmentch/IllustratorArt#gallery",
+      "showcaseKind": "related-project-artwork"
     },
     {
       "id": "R-JSX-003",
