@@ -98,3 +98,7 @@ USER 直接授權：先完成網站設定三點選單、點擊留白或 Escape �
 ## F. 2026-10-11 設定入口與篩選框微調
 
 USER 要求設定按鈕比照 ChatGPT 再提高，以及保留 PIN 核取方塊的正確位置但縮小。已直接於 `index.html` 實作：設定入口相對既有位置向上 14px（`margin-top:-14px`）；卡片研究 ID 旁核取方塊由 17×17px 縮為 13×13px。未改動勾選保存、來源下拉、58 筆資料或其他 Val／INK 程式。Implementation commit: `c7739e3806d2c58b00af0db556a47b450237652b`。此為 source-level 修改；新 commit 的 Pages／USER 視覺驗收須另外確認，不沿用先前 Pages 成功作此 commit 的證據。
+
+## G. 2026-10-11 右上角設定定位修正
+
+USER 提供實際 Chrome 截圖確認上一版設定按鈕仍靠近 PIN 標題，未達預期。已修正 `index.html`：以 `header{position:relative}` 及 `.site-settings{position:absolute;right:0;top:-16px;margin:0}` 將按鈕定位到頁首右上，而非以標題列負邊距微調。保留 36×36px 按鈕、13×13px PIN 勾選方塊及既有互動。Exact implementation commit `b51db9e5d58ca3216f41ee407a57631f184e0a21`；Pages run `38143074611` 檢查時 IN_PROGRESS，USER 截圖視覺驗收仍待確認。
