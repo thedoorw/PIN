@@ -1,6 +1,8 @@
 # PIN Front-end UI modules
 
-- `index.html`: document structure only; no cumulative inline CSS.
+**Layout freeze:** [PIN_UI_LAYOUT_BASELINE_20261013.md](./PIN_UI_LAYOUT_BASELINE_20261013.md). Future UI edits must check this baseline and preserve unrelated dimensions, interaction targets and data behavior.
+
+- `index.html`: document structure and asset imports; an auxiliary research section still has inline CSS/JS and should be extracted independently, not by adding gallery overrides.
 - `styles/base.css`: global typography, site header, navigation and reversible search.
 - `styles/gallery.css`: 3:2 contain images, stable two-line titles, card details and responsive grid.
 - `styles/settings.css`: settings popover, visual preferences, management and backup controls.
