@@ -227,7 +227,9 @@ function buildCard(item, related = [item]) {
   }
   card.append(art);
   const body = make("div", "cardbody");
-  body.append(make("div", "name", item.title));
+  const titleLabel=make("div", "name", item.title);
+  titleLabel.title=item.title;
+  body.append(titleLabel);
   const line = make("div", "cardline");
   line.append(make("span", "pin-id", item.id));
   const pick=document.createElement("input");
