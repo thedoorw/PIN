@@ -302,6 +302,27 @@ body.pin-managing .pin-manager-indicator,body.pin-trash-view .pin-manager-indica
 .pin-search-drawer #q:focus{border-bottom:2px solid #111!important}
 @media(max-width:640px){.pin-search-drawer.is-open{width:clamp(90px,30vw,220px);flex-basis:clamp(90px,30vw,220px)}}
 @media(prefers-reduced-motion:reduce){.pin-search-drawer{transition:none!important}}
+
+/* PIN alignment and card rhythm audit — 2026-10-13 */
+.site-brand-row{align-items:center!important;padding-right:6px;min-height:46px}
+.pin-head-actions{display:flex!important;align-items:center!important;align-self:center!important;gap:12px!important;padding:0 4px 0 0;margin:0 2px 0 auto;min-height:40px}
+.pin-head-actions #pin-search-toggle,.pin-head-actions #site-settings-panel>summary{width:36px!important;height:40px!important;min-height:40px!important;line-height:1!important;margin:0!important;padding:0!important;border:0!important;outline-offset:2px;background:transparent!important;box-shadow:none!important;display:flex!important;align-items:center!important;justify-content:center!important;position:static!important;transform:none!important}
+.pin-head-actions #pin-search-toggle svg{display:block;flex-shrink:0;width:19px;height:19px}
+.pin-head-actions #site-settings-panel{margin:0!important;position:relative!important;align-self:center!important;display:block!important;line-height:1!important}
+.pin-head-actions #site-settings-panel>summary span{display:block;line-height:1!important;font-size:22px!important;transform:translateY(-2px)}
+.site-settings-sheet{right:0!important;left:auto!important;max-width:min(440px,calc(100vw - 28px))!important}
+.cardbody .name{height:calc(2 * 1.48em)!important;min-height:calc(2 * 1.48em)!important;max-height:calc(2 * 1.48em)!important;line-height:1.48!important;display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:2!important;line-clamp:2;overflow:hidden!important;margin:0 0 5px!important;font-size:12px}
+.cardbody .cardline{min-height:17px!important;margin:0!important;padding:0 0 4px!important;line-height:1.4}
+.cardbody .card-detail{margin-top:auto!important;border-top:1px solid #e9e9e9!important}
+.card-detail>summary{padding:7px 0 1px!important;line-height:1.3!important}
+.cardbody{height:auto;flex:1}
+.card .pin-id,.card .name,.card .cardline,.card .cardline span,.card .card-detail>summary,.card .card-detail>summary::after,.card .pin-source-link,.card .pin-source-link:visited,.card a,.card a:visited{color:#111!important}
+.card .name{font-weight:600!important}
+.card .pin-id{opacity:.72}
+.card .card-detail>summary{font-weight:450!important}
+.card .card-detail>summary:hover,.card .pin-source-link:hover{text-decoration:underline}
+@media(max-width:640px){.pin-head-actions{gap:8px!important;padding-right:0}.site-brand-row{padding-right:0}.cardbody .name{font-size:11px!important}}
+
 </style></head><body><main>
 <header><div class="site-brand-row"><div class="pin-brand-block"><h1 id="site-name">PIN</h1><p id="pin-custom-caption" class="pin-custom-caption"></p></div><div class="pin-head-actions"><div id="pin-search-drawer" class="pin-search-drawer" aria-hidden="true"><input id="q" type="search" placeholder="搜尋作品…" aria-label="搜尋作品"></div><button type="button" id="pin-search-toggle" class="pin-icon-button" aria-label="開啟作品搜尋" aria-expanded="false" aria-controls="pin-search-drawer" title="搜尋作品"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg></button>
 <details id="site-settings-panel" class="site-settings">
@@ -344,4 +365,4 @@ body.pin-managing .pin-manager-indicator,body.pin-trash-view .pin-manager-indica
 <div class="pin-note" id="pin-help-text">點作品縮圖直接開啟原始作品展示；沒有作品展示的程式／工具，請展開技術來源。縮圖框固定 3:2，不裁切作品。研究編號右側核取方塊用於批次選取；使用上方按鈕一次移至已刪除區，進入已刪除區可批次還原；正式 GitHub 型錄不會被直接修改；「來源」下拉只顯示作品來源。目前只保留海報、字體及成熟作品三類。</div>
 <section id="cards" class="grid"></section><div class="load-wrap"><button id="load-more" type="button" hidden>顯示更多</button></div>
 <footer><span id="footer-site-name">PIN</span> — INK 個人視覺研究型錄。已確認須付費的來源從本型錄排除；價格／授權未確認的個案仍需另行核查。清理前的研究資料另存於 PIN Repo 的歷史歸檔。個人標記、備註與自選縮圖只儲存在目前瀏覽器；搬遷前請先匯出備份。</footer>
-</main><script src="./site-settings.js?v=20261013-caption" defer></script><script src="./app.js?v=pin-search-reversible-20261013" defer></script></body></html>
+</main><script src="./site-settings.js?v=20261013-caption" defer></script><script src="./app.js?v=pin-gallery-align-20261013" defer></script></body></html>
