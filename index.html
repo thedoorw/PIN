@@ -259,14 +259,34 @@ body.pin-managing .card .art .chip,body.pin-managing .card .art .source-image-ty
 body.pin-managing .pin-manager-indicator,body.pin-trash-view .pin-manager-indicator{display:inline}
 @media(max-width:640px){main{padding:10px 10px 22px}.site-settings-sheet{right:-2px}.category-bar button{font-size:11px}.grid{margin-top:10px}}
 
+
+/* Gallery-first refinement: ink-black typography, aligned header actions and compact search. */
+:root,body,button,input,select,textarea,.name,.cardbody,.card-detail>summary,.category-bar button,.site-settings-sheet,.site-settings-sheet label,.site-settings-sheet .pin-settings-section>summary{color:#111!important}
+.site-brand-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;width:100%;min-width:0}
+.pin-brand-block{flex:1;min-width:0}
+.pin-custom-caption{font-size:13px;line-height:1.55;color:#111!important;margin:3px 0 5px;max-width:880px;white-space:pre-wrap;overflow-wrap:anywhere}
+.pin-custom-caption:empty{display:none}
+.pin-head-actions{display:flex;flex:0 0 auto;gap:7px;align-items:center;margin-left:auto;min-width:0}
+.site-settings{position:relative;margin-left:0;flex:none;z-index:24}
+.site-settings>summary,.pin-icon-button{display:flex;align-items:center;justify-content:center;width:37px;height:37px;padding:0;margin:0;flex:none;border:1px solid #d9e1d8;border-radius:50%;background:#fff;color:#111!important}
+.site-settings-sheet{right:0;left:auto;max-width:calc(100vw - 20px);box-sizing:border-box;text-align:left}
+.site-settings-sheet textarea{width:100%;max-width:100%;font:inherit;font-size:12px;resize:vertical;min-height:66px;border:1px solid #d9e1d8;border-radius:7px;padding:9px;color:#111}
+.pin-search-drawer{display:flex;align-items:center;gap:7px;max-width:650px;margin:7px 0 4px auto}
+.pin-search-drawer[hidden]{display:none!important}
+.pin-search-drawer #q{min-width:0;flex:1;max-width:none}
+.pin-search-drawer button{width:37px;height:37px;flex:none;padding:0;font-size:23px}
+.category-bar button.active{color:#fff!important}
+.site-settings-sheet .stat,.site-settings-sheet .pin-note,.site-settings-sheet .subhead,.pin-manager-indicator,.pin-trash-count,.cardline,.id,.pin-id{color:#111!important}
+@media(max-width:640px){.site-brand-row{gap:6px}.pin-head-actions{gap:5px}.site-settings-sheet{right:0}.pin-custom-caption{font-size:12px}}
+
 </style></head><body><main>
-<header><div class="site-brand-row"><h1 id="site-name">PIN</h1>
+<header><div class="site-brand-row"><div class="pin-brand-block"><h1 id="site-name">PIN</h1><p id="pin-custom-caption" class="pin-custom-caption"></p></div><div class="pin-head-actions"><button type="button" id="pin-search-toggle" class="pin-icon-button" aria-label="開啟作品搜尋" aria-expanded="false" aria-controls="pin-search-drawer" title="搜尋作品"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg></button>
 <details id="site-settings-panel" class="site-settings">
 <summary class="site-settings-trigger" aria-label="網站設定" title="網站設定"><span aria-hidden="true">⋯</span></summary>
 <div class="site-settings-sheet">
 <h2>網站外觀</h2>
 <label for="site-name-input">網頁名稱</label>
-<input id="site-name-input" type="text" value="PIN" maxlength="50" placeholder="例如 PIN">
+<input id="site-name-input" type="text" value="PIN" maxlength="50" placeholder="例如 PIN"><label for="site-caption-input">標題下方自訂文案</label><textarea id="site-caption-input" maxlength="240" rows="3" placeholder="輸入要顯示在 PIN 標題下方的文字（可留白）"></textarea>
 <label for="site-icon-file">Favicon（分頁小圖示）</label>
 <div class="site-icon-field">
 <div class="site-icon-preview"><img id="site-icon-preview" alt="圖示預覽" hidden><span id="site-icon-fallback">P</span></div>
@@ -281,12 +301,12 @@ body.pin-managing .pin-manager-indicator,body.pin-trash-view .pin-manager-indica
 <button id="site-settings-reset" type="button">還原公開版本</button>
 </div>
 <p id="site-settings-status" class="site-settings-status" role="status" aria-live="polite">儲存本機只影響此瀏覽器。公開設定需要把 site.json 提交至 PIN Repo。</p>
-</div></details></div><p class="subhead" id="pin-archive-description" hidden>先集中瀏覽海報、字體與成熟作品，其他研究資料已退出現行型錄。</p>
+</div></details></div></div><p class="subhead" id="pin-archive-description" hidden>先集中瀏覽海報、字體與成熟作品，其他研究資料已退出現行型錄。</p>
 <div class="stats"><div class="stat"><b id="listed">—</b>非付費研究紀錄</div><div class="stat"><b id="thumbnailCount">—</b>附圖紀錄</div><div class="stat"><b id="excludedCount">0</b>已標記不考慮</div></div></header>
 <div class="filter-shell">
 <nav class="category-bar" aria-label="保留作品類別"><button type="button" data-type="ALL" class="active" aria-pressed="true">全部</button><button type="button" data-type="POSTER" aria-pressed="false">海報</button><button type="button" data-type="TYPOGRAPHY" aria-pressed="false">字體</button><button type="button" data-type="MATURE" aria-pressed="false">成熟作品</button></nav>
 <div class="pin-controls">
-<input id="q" type="search" placeholder="搜尋作品…" aria-label="搜尋作品"><span class="pin-manager-indicator">管理模式</span>
+<span class="pin-manager-indicator">管理模式</span>
 <label for="image-filter" class="visually-small"></label>
 <select id="image-filter" aria-label="圖片呈現"><option value="pictured">只看有圖</option><option value="all">包含無圖</option><option value="pending">只看無圖</option></select>
 <label class="hide-checkbox"><input id="hide-excluded" type="checkbox">隱藏不考慮</label>
@@ -297,8 +317,8 @@ body.pin-managing .pin-manager-indicator,body.pin-trash-view .pin-manager-indica
 <button id="export" type="button">匯出標記／備註／縮圖</button><button id="import" type="button">匯入備份</button><input id="import-file" type="file" accept=".json,application/json" hidden>
 <span id="saved-state" role="status" aria-live="polite">個人記號儲存在此瀏覽器</span>
 </div></details><span id="counter"></span>
-</div></div>
+</div></div><div id="pin-search-drawer" class="pin-search-drawer" hidden><input id="q" type="search" placeholder="搜尋作品…" aria-label="搜尋作品"><button type="button" id="pin-search-close" aria-label="關閉搜尋">×</button></div>
 <div class="pin-note" id="pin-help-text">點作品縮圖直接開啟原始作品展示；沒有作品展示的程式／工具，請展開技術來源。縮圖框固定 3:2，不裁切作品。研究編號右側核取方塊用於批次選取；使用上方按鈕一次移至已刪除區，進入已刪除區可批次還原；正式 GitHub 型錄不會被直接修改；「來源」下拉只顯示作品來源。目前只保留海報、字體及成熟作品三類。</div>
 <section id="cards" class="grid"></section><div class="load-wrap"><button id="load-more" type="button" hidden>顯示更多</button></div>
 <footer><span id="footer-site-name">PIN</span> — INK 個人視覺研究型錄。已確認須付費的來源從本型錄排除；價格／授權未確認的個案仍需另行核查。清理前的研究資料另存於 PIN Repo 的歷史歸檔。個人標記、備註與自選縮圖只儲存在目前瀏覽器；搬遷前請先匯出備份。</footer>
-</main><script src="./site-settings.js?v=20261013-title-clean" defer></script><script src="./app.js?v=pin-gallery-first-20261013" defer></script></body></html>
+</main><script src="./site-settings.js?v=20261013-caption" defer></script><script src="./app.js?v=pin-gallery-first-search-20261013" defer></script></body></html>
