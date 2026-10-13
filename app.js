@@ -240,25 +240,17 @@ function buildCard(item, related = [item]) {
   pick.addEventListener("change",()=>{if(pick.checked)selectedPins.add(item.id);else selectedPins.delete(item.id);syncBatchButton();});
   line.append(pick);
   body.append(line);
-  const detail = make("details", "card-detail");
-  detail.append(make("summary", "detail-toggle", "來源"));
-  const detailBody = make("div", "detail-body");
-  const seen = new Set();
-  const sources = [item, ...related.filter(record => record.id !== item.id)];
-  for (const record of sources) {
-    const url = isValidImageUrl(record.url || "") ? record.url : "";
-    if (!url || seen.has(url)) continue;
-    seen.add(url);
-    const label = sources.length > 1 ? "來源 · " + record.id + " ↗" : "開啟原始來源 ↗";
-    const anchor = make("a", "pin-source-link", label);
-    anchor.href = url;
-    anchor.target = "_blank";
-    anchor.rel = "noopener noreferrer";
-    detailBody.append(anchor);
+  // Source and thumbnail use the identical destination. No extra disclosure click.
+  if (artworkTarget) {
+    const sourceLink = make("a", "card-source-link", "來源");
+    sourceLink.href = artworkTarget;
+    sourceLink.target = "_blank";
+    sourceLink.rel = "noopener noreferrer";
+    sourceLink.setAttribute("aria-label", "開啟來源：" + item.title);
+    body.append(sourceLink);
+  } else {
+    body.append(make("span", "card-source-link", "來源待補"));
   }
-  if (!seen.size) detailBody.append(make("span", "pin-source-empty", "來源待補"));
-  detail.append(detailBody);
-  body.append(detail);
   card.append(body);
   return card;
 }
