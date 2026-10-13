@@ -1,0 +1,25 @@
+/* PIN UI / settings.css — settings sheet and nested research controls */
+.site-settings{position:relative;z-index:24}
+.site-settings>summary{list-style:none;cursor:pointer}.site-settings>summary::-webkit-details-marker{display:none}
+.site-settings-sheet{position:absolute;right:0;top:calc(100% + 8px);width:min(440px,calc(100vw - 28px));max-height:min(78vh,780px);overflow:auto;z-index:30;display:flex;flex-direction:column;gap:11px;padding:18px;background:white;border:1px solid #dce5dd;border-radius:12px;box-shadow:0 12px 38px #233e2c29;font-size:12px;line-height:1.5}
+.site-settings-sheet h2{font-size:16px;margin:0}.site-settings-sheet label{font-size:12px;font-weight:600}
+.site-settings-sheet input[type=text],.site-settings-sheet input[type=url],.site-settings-sheet textarea{width:100%;max-width:100%;min-width:0;background:white;border:1px solid #d9e1d8;border-radius:7px;padding:9px;font-size:12px}
+.site-settings-sheet textarea{min-height:65px;resize:vertical}
+.site-settings-sheet button,.site-settings-sheet select{border:1px solid #d9e1d8;border-radius:7px;padding:8px 10px;background:white;font-size:12px;max-width:100%}
+.site-settings-sheet .pin-settings-section{border-top:1px solid #e5eae4;padding-top:9px}
+.pin-settings-section>summary{cursor:pointer;font-size:13px;font-weight:700;padding:6px 0}
+.pin-settings-section .stats{display:flex;gap:13px;flex-wrap:wrap;margin:8px 0}
+.pin-settings-section .stat{font-size:11px}.pin-settings-section .stat b{font-size:15px;margin-right:5px}
+.pin-settings-section .pin-note,.pin-settings-section .subhead{display:block;font-size:12px;line-height:1.7;margin:8px 0}
+.site-icon-field{display:flex;align-items:center;gap:12px}.site-icon-preview{height:51px;width:51px;flex-shrink:0;display:grid;place-items:center;background:#f2f4f1;border-radius:9px;overflow:hidden}
+.site-icon-preview img{max-width:100%;max-height:100%}.site-icon-inputs{min-width:0;flex:1}.site-icon-inputs input[type=file]{display:block;max-width:100%;font-size:11px}
+.site-icon-inputs small{display:block;font-size:10px;color:#444;line-height:1.5}
+.site-settings-actions,.pin-manager-actions{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+.site-settings-actions .settings-primary{background:#111;color:white}
+.site-settings-status,#saved-state{font-size:11px;line-height:1.5;color:#444;margin:0}
+.hide-checkbox{display:flex;align-items:center;gap:6px;font-size:11px}
+.hide-checkbox input{width:15px;height:15px;min-width:15px;accent-color:#111}
+.filter-settings>summary{cursor:pointer;font-size:12px;padding:7px 0}
+.annotation-bar{display:flex;flex-direction:column;align-items:stretch;gap:7px;padding:10px 0}
+.pin-trash-count,#counter{font-size:11px;color:#111}
+.visually-small{font-size:11px}
