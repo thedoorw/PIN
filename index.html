@@ -218,7 +218,7 @@ header{position:relative}
 .card-detail .pin-source-link:hover{text-decoration:underline}
 .card-detail .pin-source-empty{font-size:11px;color:#89978c}
 
-</style></head><body><main>
+.pin-archive-action{margin-top:6px;border:1px solid #d5dfd7;border-radius:6px;background:#fafbfa;color:#48594e;font-size:11px;padding:5px 8px;cursor:pointer}.pin-trash-count{font-size:11px;color:#738177}#pin-trash-toggle{font-weight:600}</style></head><body><main>
 <header><div class="kicker">INK / PERSONAL VISUAL RESEARCH</div><div class="site-brand-row"><h1 id="site-name">PIN</h1>
 <details id="site-settings-panel" class="site-settings">
 <summary class="site-settings-trigger" aria-label="網站設定" title="網站設定"><span aria-hidden="true">⋯</span></summary>
@@ -249,7 +249,7 @@ header{position:relative}
 <label for="image-filter" class="visually-small"></label>
 <select id="image-filter" aria-label="圖片呈現"><option value="pictured">只看有圖</option><option value="all">包含無圖</option><option value="pending">只看無圖</option></select>
 <label class="hide-checkbox"><input id="hide-excluded" type="checkbox">隱藏不考慮</label>
-<button id="clear-filters" type="button">清除篩選</button>
+<button id="clear-filters" type="button">清除篩選</button><button id="pin-trash-toggle" type="button">已刪除區</button><span class="pin-trash-count">已刪除 <b id="pin-trash-count">0</b></span><button id="pin-trash-export" type="button" title="下載待正式刪除清單，GitHub 不會自動更新">匯出刪除清單</button>
 <details class="filter-settings"><summary>進階條件與備份</summary><div class="annotation-bar">
 <label for="access-filter">取得條件</label><select id="access-filter"><option value="all">全部</option><option value="free">可免費取得／閱讀</option><option value="unknown">取得條件待查</option></select>
 <label for="test-filter">INK 驗證</label><select id="test-filter"><option value="all">全部</option><option value="tested">候選已測試</option><option value="partial">部分分析</option><option value="blocked">分析受限</option><option value="untested">尚未測試</option></select>
@@ -257,7 +257,7 @@ header{position:relative}
 <span id="saved-state" role="status" aria-live="polite">個人記號儲存在此瀏覽器</span>
 </div></details><span id="counter"></span>
 </div></div>
-<div class="pin-note">點作品縮圖直接開啟原始作品展示；沒有作品展示的程式／工具，請展開技術來源。縮圖框固定 3:2，不裁切作品。勾選研究編號右側方框可標記不考慮；「來源」下拉只顯示作品來源。目前只保留海報、字體及成熟作品三類。</div>
+<div class="pin-note">點作品縮圖直接開啟原始作品展示；沒有作品展示的程式／工具，請展開技術來源。縮圖框固定 3:2，不裁切作品。勾選研究編號右側方框可標記不考慮；「移至已刪除區」可在此瀏覽器隱藏作品及稍後還原；正式 GitHub 型錄不會被直接修改；「來源」下拉只顯示作品來源。目前只保留海報、字體及成熟作品三類。</div>
 <section id="cards" class="grid"></section><div class="load-wrap"><button id="load-more" type="button" hidden>顯示更多</button></div>
 <footer><span id="footer-site-name">PIN</span> — INK 個人視覺研究型錄。已確認須付費的來源從本型錄排除；價格／授權未確認的個案仍需另行核查。清理前的研究資料另存於 PIN Repo 的歷史歸檔。個人標記、備註與自選縮圖只儲存在目前瀏覽器；搬遷前請先匯出備份。</footer>
-</main><script src="./site-settings.js?v=20261011-2" defer></script><script src="./app.js?v=pin-new-pde-posters-20261011" defer></script></body></html>
+</main><script src="./site-settings.js?v=20261011-2" defer></script><script src="./app.js?v=pin-local-trash-20261013" defer></script></body></html>
