@@ -240,17 +240,37 @@ function buildCard(item, related = [item]) {
   pick.addEventListener("change",()=>{if(pick.checked)selectedPins.add(item.id);else selectedPins.delete(item.id);syncBatchButton();});
   line.append(pick);
   body.append(line);
-  // Source and thumbnail use the identical destination. No extra disclosure click.
+  const footer = make("div", "card-footer");
   if (artworkTarget) {
-    const sourceLink = make("a", "card-source-link", "來源");
-    sourceLink.href = artworkTarget;
-    sourceLink.target = "_blank";
-    sourceLink.rel = "noopener noreferrer";
-    sourceLink.setAttribute("aria-label", "開啟來源：" + item.title);
-    body.append(sourceLink);
+    const link = make("a", "card-source-link", "來源");
+    link.href = artworkTarget;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.setAttribute("aria-label", "開啟來源：" + item.title);
+    footer.append(link);
   } else {
-    body.append(make("span", "card-source-link", "來源待補"));
+    footer.append(make("span", "card-source-link", "來源待補"));
   }
+  const detail = make("details", "card-research");
+  const summary = make("summary", "", "···");
+  summary.title = "詳細資料";
+  summary.setAttribute("aria-label", "展開研究詳細資料：" + item.title);
+  detail.append(summary);
+  const detailBody = make("div", "card-research-body");
+  const seen = new Set();
+  for (const record of [item, ...related.filter(x => x.id !== item.id)]) {
+    if (!isValidImageUrl(record.url || "") || seen.has(record.url)) continue;
+    seen.add(record.url);
+    const a = make("a", "pin-source-link", record.id + " · 技術來源 ↗");
+    a.href = record.url;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    detailBody.append(a);
+  }
+  if (!seen.size) detailBody.append(make("span", "", "技術來源待補"));
+  detail.append(detailBody);
+  footer.append(detail);
+  body.append(footer);
   card.append(body);
   return card;
 }
