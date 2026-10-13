@@ -323,10 +323,22 @@ body.pin-managing .pin-manager-indicator,body.pin-trash-view .pin-manager-indica
 .card .card-detail>summary:hover,.card .pin-source-link:hover{text-decoration:underline}
 @media(max-width:640px){.pin-head-actions{gap:8px!important;padding-right:0}.site-brand-row{padding-right:0}.cardbody .name{font-size:11px!important}}
 
+
+/* Final structural alignment: identical SVG icon frames, no legacy dot baseline. */
+.pin-head-actions{align-self:center!important;align-items:center!important;height:40px!important;margin-right:8px!important;padding-right:0!important}
+.pin-head-actions #pin-search-toggle,.pin-head-actions #site-settings-panel>summary{display:grid!important;place-items:center!important;box-sizing:border-box!important;width:40px!important;height:40px!important;min-height:40px!important;line-height:normal!important}
+.pin-head-actions #site-settings-panel{height:40px!important;display:flex!important;align-items:center!important;justify-content:center!important}
+.pin-head-actions #site-settings-panel>summary svg,.pin-head-actions #pin-search-toggle svg{width:19px!important;height:19px!important;display:block!important;transform:none!important;vertical-align:middle!important}
+.pin-head-actions #site-settings-panel>summary::-webkit-details-marker{display:none}
+.cardbody,.cardbody *,.cardbody a,.cardbody a:link,.cardbody a:visited,.cardbody a:hover,.cardbody a:active,.card-detail>summary,.card-detail>summary::after{color:#000!important}
+.cardbody .name{font-weight:600!important}
+.cardbody .pin-id{color:#000!important;opacity:.7}
+.cardbody .card-detail{border-color:#e7e7e7!important}
+@media(max-width:640px){.pin-head-actions{margin-right:3px!important}}
 </style></head><body><main>
 <header><div class="site-brand-row"><div class="pin-brand-block"><h1 id="site-name">PIN</h1><p id="pin-custom-caption" class="pin-custom-caption"></p></div><div class="pin-head-actions"><div id="pin-search-drawer" class="pin-search-drawer" aria-hidden="true"><input id="q" type="search" placeholder="搜尋作品…" aria-label="搜尋作品"></div><button type="button" id="pin-search-toggle" class="pin-icon-button" aria-label="開啟作品搜尋" aria-expanded="false" aria-controls="pin-search-drawer" title="搜尋作品"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg></button>
 <details id="site-settings-panel" class="site-settings">
-<summary class="site-settings-trigger" aria-label="網站設定" title="網站設定"><span aria-hidden="true">⋯</span></summary>
+<summary class="site-settings-trigger" aria-label="網站設定" title="網站設定"><svg aria-hidden="true" viewBox="0 0 24 24" width="19" height="19" fill="currentColor"><circle cx="5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="19" cy="12" r="1.7"/></svg></summary>
 <div class="site-settings-sheet">
 <h2>網站外觀</h2>
 <label for="site-name-input">網頁名稱</label>
