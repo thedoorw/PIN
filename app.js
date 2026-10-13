@@ -189,14 +189,15 @@ function buildCard(item, related = [item]) {
   const personalUrl = annotation.imageUrl || "";
   const imageUrl = personalFile ? null : (personalUrl || item.image);
   const showcase = isValidImageUrl(item.showcaseUrl || "") ? item.showcaseUrl : "";
+  const artworkTarget = showcase || (isValidImageUrl(item.url || "") ? item.url : "");
   if (personalFile || imageUrl) {
     const img = document.createElement("img");
     img.loading = "lazy";
     img.alt = item.title + " — 作品預覽";
     img.onerror = () => { img.remove(); art.append(make("span", "pending", "預覽無法載入")); };
-    if (showcase) {
+    if (artworkTarget) {
       const preview = make("a", "preview-link");
-      preview.href = showcase;
+      preview.href = artworkTarget;
       preview.target = "_blank";
       preview.rel = "noopener noreferrer";
       preview.setAttribute("aria-label", "開啟作品來源：" + item.title);
@@ -215,9 +216,9 @@ function buildCard(item, related = [item]) {
   } else {
     const empty = make("div", "image-empty");
     empty.append(make("span", "pending", "尚無作品預覽"));
-    if (showcase) {
-      const link = make("a", "source-only", "查看作品來源 ↗");
-      link.href = showcase;
+    if (artworkTarget) {
+      const link = make("a", "source-only", "查看技術來源 ↗");
+      link.href = artworkTarget;
       link.target = "_blank";
       link.rel = "noopener noreferrer";
       empty.append(link);
@@ -243,7 +244,7 @@ function buildCard(item, related = [item]) {
   const seen = new Set();
   const sources = [item, ...related.filter(record => record.id !== item.id)];
   for (const record of sources) {
-    const url = (isValidImageUrl(record.showcaseUrl || "") && record.showcaseUrl) || (isValidImageUrl(record.url || "") && record.url);
+    const url = isValidImageUrl(record.url || "") ? record.url : "";
     if (!url || seen.has(url)) continue;
     seen.add(url);
     const label = sources.length > 1 ? "來源 · " + record.id + " ↗" : "開啟原始來源 ↗";
@@ -416,3 +417,57 @@ Promise.all([
   root.textContent = "型錄資料讀取失敗：" + err.message;
   console.error(err);
 });
+
+
+function setupGalleryFirstLayout(){
+ const sheet=document.querySelector(".site-settings-sheet");
+ const controls=document.querySelector(".pin-controls");
+ if(!sheet||!controls)return;
+ const section=(title,open=false)=>{
+   const d=document.createElement("details");d.className="pin-settings-section";
+   d.open=open;const s=document.createElement("summary");s.textContent=title;d.append(s);sheet.append(d);return d;
+ };
+ const management=section("管理與已刪除區");
+ const toggle=document.createElement("label");
+ toggle.style.cssText="display:flex;align-items:center;gap:9px;font-size:12px;padding:8px 0";
+ const cb=document.createElement("input");cb.type="checkbox";cb.id="pin-manage-switch";
+ const words=document.createElement("span");words.textContent="管理模式（顯示作品核取方塊）";
+ toggle.append(cb,words);management.append(toggle);
+ const actions=document.createElement("div");actions.className="pin-manager-actions";
+ for(const id of ["pin-trash-batch","pin-trash-toggle","pin-trash-export"]){
+   const el=document.getElementById(id);if(el)actions.append(el);
+ }
+ const trashCount=document.querySelector(".pin-trash-count");if(trashCount)actions.append(trashCount);
+ management.append(actions);
+ const filters=section("篩選與備份");
+ for(const id of ["image-filter","hide-excluded","clear-filters"]){
+   const el=document.getElementById(id);
+   if(!el)continue;
+   if(id==="hide-excluded"){const label=el.closest("label");if(label)filters.append(label);}
+   else filters.append(el);
+ }
+ const advanced=document.querySelector(".filter-settings");if(advanced)filters.append(advanced);
+ const count=document.getElementById("counter");if(count)filters.append(count);
+ const info=section("型錄資訊與使用說明");
+ const stats=document.querySelector("header .stats");if(stats)info.append(stats);
+ const archive=document.getElementById("pin-archive-description");if(archive){archive.hidden=false;info.append(archive);}
+ const help=document.getElementById("pin-help-text");if(help)info.append(help);
+ const appearance=section("網站外觀");
+ const heading=sheet.querySelector("h2");
+ const toMove=[];
+ for(let node=sheet.firstElementChild;node&&node!==management;node=node.nextElementSibling)toMove.push(node);
+ for(const node of toMove)appearance.append(node);
+ cb.addEventListener("change",()=>{
+   document.body.classList.toggle("pin-managing",cb.checked);
+   if(!cb.checked&&!showingTrash){selectedPins.clear();syncBatchButton();render();}
+ });
+ const trashBtn=document.getElementById("pin-trash-toggle");
+ trashBtn?.addEventListener("click",()=>{
+   document.body.classList.toggle("pin-trash-view",showingTrash);
+   if(showingTrash){management.open=true;cb.checked=true;document.body.classList.add("pin-managing");}
+   else if(!cb.checked){document.body.classList.remove("pin-managing");}
+ });
+ // Keep the settings open while selecting and managing gallery items.
+ sheet.parentElement.addEventListener("click",event=>event.stopPropagation());
+}
+setupGalleryFirstLayout();
