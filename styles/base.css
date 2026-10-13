@@ -16,12 +16,12 @@ body.pin-managing .pin-manager-indicator,body.pin-trash-view .pin-manager-indica
 .pin-search-drawer.is-open{width:190px;flex-basis:190px;pointer-events:auto}
 .pin-search-drawer #q{display:block;width:100%;min-width:0;height:36px;border:0;border-bottom:1px solid #999;border-radius:0;outline:0;padding:5px 2px;background:transparent;font-size:12px}
 .pin-search-drawer #q:focus{border-bottom:1px solid #999}
-.pin-head-actions{display:flex;align-items:center;gap:12px;margin-left:auto;padding-right:8px;flex:0 1 auto;min-width:0;height:40px}
+.pin-head-actions{display:flex;align-items:center;gap:12px;margin-left:auto;margin-right:-32px;padding-right:0;flex:0 1 auto;min-width:0;height:40px}
 .pin-head-actions .pin-icon-button,.pin-head-actions #site-settings-panel>summary{display:grid;place-items:center;flex-shrink:0;width:40px;height:40px;margin:0;padding:0;border:0;background:transparent;border-radius:0;box-shadow:none;line-height:1}
 .pin-head-actions button svg,.pin-head-actions summary svg{display:block;width:19px;height:19px}
 .pin-head-actions #site-settings-panel{align-self:center;height:40px}
 .pin-icon-button:hover,.site-settings>summary:hover{opacity:.65}
 .pin-icon-button:focus-visible,.site-settings>summary:focus-visible{outline:2px solid #111;outline-offset:2px}
 .pin-search-drawer #q::-webkit-search-cancel-button{cursor:pointer}
-@media(max-width:640px){main{padding:12px 10px 30px}.pin-head-actions{gap:5px;padding-right:2px}.pin-search-drawer.is-open{width:min(160px,38vw);flex-basis:min(160px,38vw)}.category-bar{gap:3px}.category-bar button{padding:6px 10px;font-size:11px}}
+@media(max-width:640px){main{padding:12px 10px 30px}.pin-head-actions{gap:5px;margin-right:0;padding-right:0}.pin-search-drawer.is-open{width:min(160px,38vw);flex-basis:min(160px,38vw)}.category-bar{gap:3px}.category-bar button{padding:6px 10px;font-size:11px}}
 @media(prefers-reduced-motion:reduce){.pin-search-drawer{transition:none}}
