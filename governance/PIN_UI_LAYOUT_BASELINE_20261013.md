@@ -1,8 +1,8 @@
 # PIN UI Layout Baseline — 2026-10-13
 
-Status: **USER-approved provisional layout freeze** (source-code baseline, browser acceptance still pending).
+Status: **SUPERSEDED / FREEZE LIFTED by USER**. This document is a historical snapshot only. Its layout values are no longer binding; use current user instructions for subsequent changes.
 
-This document preserves the current arrangement; it is NOT permission to redesign it. GitHub `main` is the source of truth. A later task must modify only its named scope and must preserve all unrelated frozen properties. If a layout change is intentional, request USER approval and update this baseline in the same change.
+Historical reference only. The USER withdrew the layout freeze; future changes may revise this arrangement. GitHub `main` is the source of truth. A later task must modify only its named scope and must preserve all unrelated frozen properties. If a layout change is intentional, request USER approval and update this baseline in the same change.
 
 ## 1. Visual hierarchy / positioning
 
