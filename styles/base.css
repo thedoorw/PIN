@@ -2,9 +2,9 @@
 :root{font-family:system-ui,-apple-system,"Noto Sans TC",sans-serif;color:#111;background:#f8f8f8}
 *{box-sizing:border-box}body{margin:0;color:#111}button,input,select,textarea{font:inherit;color:#111}button{cursor:pointer}a{color:#111} [hidden]{display:none!important}
 main{max-width:1580px;margin:auto;padding:16px 59px 44px}
-.site-brand-row{display:flex;align-items:center;gap:16px;min-width:0;min-height:46px}
-.pin-brand-block{flex:1;min-width:0}header{margin:0 0 8px}header h1{font-size:35px;line-height:1.1;font-weight:800;letter-spacing:-.065em;margin:0}
-.pin-custom-caption{font-size:13px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere;margin:5px 0;color:#111}.pin-custom-caption:empty{display:none}
+.site-brand-row{display:flex;align-items:flex-start;gap:16px;min-width:0;min-height:40px}
+.pin-brand-block{flex:1;min-width:0}header{margin:0 0 24px}header h1{font-size:35px;line-height:40px;font-weight:800;letter-spacing:-.065em;margin:0}
+.pin-custom-caption{font-size:13px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere;margin:24px 0 0;color:#111}.pin-custom-caption:empty{display:none}
 header>.subhead,header>.stats,.pin-note,footer{display:none}
 .filter-shell{position:sticky;top:0;z-index:8;background:#f8f8f8ed;backdrop-filter:blur(10px);border-bottom:1px solid #dedede;padding:10px 0}
 .category-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
