@@ -34,6 +34,16 @@ body.pin-managing .art .chip,body.pin-managing .art .style-badge,body.pin-managi
 @media(max-width:355px){.grid{grid-template-columns:1fr}}
 
 /* Direct source link, no disclosure arrow. */
-.card-source-link{display:block;margin-top:auto;padding:8px 0 2px;border-top:1px solid #e9e9e9;color:#111;text-decoration:none;font-size:11px;line-height:1.3}
+.card-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto;border-top:1px solid #e9e9e9;padding-top:6px;flex-wrap:wrap}
+.card-source-link{display:inline-block;flex:0 0 auto;width:max-content;padding:2px 0;color:#111;text-decoration:none;font-size:11px;line-height:1.3}
+.card-research{margin-left:auto;min-width:25px}
+.card-research>summary{cursor:pointer;list-style:none;width:25px;height:23px;display:grid;place-items:center;color:#444;font-size:18px;line-height:1}
+.card-research>summary::-webkit-details-marker{display:none}
+.card-research>summary:hover{background:#eee;border-radius:4px}
+.card-research[open]{flex:0 0 100%;display:contents}
+.card-research[open]>summary{order:1;margin-left:auto}
+.card-research-body{display:flex;flex-direction:column;gap:6px;font-size:11px;padding:9px 0;overflow-wrap:anywhere}
+.card-research[open]>.card-research-body{order:2;flex:0 0 100%;width:100%}
+.card-research-body a{color:#111}
 .card-source-link:hover{text-decoration:underline}
 @media(max-width:640px){.grid{margin-left:0;margin-right:0}}
