@@ -1,11 +1,11 @@
 "use strict";
 (() => {
   const STORAGE_KEY = "pin:site-appearance-preview:v1";
-  const DEFAULT = { siteName: "PIN", faviconUrl: "./assets/favicon.svg" };
+  const DEFAULT = { siteName: "PIN", faviconUrl: "./assets/favicon.svg", caption: "" };
   const LIMIT = 256 * 1024;
   const el = id => document.getElementById(id);
   const f = {
-    name: el("site-name-input"), url: el("site-icon-url"), file: el("site-icon-file"),
+    name: el("site-name-input"), caption: el("site-caption-input"), captionDisplay: el("pin-custom-caption"), url: el("site-icon-url"), file: el("site-icon-file"),
     save: el("site-settings-save"), export: el("site-settings-export"), reset: el("site-settings-reset"),
     status: el("site-settings-status"), title: el("site-name"), footer: el("footer-site-name"),
     icon: el("site-favicon"), preview: el("site-icon-preview"), fallback: el("site-icon-fallback")
@@ -22,11 +22,12 @@
   }
   function normalize(v) {
     return { siteName: cleanName(v?.siteName) || DEFAULT.siteName,
-      faviconUrl: safeIcon(v?.faviconUrl) || DEFAULT.faviconUrl };
+      faviconUrl: safeIcon(v?.faviconUrl) || DEFAULT.faviconUrl, caption: String(v?.caption || "").slice(0,240) };
   }
   function apply(v) {
     const setting = normalize(v);
     f.title.textContent = setting.siteName;
+    f.captionDisplay.textContent = setting.caption;
     f.footer.textContent = setting.siteName;
     document.title = setting.siteName;
     f.icon.type = setting.faviconUrl.startsWith("data:image/png;") ? "image/png" : (setting.faviconUrl.endsWith(".svg") ? "image/svg+xml" : "image/x-icon");
@@ -38,6 +39,7 @@
   }
   function fill(v) {
     f.name.value = v.siteName;
+    f.caption.value = v.caption || "";
     draftIcon = v.faviconUrl;
     f.url.value = v.faviconUrl.startsWith("https://") ? v.faviconUrl : "";
     f.file.value = "";
@@ -46,10 +48,11 @@
     const name = cleanName(f.name.value), typed = f.url.value.trim();
     if (!name) { f.status.textContent = "請填寫網頁名稱"; return null; }
     if (typed && !safeIcon(typed)) { f.status.textContent = "Favicon 網址必須為 https:// 連結"; return null; }
-    return {siteName:name, faviconUrl:typed || draftIcon};
+    return {siteName:name, faviconUrl:typed || draftIcon, caption:f.caption.value.slice(0,240)};
   }
   function livePreview() { const v = current(); if (v) apply(v); }
   f.name.addEventListener("input", livePreview);
+  f.caption.addEventListener("input", livePreview);
   f.url.addEventListener("change", livePreview);
   f.file.addEventListener("change", () => {
     const image = f.file.files?.[0];
