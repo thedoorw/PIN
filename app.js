@@ -486,6 +486,7 @@ function setPinSearchOpen(open){
  pinSearchButton.setAttribute("aria-expanded",String(open));
  pinSearchButton.setAttribute("aria-label",open?"關閉作品搜尋":"開啟作品搜尋");
  if(open)search.focus();
+ else if(document.activeElement===search)search.blur();
 }
 pinSearchButton.addEventListener("click",()=>setPinSearchOpen(!pinSearchDrawer.classList.contains("is-open")));
 search.tabIndex=-1;
