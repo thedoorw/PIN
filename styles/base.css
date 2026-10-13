@@ -1,7 +1,7 @@
 /* PIN UI / base.css — one owner for global layout and typography */
 :root{font-family:system-ui,-apple-system,"Noto Sans TC",sans-serif;color:#111;background:#f8f8f8}
 *{box-sizing:border-box}body{margin:0;color:#111}button,input,select,textarea{font:inherit;color:#111}button{cursor:pointer}a{color:#111} [hidden]{display:none!important}
-main{max-width:1580px;margin:auto;padding:16px 27px 44px}
+main{max-width:1580px;margin:auto;padding:16px 59px 44px}
 .site-brand-row{display:flex;align-items:center;gap:16px;min-width:0;min-height:46px}
 .pin-brand-block{flex:1;min-width:0}header{margin:0 0 8px}header h1{font-size:35px;line-height:1.1;font-weight:800;letter-spacing:-.065em;margin:0}
 .pin-custom-caption{font-size:13px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere;margin:5px 0;color:#111}.pin-custom-caption:empty{display:none}
