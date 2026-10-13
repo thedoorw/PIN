@@ -229,21 +229,6 @@ function buildCard(item, related = [item]) {
   body.append(make("div", "name", item.title));
   const line = make("div", "cardline");
   line.append(make("span", "pin-id", item.id));
-  const reject = document.createElement("input");
-  reject.type = "checkbox";
-  reject.className = "pin-reject";
-  reject.checked = annotation.rejected;
-  reject.title = "不考慮此 PIN";
-  reject.setAttribute("aria-label", "不考慮：" + item.title);
-  reject.addEventListener("change", () => {
-    const next = reject.checked;
-    annotations[item.id] = { ...getAnnotation(item.id), rejected: next };
-    card.classList.toggle("is-excluded", next);
-    persist();
-    updateCounts();
-    if (hideExcluded.checked) render();
-  });
-  line.append(reject);
   const pick=document.createElement("input");
   pick.type="checkbox";pick.className="pin-batch-select";
   pick.checked=selectedPins.has(item.id);
