@@ -28,7 +28,7 @@
     const setting = normalize(v);
     f.title.textContent = setting.siteName;
     f.footer.textContent = setting.siteName;
-    document.title = setting.siteName + " — 視覺研究型錄";
+    document.title = setting.siteName;
     f.icon.type = setting.faviconUrl.startsWith("data:image/png;") ? "image/png" : (setting.faviconUrl.endsWith(".svg") ? "image/svg+xml" : "image/x-icon");
     f.icon.href = setting.faviconUrl;
     f.fallback.textContent = setting.siteName.slice(0, 1).toUpperCase();
