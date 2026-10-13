@@ -974,6 +974,52 @@
       ],
       "showcaseUrl": "https://raw.githubusercontent.com/Zhytniakov/Processing-posters/Processing-posters/poster%203%20-%20noise%20circle/poster_3_noise_circles.png",
       "showcaseKind": "original-preview-asset"
+    },
+    {
+      "id": "R-P5-001",
+      "title": "Landscape Generator 3 — 幾何風景構圖",
+      "url": "https://github.com/makeabilitylab/p5js/tree/main/Art/LandscapeGenerator3",
+      "image": "https://raw.githubusercontent.com/makeabilitylab/p5js/main/previews/Art/LandscapeGenerator3.poster.png",
+      "description": "Makeability Lab 原創 p5.js 幾何風景示例：分離天空、山脈、太陽與月亮等構圖模組；有完整 sketch.js 與輔助 JS 檔案，可免費取得並研究。",
+      "credit": "Makeability Lab / p5js / Art/LandscapeGenerator3; source-generated preview",
+      "showcaseUrl": "https://raw.githubusercontent.com/makeabilitylab/p5js/main/previews/Art/LandscapeGenerator3.poster.png",
+      "type": "SCRIPT",
+      "batch": 12,
+      "imageEvidence": "SOURCE_ORIGINAL_IMAGE",
+      "sourceStatus": "LICENSE_MIT / CODE_AND_MATCHING_CAPTURE_VERIFIED / INK_UNTESTED",
+      "access": "free",
+      "accessLabel": "免費原始程式／MIT",
+      "accessDetail": "作者公開 GitHub 原始碼與 MIT LICENSE，並提供同一作品執行擷取的原始縮圖。",
+      "testStatus": "untested",
+      "testLabel": "INK 未測試",
+      "testDetail": "可供本機 p5.js 或瀏覽器研究，不代表已能在 INK Runtime 執行。",
+      "styleTags": [
+        "海報"
+      ],
+      "showcaseKind": "original-preview-asset"
+    },
+    {
+      "id": "R-P5-002",
+      "title": "Sine Wave Playground — 正弦曲線構圖",
+      "url": "https://github.com/makeabilitylab/p5js/tree/main/Art/SineWavePlayground",
+      "image": "https://raw.githubusercontent.com/makeabilitylab/p5js/main/previews/Art/SineWavePlayground.poster.png",
+      "description": "Makeability Lab 原創 p5.js 正弦曲線練習：附獨立 sketch.js、可執行 HTML 與自動產生的成果縮圖，適合研究曲線作為幾何構圖基本元件。",
+      "credit": "Makeability Lab / p5js / Art/SineWavePlayground; source-generated preview",
+      "showcaseUrl": "https://raw.githubusercontent.com/makeabilitylab/p5js/main/previews/Art/SineWavePlayground.poster.png",
+      "type": "SCRIPT",
+      "batch": 12,
+      "imageEvidence": "SOURCE_ORIGINAL_IMAGE",
+      "sourceStatus": "LICENSE_MIT / CODE_AND_MATCHING_CAPTURE_VERIFIED / INK_UNTESTED",
+      "access": "free",
+      "accessLabel": "免費原始程式／MIT",
+      "accessDetail": "作者公開 GitHub 原始碼與 MIT LICENSE，並提供同一作品執行擷取的原始縮圖。",
+      "testStatus": "untested",
+      "testLabel": "INK 未測試",
+      "testDetail": "可供本機 p5.js 或瀏覽器研究，不代表已能在 INK Runtime 執行。",
+      "styleTags": [
+        "海報"
+      ],
+      "showcaseKind": "original-preview-asset"
     }
   ],
   "curation": {
