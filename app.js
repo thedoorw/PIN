@@ -1,6 +1,33 @@
 "use strict";
 // Public catalog metadata is served from the GitHub-sourced projection.
 // Visitor notes and rejection marks never leave this browser.
+
+// Browser-local trash: public GitHub Pages cannot modify the canonical catalog.
+// This keeps removal decisions reversible and exportable without storing credentials.
+const PIN_TRASH_KEY = "pin:trash:v1";
+let pinTrash = (() => { try { const x=JSON.parse(localStorage.getItem(PIN_TRASH_KEY)||"{}"); return x&&typeof x==="object"&&!Array.isArray(x)?x:{}; } catch { return {}; } })();
+let showingTrash=false;
+function savePinTrash() {
+  try { localStorage.setItem(PIN_TRASH_KEY, JSON.stringify(pinTrash)); }
+  catch(e) { statusLine.textContent="無法儲存已刪除區："+e.message; }
+}
+function updateTrashCounter() {
+  const count=document.getElementById("pin-trash-count");
+  if(count)count.textContent=Object.keys(pinTrash).filter(id=>items.some(x=>x.id===id)).length;
+}
+function archivePin(id) {
+  const item=items.find(x=>x.id===id); if(!item)return;
+  pinTrash[id]={at:new Date().toISOString(),title:item.title};
+  savePinTrash(); render();
+}
+function restorePin(id) { delete pinTrash[id]; savePinTrash(); render(); }
+function exportTrashManifest() {
+  const records=items.filter(x=>pinTrash[x.id]).map(x=>({id:x.id,title:x.title,url:x.url,deletedAt:pinTrash[x.id].at}));
+  const blob=new Blob([JSON.stringify({schema:"pin-trash-request-v1",exportedAt:new Date().toISOString(),items:records},null,2)],{type:"application/json"});
+  const url=URL.createObjectURL(blob),link=document.createElement("a");link.href=url;link.download="PIN-已刪除區-GitHub刪除清單.json";document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  statusLine.textContent="已匯出 "+records.length+" 筆待 GitHub 正式刪除清單；尚未修改 GitHub";
+}
+
 const STORAGE_KEY = "ink-visual-catalog:annotations:v1";
 const root = document.getElementById("cards");
 const counter = document.getElementById("counter");
@@ -197,6 +224,10 @@ function buildCard(item, related = [item]) {
   });
   line.append(reject);
   body.append(line);
+  const trashAction=make("button","pin-archive-action",showingTrash?"還原到型錄":"移至已刪除區");
+  trashAction.type="button";
+  trashAction.addEventListener("click",()=>showingTrash?restorePin(item.id):archivePin(item.id));
+  body.append(trashAction);
   const detail = make("details", "card-detail");
   detail.append(make("summary", "detail-toggle", "來源"));
   const detailBody = make("div", "detail-body");
@@ -221,6 +252,7 @@ function buildCard(item, related = [item]) {
 }
 function render() {
   const searchable=items.filter(x=>
+    Boolean(pinTrash[x.id]) === showingTrash &&
     (type==="ALL" || (type==="MATURE" ? x.type==="MATURE" : (x.styleTags||[]).includes(type==="POSTER"?"海報":"字體"))) &&
     (access==="all"||(x.access||"unknown")===access) &&
     (imageMode==="all"||(imageMode==="pictured"?currentImageAvailable(x):!currentImageAvailable(x))) &&
@@ -244,12 +276,12 @@ function render() {
   const rem=Math.max(0,groups.length-visibleLimit);
   loadMore.hidden=rem===0;
   if(rem)loadMore.textContent="再顯示 "+Math.min(40,rem)+" 個 PIN（剩餘 "+rem+"）";
-  updateCounts();syncImageCount();
+  updateCounts();syncImageCount();updateTrashCounter();
 }
 function resetFilters() {
   type="ALL";term="";access="all";test="all";imageMode="all";visibleLimit=40;
   search.value="";accessSelect.value="all";testSelect.value="all";imageSelect.value="all";
-  hideExcluded.checked=false;
+  hideExcluded.checked=false;showingTrash=false;document.getElementById("pin-trash-toggle").textContent="已刪除區";
   document.querySelectorAll("[data-type]").forEach(b=>{
     const active=b.dataset.type==="ALL";
     b.classList.toggle("active",active);b.setAttribute("aria-pressed",String(active));
@@ -332,6 +364,8 @@ async function importNotes(file) {
     statusLine.textContent = "無法匯入：" + err.message;
   }
 }
+document.getElementById("pin-trash-toggle").addEventListener("click",()=>{showingTrash=!showingTrash;document.getElementById("pin-trash-toggle").textContent=showingTrash?"返回型錄":"已刪除區";visibleLimit=40;render();});
+document.getElementById("pin-trash-export").addEventListener("click",exportTrashManifest);
 search.addEventListener("input",e=>{term=e.target.value.toLowerCase();visibleLimit=40;render();});
 loadMore.addEventListener("click",()=>{visibleLimit+=40;render();});
 document.querySelectorAll("[data-type]").forEach(b=>b.addEventListener("click",()=>{
