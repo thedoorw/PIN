@@ -288,8 +288,22 @@ body.pin-managing .pin-manager-indicator,body.pin-trash-view .pin-manager-indica
 @keyframes pin-search-open{from{width:0;opacity:0}to{width:clamp(135px,28vw,340px);opacity:1}}
 .pin-head-actions .site-settings{margin:0;flex-shrink:0}
 @media(max-width:640px){.pin-head-actions{max-width:75vw}.pin-search-drawer{width:clamp(100px,31vw,240px)}@keyframes pin-search-open{from{width:0;opacity:0}to{width:clamp(100px,31vw,240px);opacity:1}}}
+
+/* Search refinements: frameless icon, true underline and symmetric open/close. */
+.pin-head-actions{align-items:center;justify-content:flex-end;gap:9px}
+.pin-head-actions .pin-icon-button{width:34px;height:37px;display:flex;align-items:center;justify-content:center;border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;padding:0;color:#111!important;appearance:none}
+.pin-icon-button:hover{opacity:.65}
+.pin-icon-button:focus-visible{outline:2px solid #111;outline-offset:2px;border-radius:3px!important}
+.pin-head-actions .site-settings{display:flex;align-items:center}
+.pin-head-actions .site-settings>summary{border:0;background:transparent;box-shadow:none;border-radius:0;width:34px;height:37px;display:flex;align-items:center;justify-content:center;padding:0;font-size:20px}
+.pin-search-drawer,.pin-search-drawer[hidden]{display:block!important;width:0;flex:0 1 0px;min-width:0;opacity:0;visibility:hidden;overflow:hidden;margin:0;pointer-events:none;animation:none!important;transition:width .26s ease,flex-basis .26s ease,opacity .20s ease,visibility 0s linear .26s}
+.pin-search-drawer.is-open{width:clamp(120px,28vw,340px);flex-basis:clamp(120px,28vw,340px);opacity:1;visibility:visible;pointer-events:auto;transition:width .26s ease,flex-basis .26s ease,opacity .20s ease,visibility 0s}
+.pin-search-drawer #q{height:35px;width:100%;min-width:0;max-width:none;border:0!important;border-bottom:1px solid #111!important;border-radius:0!important;box-shadow:none!important;outline:0;background:transparent!important;padding:5px 2px!important;color:#111!important}
+.pin-search-drawer #q:focus{border-bottom:2px solid #111!important}
+@media(max-width:640px){.pin-search-drawer.is-open{width:clamp(90px,30vw,220px);flex-basis:clamp(90px,30vw,220px)}}
+@media(prefers-reduced-motion:reduce){.pin-search-drawer{transition:none!important}}
 </style></head><body><main>
-<header><div class="site-brand-row"><div class="pin-brand-block"><h1 id="site-name">PIN</h1><p id="pin-custom-caption" class="pin-custom-caption"></p></div><div class="pin-head-actions"><div id="pin-search-drawer" class="pin-search-drawer" hidden><input id="q" type="search" placeholder="搜尋作品…" aria-label="搜尋作品"></div><button type="button" id="pin-search-toggle" class="pin-icon-button" aria-label="開啟作品搜尋" aria-expanded="false" aria-controls="pin-search-drawer" title="搜尋作品"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg></button>
+<header><div class="site-brand-row"><div class="pin-brand-block"><h1 id="site-name">PIN</h1><p id="pin-custom-caption" class="pin-custom-caption"></p></div><div class="pin-head-actions"><div id="pin-search-drawer" class="pin-search-drawer" aria-hidden="true"><input id="q" type="search" placeholder="搜尋作品…" aria-label="搜尋作品"></div><button type="button" id="pin-search-toggle" class="pin-icon-button" aria-label="開啟作品搜尋" aria-expanded="false" aria-controls="pin-search-drawer" title="搜尋作品"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg></button>
 <details id="site-settings-panel" class="site-settings">
 <summary class="site-settings-trigger" aria-label="網站設定" title="網站設定"><span aria-hidden="true">⋯</span></summary>
 <div class="site-settings-sheet">
@@ -330,4 +344,4 @@ body.pin-managing .pin-manager-indicator,body.pin-trash-view .pin-manager-indica
 <div class="pin-note" id="pin-help-text">點作品縮圖直接開啟原始作品展示；沒有作品展示的程式／工具，請展開技術來源。縮圖框固定 3:2，不裁切作品。研究編號右側核取方塊用於批次選取；使用上方按鈕一次移至已刪除區，進入已刪除區可批次還原；正式 GitHub 型錄不會被直接修改；「來源」下拉只顯示作品來源。目前只保留海報、字體及成熟作品三類。</div>
 <section id="cards" class="grid"></section><div class="load-wrap"><button id="load-more" type="button" hidden>顯示更多</button></div>
 <footer><span id="footer-site-name">PIN</span> — INK 個人視覺研究型錄。已確認須付費的來源從本型錄排除；價格／授權未確認的個案仍需另行核查。清理前的研究資料另存於 PIN Repo 的歷史歸檔。個人標記、備註與自選縮圖只儲存在目前瀏覽器；搬遷前請先匯出備份。</footer>
-</main><script src="./site-settings.js?v=20261013-caption" defer></script><script src="./app.js?v=pin-search-slide-20261013" defer></script></body></html>
+</main><script src="./site-settings.js?v=20261013-caption" defer></script><script src="./app.js?v=pin-search-reversible-20261013" defer></script></body></html>
