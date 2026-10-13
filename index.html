@@ -279,8 +279,17 @@ body.pin-managing .pin-manager-indicator,body.pin-trash-view .pin-manager-indica
 .site-settings-sheet .stat,.site-settings-sheet .pin-note,.site-settings-sheet .subhead,.pin-manager-indicator,.pin-trash-count,.cardline,.id,.pin-id{color:#111!important}
 @media(max-width:640px){.site-brand-row{gap:6px}.pin-head-actions{gap:5px}.site-settings-sheet{right:0}.pin-custom-caption{font-size:12px}}
 
+
+/* Search slides horizontally out of the magnifier, without creating another row. */
+.pin-head-actions{position:relative;max-width:min(65vw,580px);flex-shrink:1}
+.pin-search-drawer{display:block;min-width:0;flex:1 1 auto;width:clamp(135px,28vw,340px);margin:0;overflow:hidden;animation:pin-search-open .2s ease-out}
+.pin-search-drawer[hidden]{display:none!important}
+.pin-search-drawer #q{width:100%;min-width:0;max-width:none;margin:0;height:37px}
+@keyframes pin-search-open{from{width:0;opacity:0}to{width:clamp(135px,28vw,340px);opacity:1}}
+.pin-head-actions .site-settings{margin:0;flex-shrink:0}
+@media(max-width:640px){.pin-head-actions{max-width:75vw}.pin-search-drawer{width:clamp(100px,31vw,240px)}@keyframes pin-search-open{from{width:0;opacity:0}to{width:clamp(100px,31vw,240px);opacity:1}}}
 </style></head><body><main>
-<header><div class="site-brand-row"><div class="pin-brand-block"><h1 id="site-name">PIN</h1><p id="pin-custom-caption" class="pin-custom-caption"></p></div><div class="pin-head-actions"><button type="button" id="pin-search-toggle" class="pin-icon-button" aria-label="開啟作品搜尋" aria-expanded="false" aria-controls="pin-search-drawer" title="搜尋作品"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg></button>
+<header><div class="site-brand-row"><div class="pin-brand-block"><h1 id="site-name">PIN</h1><p id="pin-custom-caption" class="pin-custom-caption"></p></div><div class="pin-head-actions"><div id="pin-search-drawer" class="pin-search-drawer" hidden><input id="q" type="search" placeholder="搜尋作品…" aria-label="搜尋作品"></div><button type="button" id="pin-search-toggle" class="pin-icon-button" aria-label="開啟作品搜尋" aria-expanded="false" aria-controls="pin-search-drawer" title="搜尋作品"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg></button>
 <details id="site-settings-panel" class="site-settings">
 <summary class="site-settings-trigger" aria-label="網站設定" title="網站設定"><span aria-hidden="true">⋯</span></summary>
 <div class="site-settings-sheet">
@@ -317,8 +326,8 @@ body.pin-managing .pin-manager-indicator,body.pin-trash-view .pin-manager-indica
 <button id="export" type="button">匯出標記／備註／縮圖</button><button id="import" type="button">匯入備份</button><input id="import-file" type="file" accept=".json,application/json" hidden>
 <span id="saved-state" role="status" aria-live="polite">個人記號儲存在此瀏覽器</span>
 </div></details><span id="counter"></span>
-</div></div><div id="pin-search-drawer" class="pin-search-drawer" hidden><input id="q" type="search" placeholder="搜尋作品…" aria-label="搜尋作品"><button type="button" id="pin-search-close" aria-label="關閉搜尋">×</button></div>
+</div></div>
 <div class="pin-note" id="pin-help-text">點作品縮圖直接開啟原始作品展示；沒有作品展示的程式／工具，請展開技術來源。縮圖框固定 3:2，不裁切作品。研究編號右側核取方塊用於批次選取；使用上方按鈕一次移至已刪除區，進入已刪除區可批次還原；正式 GitHub 型錄不會被直接修改；「來源」下拉只顯示作品來源。目前只保留海報、字體及成熟作品三類。</div>
 <section id="cards" class="grid"></section><div class="load-wrap"><button id="load-more" type="button" hidden>顯示更多</button></div>
 <footer><span id="footer-site-name">PIN</span> — INK 個人視覺研究型錄。已確認須付費的來源從本型錄排除；價格／授權未確認的個案仍需另行核查。清理前的研究資料另存於 PIN Repo 的歷史歸檔。個人標記、備註與自選縮圖只儲存在目前瀏覽器；搬遷前請先匯出備份。</footer>
-</main><script src="./site-settings.js?v=20261013-caption" defer></script><script src="./app.js?v=pin-gallery-first-search-20261013" defer></script></body></html>
+</main><script src="./site-settings.js?v=20261013-caption" defer></script><script src="./app.js?v=pin-search-slide-20261013" defer></script></body></html>
