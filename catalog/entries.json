@@ -1,7 +1,7 @@
 {
   "catalog": "PIN",
   "schema": "PIN_CATALOG_v1",
-  "updatedAt": "2026-10-11",
+  "updatedAt": "2026-10-13",
   "archiveCount": 233,
   "excludedPaidCount": 23,
   "items": [
@@ -24,27 +24,6 @@
         "字體"
       ],
       "showcaseUrl": "https://pixelbuddha.net/actions/1267-risograph-grain-photoshop-action",
-      "showcaseKind": "original-external-work-page"
-    },
-    {
-      "id": "W015",
-      "title": "80s Poster Photoshop Action",
-      "type": "ATN",
-      "batch": 1,
-      "url": "https://www.actions4photoshop.com/atn/photo-effects/80s-poster-photoshop-action.aspx",
-      "image": "https://www.actions4photoshop.com/atn/thumbs/80s-poster-photoshop-action.jpg",
-      "description": "neon / retro poster treatment.",
-      "credit": "80S Poster Photoshop Action (Photo-Effects) | Actions for Photoshop — source page og:image",
-      "imageEvidence": "SOURCE_PAGE_OG",
-      "sourceStatus": "PREVIEW_VERIFIED / ACTION_TRACEABLE / LICENSE_REVIEW.",
-      "access": "unknown",
-      "testStatus": "untested",
-      "accessLabel": "取得條件待查",
-      "accessDetail": "尚無可靠的價格或公開免費下載證據。",
-      "styleTags": [
-        "海報"
-      ],
-      "showcaseUrl": "https://www.actions4photoshop.com/atn/photo-effects/80s-poster-photoshop-action.aspx",
       "showcaseKind": "original-external-work-page"
     },
     {
@@ -242,28 +221,6 @@
       ],
       "showcaseUrl": "",
       "showcaseKind": "source-code-only"
-    },
-    {
-      "id": "M002",
-      "title": "Modular Typography with Processing — Amuki Estudio",
-      "type": "SCRIPT",
-      "batch": 4,
-      "url": "https://www.behance.net/gallery/172542367/Modular-Typography-with-processing",
-      "image": "https://mir-s3-cdn-cf.behance.net/project_modules/1400/bc5fe0172542367.64834554efc2d.jpg",
-      "description": "mature colorful modular letterforms built from 128 interchangeable modules.",
-      "credit": "Amuki Estudio original Behance gallery/172542367 — Modular Typography with Processing",
-      "imageEvidence": "SOURCE_ORIGINAL_IMAGE",
-      "sourceStatus": "PREVIEW_VERIFIED / PROCESS_TRACEABLE / SOURCE_ACQUISITION_PENDING.",
-      "access": "unknown",
-      "testStatus": "untested",
-      "accessLabel": "取得條件待查",
-      "accessDetail": "尚無可靠的價格或公開免費下載證據。",
-      "styleTags": [
-        "海報",
-        "字體"
-      ],
-      "showcaseUrl": "https://www.behance.net/gallery/172542367/Modular-Typography-with-processing",
-      "showcaseKind": "original-external-work-page"
     },
     {
       "id": "M003",
@@ -480,29 +437,6 @@
       "showcaseKind": "original-external-work-page"
     },
     {
-      "id": "CON001",
-      "title": "Procedural Soviet Constructivism recipe — claude-drawing-skill",
-      "type": "SCRIPT",
-      "batch": 5,
-      "url": "https://github.com/cloveric/claude-drawing-skill",
-      "image": "https://raw.githubusercontent.com/cloveric/claude-drawing-skill/main/examples/constructivism_radio.jpg",
-      "description": "red/black constructivist poster with separate print plates, halftoned procedural 3D-photo inserts, condensed type, paper aging and registration error.",
-      "credit": "cloveric / claude-drawing-skill — original Constructivism Radio example, examples/constructivism_radio.jpg",
-      "imageEvidence": "SOURCE_ORIGINAL_IMAGE",
-      "sourceStatus": "RECIPE_TRACEABLE / SOURCE_ID_PIN_REQUIRED / LICENSE_REVIEW.",
-      "access": "unknown",
-      "testStatus": "untested",
-      "accessLabel": "取得條件待查",
-      "accessDetail": "尚無可靠的價格或公開免費下載證據。",
-      "imageMissingReason": "",
-      "imageGapCode": "SOURCE_ID_UNRESOLVED",
-      "styleTags": [
-        "海報"
-      ],
-      "showcaseUrl": "https://raw.githubusercontent.com/cloveric/claude-drawing-skill/main/examples/constructivism_radio.jpg",
-      "showcaseKind": "original-preview-asset"
-    },
-    {
       "id": "CON002",
       "title": "Constructivist paper sci-fi collage skill — QundaiCai314",
       "type": "SCRIPT",
@@ -673,143 +607,6 @@
       "showcaseKind": "original-preview-asset"
     },
     {
-      "id": "AC011",
-      "title": "Tea Insurrection — Constructivist propaganda-poster tutorial",
-      "type": "SCRIPT",
-      "batch": 7,
-      "url": "https://lopsy.art/tutorials/propaganda-poster-party-invitation/",
-      "image": "https://lopsy.art/tutorials/propaganda-poster-party-invitation/cover.jpg",
-      "description": "mature red/black/cream Constructivist poster with radial burst, diagonal bands, cutout object, condensed type, hard shadow, halftone and paper texture.",
-      "credit": "Design a Propaganda Poster Style Party Invitation | Lopsy Tutorial — source-page OG image",
-      "imageEvidence": "SOURCE_PAGE_OG",
-      "sourceStatus": "PREVIEW_VERIFIED / FINISHED_PROJECT / STEP_RECIPE / LICENSE_REVIEW.",
-      "access": "unknown",
-      "testStatus": "untested",
-      "accessLabel": "取得條件待查",
-      "accessDetail": "尚無可靠的價格或公開免費下載證據。",
-      "styleTags": [
-        "海報"
-      ],
-      "showcaseUrl": "https://lopsy.art/tutorials/propaganda-poster-party-invitation/",
-      "showcaseKind": "original-external-work-page"
-    },
-    {
-      "id": "M-C001",
-      "originalID": "C001",
-      "title": "Modern minimal hackathon posters in ChatGPT",
-      "type": "MATURE",
-      "batch": 0,
-      "url": "https://www.figma.com/blog/slides-buzz-figma-app-in-chatgpt/",
-      "image": "https://cdn.sanity.io/images/599r6htc/regionalized/b9025779fe123e70d5656c39f5bac711a3688b60-2912x1792.png?auto=format&fit=max&h=495&q=75&rect=1%2C0%2C2911%2C1792&w=804",
-      "description": "Poster · Figma",
-      "credit": "Figma / Official — 研究表來源預覽",
-      "imageEvidence": "RESEARCH_SHEET_PREVIEW",
-      "sourceStatus": "MATURE_CANDIDATE",
-      "access": "unknown",
-      "accessLabel": "取得條件待查",
-      "testStatus": "untested",
-      "testLabel": "INK 未測試",
-      "testDetail": "成熟作品候選，未提供此個案的 INK native 重現證據",
-      "styleTags": [
-        "海報"
-      ],
-      "showcaseUrl": "https://www.figma.com/blog/slides-buzz-figma-app-in-chatgpt/",
-      "showcaseKind": "original-external-work-page"
-    },
-    {
-      "id": "M-C002",
-      "originalID": "C002",
-      "title": "Year-in-review deck generated from ChatGPT",
-      "type": "MATURE",
-      "batch": 0,
-      "url": "https://www.figma.com/blog/slides-buzz-figma-app-in-chatgpt/",
-      "image": "https://cdn.sanity.io/images/599r6htc/regionalized/7848d23e7d38cefb6fb1fbfb7dbf5f330228d7bf-2912x1792.png",
-      "description": "Typography / Layout · Figma",
-      "credit": "Figma / Official — 研究表來源預覽",
-      "imageEvidence": "RESEARCH_SHEET_PREVIEW",
-      "sourceStatus": "MATURE_CANDIDATE",
-      "access": "unknown",
-      "accessLabel": "取得條件待查",
-      "testStatus": "untested",
-      "testLabel": "INK 未測試",
-      "testDetail": "成熟作品候選，未提供此個案的 INK native 重現證據",
-      "styleTags": [
-        "字體"
-      ],
-      "showcaseUrl": "https://www.figma.com/blog/slides-buzz-figma-app-in-chatgpt/",
-      "showcaseKind": "original-external-work-page"
-    },
-    {
-      "id": "M-C003",
-      "originalID": "C003",
-      "title": "Reference image → Figma portfolio design → webpage",
-      "type": "MATURE",
-      "batch": 0,
-      "url": "https://dev.to/umitomo-lab/i-thought-figma-mcp-could-recreate-any-design-i-was-wrong-1ab3",
-      "image": "https://www.nuttadech.com/blog/illustrations/figma-mcp-03-before-after.webp",
-      "description": "UI / Information Design · Figma",
-      "credit": "Figma / Creator Share — 研究表來源預覽",
-      "imageEvidence": "RESEARCH_SHEET_PREVIEW",
-      "sourceStatus": "MATURE_CANDIDATE",
-      "access": "unknown",
-      "accessLabel": "取得條件待查",
-      "testStatus": "untested",
-      "testLabel": "INK 未測試",
-      "testDetail": "成熟作品候選，未提供此個案的 INK native 重現證據",
-      "styleTags": [
-        "海報"
-      ],
-      "showcaseUrl": "https://dev.to/umitomo-lab/i-thought-figma-mcp-could-recreate-any-design-i-was-wrong-1ab3",
-      "showcaseKind": "original-external-work-page"
-    },
-    {
-      "id": "M-C004",
-      "originalID": "C004",
-      "title": "Concept Poster",
-      "type": "MATURE",
-      "batch": 0,
-      "url": "https://www.figma.com/templates/concept-poster/",
-      "image": "https://cdn.sanity.io/images/599r6htc/regionalized/69ebd1b0811ea6d3444515a8a9cbaabdd52a04e8-1108x1108.png?auto=format&fit=max&h=540&q=75&w=540",
-      "description": "Poster · Figma",
-      "credit": "Figma / Official — 研究表來源預覽",
-      "imageEvidence": "RESEARCH_SHEET_PREVIEW",
-      "sourceStatus": "MATURE_CANDIDATE",
-      "access": "unknown",
-      "accessLabel": "取得條件待查",
-      "testStatus": "untested",
-      "testLabel": "INK 未測試",
-      "testDetail": "成熟作品候選，未提供此個案的 INK native 重現證據",
-      "styleTags": [
-        "海報"
-      ],
-      "showcaseUrl": "https://www.figma.com/templates/concept-poster/",
-      "showcaseKind": "original-external-work-page"
-    },
-    {
-      "id": "M-C005",
-      "originalID": "C005",
-      "title": "Dance-party invitation in Adobe Express",
-      "type": "MATURE",
-      "batch": 0,
-      "url": "https://blog.adobe.com/en/publish/2025/12/10/edit-photoshop-chatgpt",
-      "image": "https://blog.adobe.com/en/publish/2025/12/10/media_1d53fa39b418ce576f7e7f0c1d7747810f53d4cdc.png?format=png&optimize=medium&width=750",
-      "description": "Typography / Layout · Adobe",
-      "credit": "Adobe / Official — 研究表來源預覽",
-      "imageEvidence": "RESEARCH_SHEET_PREVIEW",
-      "sourceStatus": "MATURE_CANDIDATE",
-      "access": "unknown",
-      "accessLabel": "取得條件待查",
-      "testStatus": "untested",
-      "testLabel": "INK 未測試",
-      "testDetail": "成熟作品候選，未提供此個案的 INK native 重現證據",
-      "styleTags": [
-        "字體",
-        "海報"
-      ],
-      "showcaseUrl": "https://blog.adobe.com/en/publish/2025/12/10/edit-photoshop-chatgpt",
-      "showcaseKind": "original-external-work-page"
-    },
-    {
       "id": "M-C006",
       "originalID": "C006",
       "title": "Promotional boutique flyer → PDF",
@@ -835,27 +632,6 @@
       "showcaseKind": "original-external-work-page"
     },
     {
-      "id": "M-C007",
-      "originalID": "C007",
-      "title": "Three social ads from a brief",
-      "type": "MATURE",
-      "batch": 0,
-      "url": "https://openai.com/business/plugins/adobe-express/",
-      "image": "https://blog.adobe.com/en/publish/2024/04/01/media_1d8e497a4ddd21dd7e6d9333b3b81aa37cba9bd58.jpeg?format=pjpg&optimize=medium&width=1200",
-      "description": "Social / Marketing · Adobe",
-      "credit": "Adobe / Official — 研究表來源預覽",
-      "imageEvidence": "RESEARCH_SHEET_PREVIEW",
-      "sourceStatus": "MATURE_CANDIDATE",
-      "access": "unknown",
-      "accessLabel": "取得條件待查",
-      "testStatus": "untested",
-      "testLabel": "INK 未測試",
-      "testDetail": "成熟作品候選，未提供此個案的 INK native 重現證據",
-      "styleTags": [],
-      "showcaseUrl": "https://openai.com/business/plugins/adobe-express/",
-      "showcaseKind": "original-external-work-page"
-    },
-    {
       "id": "M-C008",
       "originalID": "C008",
       "title": "Modern geometric logo",
@@ -877,92 +653,6 @@
       "showcaseKind": "original-external-work-page"
     },
     {
-      "id": "M-C009",
-      "originalID": "C009",
-      "title": "Run Club poster — Magic Layers in ChatGPT",
-      "type": "MATURE",
-      "batch": 0,
-      "url": "https://www.canva.com/newsroom/news/magic-layers-ai-assistants/",
-      "image": "https://content-management-files.canva.com/8b9ff60a-c116-4146-ab4d-454903c44213/CanvaAIphotoeditinginsideGeminiandChatGPT.png",
-      "description": "Poster · Canva",
-      "credit": "Canva / Official — 研究表來源預覽",
-      "imageEvidence": "RESEARCH_SHEET_PREVIEW",
-      "sourceStatus": "MATURE_CANDIDATE",
-      "access": "unknown",
-      "accessLabel": "取得條件待查",
-      "testStatus": "untested",
-      "testLabel": "INK 未測試",
-      "testDetail": "成熟作品候選，未提供此個案的 INK native 重現證據",
-      "styleTags": [
-        "海報"
-      ],
-      "showcaseUrl": "https://www.canva.com/newsroom/news/magic-layers-ai-assistants/",
-      "showcaseKind": "original-external-work-page"
-    },
-    {
-      "id": "M-C010",
-      "originalID": "C010",
-      "title": "Rivea product campaign visual — Magic Layers",
-      "type": "MATURE",
-      "batch": 0,
-      "url": "https://www.canva.com/newsroom/news/magic-layers-ai-assistants/",
-      "image": "https://content-management-files.canva.com/89e94e51-8d2d-470d-90b8-e9d4cf49bc39/CanvaeditableimagesMagicLayersinGemini.png",
-      "description": "Social / Marketing · Canva",
-      "credit": "Canva / Official — 研究表來源預覽",
-      "imageEvidence": "RESEARCH_SHEET_PREVIEW",
-      "sourceStatus": "MATURE_CANDIDATE",
-      "access": "unknown",
-      "accessLabel": "取得條件待查",
-      "testStatus": "untested",
-      "testLabel": "INK 未測試",
-      "testDetail": "成熟作品候選，未提供此個案的 INK native 重現證據",
-      "styleTags": [],
-      "showcaseUrl": "https://www.canva.com/newsroom/news/magic-layers-ai-assistants/",
-      "showcaseKind": "original-external-work-page"
-    },
-    {
-      "id": "M-C011",
-      "originalID": "C011",
-      "title": "Grand-opening pastry hero image in ChatGPT + Canva",
-      "type": "MATURE",
-      "batch": 0,
-      "url": "https://www.canva.com/newsroom/news/deep-research-integration-mcp-server/",
-      "image": "https://content-management-files.canva.com/97b79173-0c59-46a2-b5c1-0f375e23150e/CanvaandOpenAICodex.png",
-      "description": "Social / Marketing · Canva",
-      "credit": "Canva / Official — 研究表來源預覽",
-      "imageEvidence": "RESEARCH_SHEET_PREVIEW",
-      "sourceStatus": "MATURE_CANDIDATE",
-      "access": "unknown",
-      "accessLabel": "取得條件待查",
-      "testStatus": "untested",
-      "testLabel": "INK 未測試",
-      "testDetail": "成熟作品候選，未提供此個案的 INK native 重現證據",
-      "styleTags": [],
-      "showcaseUrl": "https://www.canva.com/newsroom/news/deep-research-integration-mcp-server/",
-      "showcaseKind": "original-external-work-page"
-    },
-    {
-      "id": "M-C012",
-      "originalID": "C012",
-      "title": "Squirrelites campaign quote card",
-      "type": "MATURE",
-      "batch": 0,
-      "url": "https://www.canva.com/newsroom/news/brand-campaign-2026/",
-      "image": "https://content-management-files.canva.com/37284156-0785-4370-b8c3-c6b114b1410d/NewsroomOOHQuoteCard-H1BrandCampaign.jpg",
-      "description": "Social / Marketing · Canva",
-      "credit": "Canva / Official — 研究表來源預覽",
-      "imageEvidence": "RESEARCH_SHEET_PREVIEW",
-      "sourceStatus": "MATURE_CANDIDATE",
-      "access": "unknown",
-      "accessLabel": "取得條件待查",
-      "testStatus": "untested",
-      "testLabel": "INK 未測試",
-      "testDetail": "成熟作品候選，未提供此個案的 INK native 重現證據",
-      "styleTags": [],
-      "showcaseUrl": "https://www.canva.com/newsroom/news/brand-campaign-2026/",
-      "showcaseKind": "original-external-work-page"
-    },
-    {
       "id": "M-C013",
       "originalID": "C013",
       "title": "Layered shader artwork — Riso / Particle Grid / Gradient Map",
@@ -981,52 +671,6 @@
       "testDetail": "成熟作品候選，未提供此個案的 INK native 重現證據",
       "styleTags": [],
       "showcaseUrl": "https://www.figma.com/blog/agent-custom-tools-context-skills/",
-      "showcaseKind": "original-external-work-page"
-    },
-    {
-      "id": "M-C014",
-      "originalID": "C014",
-      "title": "Surreal poster — texture and light",
-      "type": "MATURE",
-      "batch": 0,
-      "url": "https://www.adobe.com/learn/photoshop/web/add-texture-lighting-to-poster-design",
-      "image": "https://images-tv.adobe.com/mpcv3/df03e380-920b-429e-a0fa-cdaeba820809/ebb217ce-1cc3-4ddc-9b10-cbbbc7c3c8ca/6142705d175a4a3588c6ff4f1fdc0eea_1727455529-1920x1080.jpg",
-      "description": "Poster · Adobe",
-      "credit": "Adobe / Official — 研究表來源預覽",
-      "imageEvidence": "RESEARCH_SHEET_PREVIEW",
-      "sourceStatus": "MATURE_CANDIDATE",
-      "access": "unknown",
-      "accessLabel": "取得條件待查",
-      "testStatus": "untested",
-      "testLabel": "INK 未測試",
-      "testDetail": "成熟作品候選，未提供此個案的 INK native 重現證據",
-      "styleTags": [
-        "海報"
-      ],
-      "showcaseUrl": "https://www.adobe.com/learn/photoshop/web/add-texture-lighting-to-poster-design",
-      "showcaseKind": "original-external-work-page"
-    },
-    {
-      "id": "M-C015",
-      "originalID": "C015",
-      "title": "Poster in billboard mockup",
-      "type": "MATURE",
-      "batch": 0,
-      "url": "https://blog.adobe.com/en/publish/2020/02/03/visualize-poster-designs-in-the-real-world-with-adobe-stock-and-photoshop",
-      "image": "https://blog.adobe.com/en/publish/2020/02/03/media_194725bbe8cf174c6ef661c98bae793e52494c50a.jpg?format=jpg&optimize=medium&width=750",
-      "description": "Composite · Adobe",
-      "credit": "Adobe / Official — 研究表來源預覽",
-      "imageEvidence": "RESEARCH_SHEET_PREVIEW",
-      "sourceStatus": "MATURE_CANDIDATE",
-      "access": "unknown",
-      "accessLabel": "取得條件待查",
-      "testStatus": "untested",
-      "testLabel": "INK 未測試",
-      "testDetail": "成熟作品候選，未提供此個案的 INK native 重現證據",
-      "styleTags": [
-        "海報"
-      ],
-      "showcaseUrl": "https://blog.adobe.com/en/publish/2020/02/03/visualize-poster-designs-in-the-real-world-with-adobe-stock-and-photoshop",
       "showcaseKind": "original-external-work-page"
     },
     {
@@ -1069,27 +713,6 @@
       "testDetail": "成熟作品候選，未提供此個案的 INK native 重現證據",
       "styleTags": [],
       "showcaseUrl": "https://www.adobe.com/learn/illustrator/web/create-edit-artwork-with-paintbrush-pencil-tools",
-      "showcaseKind": "original-external-work-page"
-    },
-    {
-      "id": "M-C018",
-      "originalID": "C018",
-      "title": "Flowing ribbons with Mixer Brush",
-      "type": "MATURE",
-      "batch": 0,
-      "url": "https://www.adobe.com/learn/photoshop/in-app/create-flowing-ribbons-of-color-with-the-mixer-brush-tool",
-      "image": "https://cc-cdn.adobe.com/graceland/PHSP/en_US/2.0.0/create-flowing-ribbons-of-color-with-the-mixer-brush-tool/paint_heroimage_1.jpg",
-      "description": "Drawing / Painting · Adobe",
-      "credit": "Adobe / Official — 研究表來源預覽",
-      "imageEvidence": "RESEARCH_SHEET_PREVIEW",
-      "sourceStatus": "MATURE_CANDIDATE",
-      "access": "unknown",
-      "accessLabel": "取得條件待查",
-      "testStatus": "untested",
-      "testLabel": "INK 未測試",
-      "testDetail": "成熟作品候選，未提供此個案的 INK native 重現證據",
-      "styleTags": [],
-      "showcaseUrl": "https://www.adobe.com/learn/photoshop/in-app/create-flowing-ribbons-of-color-with-the-mixer-brush-tool",
       "showcaseKind": "original-external-work-page"
     },
     {
@@ -1330,75 +953,6 @@
       "showcaseKind": "related-project-artwork"
     },
     {
-      "id": "R-JSX-003",
-      "title": "RandomScribble — Illustrator 隨機線條 JSX",
-      "url": "https://github.com/creold/illustrator-scripts/blob/master/md/Draw.md#randomscribble",
-      "type": "JSX",
-      "description": "RandomScribble.jsx 使用可指定點數的隨機折線／塗鴉路徑，限制在畫板或選取物件邊界內；原作者提供 GIF 操作示範。",
-      "credit": "creold / RandomScribble official documentation GIF",
-      "styleTags": [
-        "海報"
-      ],
-      "batch": 10,
-      "image": "https://i.ibb.co/b6FftPk/Random-Scribble.gif",
-      "imageEvidence": "SOURCE_README",
-      "sourceStatus": "SOURCE_CODE_DOCUMENTED / SOURCE_DOC_DEMO / INK_UNTESTED",
-      "access": "free",
-      "accessLabel": "公開原始碼可取得",
-      "accessDetail": "公開 repository 可讀；使用與再散布依原授權及各檔規定。",
-      "testStatus": "untested",
-      "testLabel": "INK 未測試",
-      "testDetail": "Illustrator JSX 存在不代表 INK Translator 可執行此腳本；需要另行逐項轉譯驗證。",
-      "showcaseUrl": "https://github.com/creold/illustrator-scripts/blob/master/md/Draw.md#randomscribble",
-      "showcaseKind": "original-script-demo"
-    },
-    {
-      "id": "R-PDE-001",
-      "title": "Spiral Dots — Processing Poster",
-      "type": "SCRIPT",
-      "batch": 11,
-      "url": "https://github.com/Zhytniakov/Processing-posters/blob/Processing-posters/poster%201%20-%20spiral%20dots/poster_1_spiral_dots.pde",
-      "image": "https://raw.githubusercontent.com/Zhytniakov/Processing-posters/Processing-posters/poster%201%20-%20spiral%20dots/poster_1_spiral dots.png",
-      "description": "以螺旋排列點陣構成幾何海報，原作者提供成果 PNG 與對應 Processing PDE 草圖。",
-      "credit": "Zhytniakov / Processing-posters, matched image and PDE script from same project folder",
-      "imageEvidence": "SOURCE_ORIGINAL_IMAGE",
-      "sourceStatus": "ORIGINAL_PNG_AND_PDE_VERIFIED / INK_UNTESTED",
-      "access": "free",
-      "accessLabel": "公開原始碼可取得",
-      "accessDetail": "程式及示範 PNG 在公開 repository；是否可再利用需另確認授權，未經核實不得重製散布。",
-      "testStatus": "untested",
-      "testLabel": "INK 未測試",
-      "testDetail": "可在 Processing 研究；不是 Illustrator JSX，亦未經 INK 執行驗證。",
-      "styleTags": [
-        "海報"
-      ],
-      "showcaseUrl": "https://raw.githubusercontent.com/Zhytniakov/Processing-posters/Processing-posters/poster%201%20-%20spiral%20dots/poster_1_spiral dots.png",
-      "showcaseKind": "original-preview-asset"
-    },
-    {
-      "id": "R-PDE-002",
-      "title": "Fractal Circles — Processing Poster",
-      "type": "SCRIPT",
-      "batch": 11,
-      "url": "https://github.com/Zhytniakov/Processing-posters/blob/Processing-posters/poster%202%20-%20fractal%20circles/poster_2_fractal_circles.pde",
-      "image": "https://raw.githubusercontent.com/Zhytniakov/Processing-posters/Processing-posters/poster%202%20-%20fractal%20circles/poster_2_fractal_circles.png",
-      "description": "以圓形遞迴與尺度變化構成幾何海報，原作者提供成果 PNG 與對應 Processing PDE 草圖。",
-      "credit": "Zhytniakov / Processing-posters, matched image and PDE script from same project folder",
-      "imageEvidence": "SOURCE_ORIGINAL_IMAGE",
-      "sourceStatus": "ORIGINAL_PNG_AND_PDE_VERIFIED / INK_UNTESTED",
-      "access": "free",
-      "accessLabel": "公開原始碼可取得",
-      "accessDetail": "程式及示範 PNG 在公開 repository；是否可再利用需另確認授權，未經核實不得重製散布。",
-      "testStatus": "untested",
-      "testLabel": "INK 未測試",
-      "testDetail": "可在 Processing 研究；不是 Illustrator JSX，亦未經 INK 執行驗證。",
-      "styleTags": [
-        "海報"
-      ],
-      "showcaseUrl": "https://raw.githubusercontent.com/Zhytniakov/Processing-posters/Processing-posters/poster%202%20-%20fractal%20circles/poster_2_fractal_circles.png",
-      "showcaseKind": "original-preview-asset"
-    },
-    {
       "id": "R-PDE-003",
       "title": "Noise Circle — Processing Poster",
       "type": "SCRIPT",
@@ -1432,6 +986,8 @@
     ],
     "archivedBefore": "research/archive/PIN_CATALOG_BEFORE_THREE_CATEGORY_REDUCTION_20261011.json",
     "current": 58,
-    "retired": 152
+    "retired": 152,
+    "userRejectedDeletedAt": "2026-10-13",
+    "userRejectedDeletedCount": 20
   }
 }
