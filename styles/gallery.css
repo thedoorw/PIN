@@ -1,5 +1,5 @@
 /* PIN UI / gallery.css — card size and image rules */
-.grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:15px;margin-top:13px;align-items:stretch}
+.grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:15px;margin:13px -16px 0;align-items:stretch}
 .card{min-width:0;display:flex;flex-direction:column;overflow:hidden;background:#fff;border:1px solid #e2e2e2;border-radius:10px;box-shadow:0 1px 5px #22222210}
 .card:hover{box-shadow:0 4px 14px #22222215}
 .art{position:relative;width:100%;aspect-ratio:3/2;background:#f0f0f0;display:flex;align-items:center;justify-content:center;overflow:hidden}
@@ -32,3 +32,8 @@ body.pin-managing .art .chip,body.pin-managing .art .style-badge,body.pin-managi
 @media(max-width:960px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:640px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.cardbody{padding:8px}.cardbody .name{font-size:11px}}
 @media(max-width:355px){.grid{grid-template-columns:1fr}}
+
+/* Direct source link, no disclosure arrow. */
+.card-source-link{display:block;margin-top:auto;padding:8px 0 2px;border-top:1px solid #e9e9e9;color:#111;text-decoration:none;font-size:11px;line-height:1.3}
+.card-source-link:hover{text-decoration:underline}
+@media(max-width:640px){.grid{margin-left:0;margin-right:0}}
