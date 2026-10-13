@@ -7,6 +7,14 @@
 const PIN_TRASH_KEY = "pin:trash:v1";
 let pinTrash = (() => { try { const x=JSON.parse(localStorage.getItem(PIN_TRASH_KEY)||"{}"); return x&&typeof x==="object"&&!Array.isArray(x)?x:{}; } catch { return {}; } })();
 let showingTrash=false;
+const selectedPins = new Set();
+let visibleGroupMembers = new Map();
+function syncBatchButton() {
+  const btn=document.getElementById("pin-trash-batch");
+  if(!btn)return;
+  btn.textContent=(showingTrash?"批次還原":"移至已刪除區")+"（"+selectedPins.size+"）";
+  btn.disabled=selectedPins.size===0;
+}
 function savePinTrash() {
   try { localStorage.setItem(PIN_TRASH_KEY, JSON.stringify(pinTrash)); }
   catch(e) { statusLine.textContent="無法儲存已刪除區："+e.message; }
@@ -21,6 +29,19 @@ function archivePin(id) {
   savePinTrash(); render();
 }
 function restorePin(id) { delete pinTrash[id]; savePinTrash(); render(); }
+function processSelectedPins() {
+  if(!selectedPins.size)return;
+  const affected=new Set();
+  for(const primary of selectedPins) for(const id of visibleGroupMembers.get(primary)||[primary]) affected.add(id);
+  const at=new Date().toISOString();
+  for(const id of affected){
+    if(showingTrash)delete pinTrash[id];
+    else {const item=items.find(x=>x.id===id);if(item)pinTrash[id]={at,title:item.title};}
+  }
+  const count=selectedPins.size,operation=showingTrash?"還原":"移至已刪除區";
+  selectedPins.clear();savePinTrash();render();
+  statusLine.textContent="已批次"+operation+" "+count+" 個 PIN（"+affected.size+" 筆研究）";
+}
 function exportTrashManifest() {
   const records=items.filter(x=>pinTrash[x.id]).map(x=>({id:x.id,title:x.title,url:x.url,deletedAt:pinTrash[x.id].at}));
   const blob=new Blob([JSON.stringify({schema:"pin-trash-request-v1",exportedAt:new Date().toISOString(),items:records},null,2)],{type:"application/json"});
@@ -223,11 +244,14 @@ function buildCard(item, related = [item]) {
     if (hideExcluded.checked) render();
   });
   line.append(reject);
+  const pick=document.createElement("input");
+  pick.type="checkbox";pick.className="pin-batch-select";
+  pick.checked=selectedPins.has(item.id);
+  pick.title=showingTrash?"選取以批次還原":"選取以批次移至已刪除區";
+  pick.setAttribute("aria-label",(showingTrash?"選取還原：":"選取刪除：")+item.title);
+  pick.addEventListener("change",()=>{if(pick.checked)selectedPins.add(item.id);else selectedPins.delete(item.id);syncBatchButton();});
+  line.append(pick);
   body.append(line);
-  const trashAction=make("button","pin-archive-action",showingTrash?"還原到型錄":"移至已刪除區");
-  trashAction.type="button";
-  trashAction.addEventListener("click",()=>showingTrash?restorePin(item.id):archivePin(item.id));
-  body.append(trashAction);
   const detail = make("details", "card-detail");
   detail.append(make("summary", "detail-toggle", "來源"));
   const detailBody = make("div", "detail-body");
@@ -268,6 +292,8 @@ function render() {
     return {primary:candidates[0],linked:allByKey.get(key)||records,rank:imagePriority(candidates[0])};
   }).sort((a,b)=>Number(/^R-PDE-00[1-3]$/.test(b.primary.id))-Number(/^R-PDE-00[1-3]$/.test(a.primary.id))||Number(currentImageAvailable(b.primary))-Number(currentImageAvailable(a.primary))||b.rank-a.rank||a.primary.id.localeCompare(b.primary.id));
   counter.textContent=groups.length+" 個 PIN · "+searchable.length+" 筆研究";
+  visibleGroupMembers=new Map(groups.slice(0,visibleLimit).map(group=>[group.primary.id,group.linked.filter(x=>Boolean(pinTrash[x.id])===showingTrash).map(x=>x.id)]));
+  for(const id of [...selectedPins])if(!visibleGroupMembers.has(id))selectedPins.delete(id);
   root.replaceChildren();
   const frag=document.createDocumentFragment();
   for(const group of groups.slice(0,visibleLimit))frag.append(buildCard(group.primary,group.linked));
@@ -276,12 +302,12 @@ function render() {
   const rem=Math.max(0,groups.length-visibleLimit);
   loadMore.hidden=rem===0;
   if(rem)loadMore.textContent="再顯示 "+Math.min(40,rem)+" 個 PIN（剩餘 "+rem+"）";
-  updateCounts();syncImageCount();updateTrashCounter();
+  updateCounts();syncImageCount();updateTrashCounter();syncBatchButton();
 }
 function resetFilters() {
   type="ALL";term="";access="all";test="all";imageMode="all";visibleLimit=40;
   search.value="";accessSelect.value="all";testSelect.value="all";imageSelect.value="all";
-  hideExcluded.checked=false;showingTrash=false;document.getElementById("pin-trash-toggle").textContent="已刪除區";
+  hideExcluded.checked=false;showingTrash=false;selectedPins.clear();document.getElementById("pin-trash-toggle").textContent="已刪除區";
   document.querySelectorAll("[data-type]").forEach(b=>{
     const active=b.dataset.type==="ALL";
     b.classList.toggle("active",active);b.setAttribute("aria-pressed",String(active));
@@ -364,7 +390,8 @@ async function importNotes(file) {
     statusLine.textContent = "無法匯入：" + err.message;
   }
 }
-document.getElementById("pin-trash-toggle").addEventListener("click",()=>{showingTrash=!showingTrash;document.getElementById("pin-trash-toggle").textContent=showingTrash?"返回型錄":"已刪除區";visibleLimit=40;render();});
+document.getElementById("pin-trash-batch").addEventListener("click",processSelectedPins);
+document.getElementById("pin-trash-toggle").addEventListener("click",()=>{selectedPins.clear();showingTrash=!showingTrash;document.getElementById("pin-trash-toggle").textContent=showingTrash?"返回型錄":"已刪除區";visibleLimit=40;render();});
 document.getElementById("pin-trash-export").addEventListener("click",exportTrashManifest);
 search.addEventListener("input",e=>{term=e.target.value.toLowerCase();visibleLimit=40;render();});
 loadMore.addEventListener("click",()=>{visibleLimit+=40;render();});
