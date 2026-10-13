@@ -476,7 +476,7 @@ setupGalleryFirstLayout();
 // Compact icon-triggered search beside the site settings button.
 const pinSearchButton=document.getElementById("pin-search-toggle");
 const pinSearchDrawer=document.getElementById("pin-search-drawer");
-const pinSearchClose=document.getElementById("pin-search-close");
+
 function setPinSearchOpen(open){
  pinSearchDrawer.hidden=!open;
  pinSearchButton.setAttribute("aria-expanded",String(open));
@@ -484,5 +484,5 @@ function setPinSearchOpen(open){
  if(open)search.focus();
 }
 pinSearchButton.addEventListener("click",()=>setPinSearchOpen(pinSearchDrawer.hidden));
-pinSearchClose.addEventListener("click",()=>setPinSearchOpen(false));
+
 search.addEventListener("keydown",e=>{if(e.key==="Escape"){setPinSearchOpen(false);pinSearchButton.focus();}});
