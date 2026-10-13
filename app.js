@@ -478,11 +478,14 @@ const pinSearchButton=document.getElementById("pin-search-toggle");
 const pinSearchDrawer=document.getElementById("pin-search-drawer");
 
 function setPinSearchOpen(open){
- pinSearchDrawer.hidden=!open;
+ pinSearchDrawer.classList.toggle("is-open",open);
+ pinSearchDrawer.setAttribute("aria-hidden",String(!open));
+ search.tabIndex=open?0:-1;
  pinSearchButton.setAttribute("aria-expanded",String(open));
  pinSearchButton.setAttribute("aria-label",open?"關閉作品搜尋":"開啟作品搜尋");
  if(open)search.focus();
 }
-pinSearchButton.addEventListener("click",()=>setPinSearchOpen(pinSearchDrawer.hidden));
+pinSearchButton.addEventListener("click",()=>setPinSearchOpen(!pinSearchDrawer.classList.contains("is-open")));
+search.tabIndex=-1;
 
 search.addEventListener("keydown",e=>{if(e.key==="Escape"){setPinSearchOpen(false);pinSearchButton.focus();}});
