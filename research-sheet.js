@@ -8,22 +8,42 @@
   const SCOPE = "https://www.googleapis.com/auth/spreadsheets";
   const CLIENT_KEY = "pin:research:oauth-client-id:v1";
   const ACCOUNT_HINT_KEY = "pin:research:google-account-hint:v1";
-  const COLS = [1, 0, 5, 6, 7, 2, 3, 4];
-  const SIZE_KEY = "pin:research:table-size:v1";
-  const DEFAULT_WIDTHS = [230, 190, 280, 280, 250, 230, 110, 170];
+  // PIN follows Google Sheets A–H exactly; baseline[0] is the sole header source.
+  const COLS = [0, 1, 2, 3, 4, 5, 6, 7];
+  const SIZE_KEY = "pin:research:table-size:v2";
+  const PREVIOUS_SIZE_KEY = "pin:research:table-size:v1";
+  const PREVIOUS_COLUMN_ORDER = [1, 0, 5, 6, 7, 2, 3, 4];
+  const PREVIOUS_DEFAULT_WIDTHS = [230, 190, 280, 280, 250, 230, 110, 170];
+  const DEFAULT_WIDTHS = [225, 260, 360, 110, 420, 300, 310, 310];
   const DEFAULT_ROW_HEIGHT = 100;
   const clampSize = (v, min, max) => Math.max(min, Math.min(max, v));
   let sizes = {columns: [...DEFAULT_WIDTHS], rows: {}};
   try {
-    const saved = JSON.parse(localStorage.getItem(SIZE_KEY) || "null");
+    const current = JSON.parse(localStorage.getItem(SIZE_KEY) || "null");
+    const previous = current ? null : JSON.parse(localStorage.getItem(PREVIOUS_SIZE_KEY) || "null");
+    const saved = current || previous;
     if (saved && typeof saved === "object") {
-      if (Array.isArray(saved.columns) && saved.columns.length === COLS.length)
-        sizes.columns = saved.columns.map((v, i) => Number.isFinite(v) ? clampSize(v, 110, 760) : DEFAULT_WIDTHS[i]);
+      if (Array.isArray(saved.columns) && saved.columns.length === COLS.length) {
+        if (previous) {
+          // Preserve user-adjusted column widths by original Google column identity.
+          // Untouched old defaults use the new Google-aligned defaults.
+          saved.columns.forEach((width, oldDisplayIndex) => {
+            const googleCol = PREVIOUS_COLUMN_ORDER[oldDisplayIndex];
+            if (Number.isFinite(width) && width !== PREVIOUS_DEFAULT_WIDTHS[oldDisplayIndex]) {
+              sizes.columns[googleCol] = clampSize(width, 110, 760);
+            }
+          });
+        } else {
+          sizes.columns = saved.columns.map((width, i) =>
+            Number.isFinite(width) ? clampSize(width, 110, 760) : DEFAULT_WIDTHS[i]);
+        }
+      }
       if (saved.rows && typeof saved.rows === "object" && !Array.isArray(saved.rows))
         for (const [key, value] of Object.entries(saved.rows))
           if (/^[1-9][0-9]*$/.test(key) && Number.isFinite(value))
             sizes.rows[key] = clampSize(value, 80, 540);
     }
+    if (previous) localStorage.setItem(SIZE_KEY, JSON.stringify(sizes));
   } catch {}
   function saveSizes() {
     try { localStorage.setItem(SIZE_KEY, JSON.stringify(sizes)); }
