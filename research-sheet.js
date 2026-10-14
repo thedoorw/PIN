@@ -279,7 +279,7 @@
   });
   reloadButton.addEventListener("click", () => { if (canRefresh()) load(); });
   addButton.addEventListener("click", addResearchRow);
-  window.addEventListener("pagehide", () => { token = ""; });
+  window.addEventListener("pagehide", () => { token = ""; tokenExpiry = 0; showAuthenticated(false); });
   showAuthenticated(false);
   setStatus("私人研究資料不會在未登入時載入。請設定 OAuth Client ID 後連接 Google。");
 })();
