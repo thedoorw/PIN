@@ -9,6 +9,69 @@
   const CLIENT_KEY = "pin:research:oauth-client-id:v1";
   const ACCOUNT_HINT_KEY = "pin:research:google-account-hint:v1";
   const COLS = [1, 0, 5, 6, 7, 2, 3, 4];
+  const SIZE_KEY = "pin:research:table-size:v1";
+  const DEFAULT_WIDTHS = [230, 190, 280, 280, 250, 230, 110, 170];
+  const DEFAULT_ROW_HEIGHT = 100;
+  const clampSize = (v, min, max) => Math.max(min, Math.min(max, v));
+  let sizes = {columns: [...DEFAULT_WIDTHS], rows: {}};
+  try {
+    const saved = JSON.parse(localStorage.getItem(SIZE_KEY) || "null");
+    if (saved && typeof saved === "object") {
+      if (Array.isArray(saved.columns) && saved.columns.length === COLS.length)
+        sizes.columns = saved.columns.map((v, i) => Number.isFinite(v) ? clampSize(v, 110, 760) : DEFAULT_WIDTHS[i]);
+      if (saved.rows && typeof saved.rows === "object" && !Array.isArray(saved.rows))
+        for (const [key, value] of Object.entries(saved.rows))
+          if (/^[1-9][0-9]*$/.test(key) && Number.isFinite(value))
+            sizes.rows[key] = clampSize(value, 80, 540);
+    }
+  } catch {}
+  function saveSizes() {
+    try { localStorage.setItem(SIZE_KEY, JSON.stringify(sizes)); }
+    catch { setStatus("此瀏覽器無法保存欄寬與列高設定。", "warning"); }
+  }
+  function rowHeight(index) { return sizes.rows[index] || DEFAULT_ROW_HEIGHT; }
+  function applyTableWidth() {
+    table.style.width = sizes.columns.reduce((sum, width) => sum + width, 0) + "px";
+  }
+  function applyRowHeight(tr, index) {
+    tr.style.setProperty("--pin-research-row-height", rowHeight(index) + "px");
+  }
+  function changeColumnWidth(index, width) {
+    sizes.columns[index] = clampSize(width, 110, 760);
+    const col = table.querySelector("colgroup")?.children[index];
+    if (col) col.style.width = sizes.columns[index] + "px";
+    applyTableWidth();
+  }
+  function changeRowHeight(index, height) {
+    const value = clampSize(height, 80, 540);
+    if (value === DEFAULT_ROW_HEIGHT) delete sizes.rows[index];
+    else sizes.rows[index] = value;
+    const tr = table.querySelector('tr[data-research-row="' + index + '"]');
+    if (tr) applyRowHeight(tr, index);
+  }
+  function beginResize(e, axis, getValue, updateValue) {
+    if (e.button !== 0) return;
+    e.preventDefault();
+    e.stopPropagation();
+    const start = axis === "x" ? e.clientX : e.clientY;
+    const origin = getValue();
+    document.documentElement.classList.add("pin-research-is-resizing");
+    const move = ev => {
+      const coordinate = axis === "x" ? ev.clientX : ev.clientY;
+      updateValue(origin + coordinate - start);
+    };
+    const finish = () => {
+      window.removeEventListener("pointermove", move);
+      window.removeEventListener("pointerup", finish);
+      window.removeEventListener("pointercancel", finish);
+      document.documentElement.classList.remove("pin-research-is-resizing");
+      saveSizes();
+    };
+    window.addEventListener("pointermove", move);
+    window.addEventListener("pointerup", finish);
+    window.addEventListener("pointercancel", finish);
+  }
+
   const root = document.getElementById("pin-private-research");
   if (!root) return;
   const clientInput = document.getElementById("pin-research-client-id");
@@ -172,13 +235,38 @@
   }
   function render() {
     table.replaceChildren();
+    const colgroup = el("colgroup");
+    COLS.forEach((_, i) => {
+      const col = el("col");
+      col.style.width = sizes.columns[i] + "px";
+      colgroup.append(col);
+    });
+    table.append(colgroup);
+    applyTableWidth();
     const thead = el("thead");
     const headRow = el("tr");
-    COLS.forEach(index => headRow.append(el("th", "", baseline[0]?.[index] || columnName(index))));
+    COLS.forEach((index, i) => {
+      const th = el("th", "", baseline[0]?.[index] || columnName(index));
+      const handle = el("button", "pin-research-col-resize");
+      handle.type = "button";
+      handle.title = "拖曳調整欄寬；方向鍵微調";
+      handle.setAttribute("aria-label", (baseline[0]?.[index] || columnName(index)) + "：調整欄寬");
+      handle.addEventListener("pointerdown", e => beginResize(e, "x", () => sizes.columns[i], width => changeColumnWidth(i, width)));
+      handle.addEventListener("keydown", e => {
+        if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+        e.preventDefault();
+        changeColumnWidth(i, sizes.columns[i] + (e.key === "ArrowRight" ? 10 : -10));
+        saveSizes();
+      });
+      th.append(handle);
+      headRow.append(th);
+    });
     thead.append(headRow);
     const tbody = el("tbody");
     for (let row = 1; row < baseline.length; row++) {
       const tr = el("tr");
+      tr.dataset.researchRow = String(row);
+      applyRowHeight(tr, row);
       for (const col of COLS) {
         const td = el("td", "pin-research-cell");
         const value = baseline[row][col];
@@ -192,15 +280,25 @@
         input.dataset.researchCell = "1";
         input.setAttribute("aria-label", "第 " + (row + 1) + " 列：" + (baseline[0]?.[col] || columnName(col)));
         input.spellcheck = true;
-        if (col === 4) input.placeholder = "https://";
-        if (col === 5) input.placeholder = "記下您的觀察或想問 PR 的問題";
-        if (col === 6) input.placeholder = "由 PR 在 ChatGPT 中讀取、研究後填寫";
-        if (col === 7) input.placeholder = "整理已確認的結論";
         input.addEventListener("change", () => saveCell(input));
         if (multi) input.addEventListener("keydown", e => {
           if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) { e.preventDefault(); input.blur(); }
         });
         td.append(input);
+        if (col === COLS[0]) {
+          const handle = el("button", "pin-research-row-resize");
+          handle.type = "button";
+          handle.title = "拖曳調整這一列高度；方向鍵微調";
+          handle.setAttribute("aria-label", "第 " + (row + 1) + " 列：調整列高");
+          handle.addEventListener("pointerdown", e => beginResize(e, "y", () => rowHeight(row), height => changeRowHeight(row, height)));
+          handle.addEventListener("keydown", e => {
+            if (e.key !== "ArrowUp" && e.key !== "ArrowDown") return;
+            e.preventDefault();
+            changeRowHeight(row, rowHeight(row) + (e.key === "ArrowDown" ? 10 : -10));
+            saveSizes();
+          });
+          td.append(handle);
+        }
         if (col === 4) {
           const link = el("a", "pin-research-source-link", "開啟來源 ↗");
           link.target = "_blank";
