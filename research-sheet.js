@@ -100,12 +100,26 @@
   const clientInput = document.getElementById("pin-research-client-id");
   const accountInput = document.getElementById("pin-research-account-hint");
   const connectButton = document.getElementById("pin-research-connect");
-  const logoutButton = document.getElementById("pin-research-disconnect");
+  // Keep Google revocation in the global settings menu, not above the research table.
+  const researchSettings = document.createElement("details");
+  researchSettings.className = "pin-settings-section";
+  researchSettings.id = "pin-research-auth-settings";
+  researchSettings.hidden = true;
+  const researchSettingsLabel = document.createElement("summary");
+  researchSettingsLabel.textContent = "研究文件授權";
+  const logoutButton = document.createElement("button");
+  logoutButton.type = "button";
+  logoutButton.id = "pin-research-disconnect";
+  logoutButton.textContent = "斷開 Google 授權";
+  logoutButton.hidden = true;
+  researchSettings.append(researchSettingsLabel, logoutButton);
+  document.querySelector(".site-settings-sheet")?.append(researchSettings);
   const reloadButton = document.getElementById("pin-research-reload");
   const resetSizesButton = document.getElementById("pin-research-reset-size");
   const addButton = document.getElementById("pin-research-add");
   const addCategory = document.getElementById("pin-research-new-category");
   const statusLabel = document.getElementById("pin-research-status");
+  const boardStatusLabel = document.getElementById("pin-research-board-status");
   const setup = document.getElementById("pin-research-setup");
   const board = document.getElementById("pin-research-board");
   const table = document.getElementById("pin-research-table");
@@ -145,6 +159,10 @@
   function setStatus(message, kind = "") {
     statusLabel.textContent = message;
     statusLabel.dataset.kind = kind;
+    // On the connected board, progress and errors stay in the existing controls row.
+    boardStatusLabel.textContent = message;
+    boardStatusLabel.dataset.kind = kind;
+    boardStatusLabel.title = message;
   }
   function connected() { return !!token && Date.now() < tokenExpiry; }
   function el(tag, cls, text) {
@@ -179,6 +197,7 @@
     setup.hidden = isAuthenticated;
     board.hidden = !isAuthenticated;
     logoutButton.hidden = !isAuthenticated;
+    researchSettings.hidden = !isAuthenticated;
     if (!isAuthenticated) {
       baseline = [];
       table.replaceChildren();
