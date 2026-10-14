@@ -28,7 +28,19 @@
   let baseline = [];
   let pending = 0;
 
-  try { clientInput.value = localStorage.getItem(CLIENT_KEY) || ""; } catch {}
+  const configuration = document.getElementById("pin-research-configuration");
+  const returningNote = document.getElementById("pin-research-returning-note");
+  let savedClientId = "";
+  try { savedClientId = localStorage.getItem(CLIENT_KEY) || ""; } catch {}
+  clientInput.value = savedClientId;
+  function syncConnectionSetup() {
+    const remembered = !!savedClientId && clientInput.value.trim() === savedClientId;
+    returningNote.hidden = !remembered;
+    connectButton.textContent = remembered ? "開啟私人研究畫板" : "連接 Google（讀取／編輯）";
+  }
+  configuration.open = !savedClientId;
+  clientInput.addEventListener("input", syncConnectionSetup);
+  syncConnectionSetup();
   function setStatus(message, kind = "") {
     statusLabel.textContent = message;
     statusLabel.dataset.kind = kind;
@@ -238,11 +250,17 @@
       return;
     }
     try {
-      localStorage.setItem(CLIENT_KEY, clientId); // An OAuth client ID is public, never a secret.
+      try {
+        localStorage.setItem(CLIENT_KEY, clientId); // Client ID is public, unlike an access token.
+        savedClientId = clientId;
+      } catch {
+        setStatus("此瀏覽器拒絕儲存設定；本次仍可登入，下次可能須重新填寫 Client ID。", "warning");
+      }
+      syncConnectionSetup();
       if (!oauthClient || clientId !== lastClientId) {
         lastClientId = clientId;
         oauthClient = google.accounts.oauth2.initTokenClient({
-          client_id: clientId, scope: SCOPE,
+          client_id: clientId, scope: SCOPE, prompt: "",
           callback: async response => {
             if (response.error || !response.access_token) {
               setStatus("Google 授權未完成：" + (response.error_description || response.error || "未收到存取權杖"), "error");
@@ -259,8 +277,8 @@
           error_callback: err => setStatus("Google 登入未完成：" + (err.type || "視窗已關閉或遭封鎖"), "warning")
         });
       }
-      setStatus("請在 Google 彈出視窗中選擇帳號並授權。");
-      oauthClient.requestAccessToken({prompt: "select_account"});
+      setStatus("正在恢復 Google 存取授權；必要時請在彈出視窗確認帳號。");
+      oauthClient.requestAccessToken({prompt: ""});
     } catch (error) { setStatus("登入設定失敗：" + error.message, "error"); }
   });
   logoutButton.addEventListener("click", () => {
@@ -281,5 +299,5 @@
   addButton.addEventListener("click", addResearchRow);
   window.addEventListener("pagehide", () => { token = ""; tokenExpiry = 0; showAuthenticated(false); });
   showAuthenticated(false);
-  setStatus("私人研究資料不會在未登入時載入。請設定 OAuth Client ID 後連接 Google。");
+  setStatus(savedClientId ? "重新整理後只需按一次「開啟私人研究畫板」；為保護私人資料，不會長期儲存 Google 存取權杖。" : "首次連接請在下方設定 OAuth Client ID。");
 })();
