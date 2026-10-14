@@ -7,6 +7,14 @@
 .pin-research-info{font-size:12px;line-height:1.7;color:#666;margin:7px 0 12px}
 .pin-research-setup{max-width:700px;margin:16px 0 30px;padding:18px 20px;border:1px solid #ddd;border-radius:8px;background:#fff}
 .pin-research-setup h3{font-size:15px;margin:0 0 12px}
+.pin-research-configuration{margin-top:16px;border-top:1px solid #e5e5e5;padding-top:11px}
+.pin-research-configuration summary{font-size:12px;color:#666;cursor:pointer;width:max-content;max-width:100%;list-style:revert}
+.pin-research-configuration summary:hover{color:#222}
+.pin-research-configuration ol{margin-top:14px!important}
+.pin-research-configuration .pin-research-connect-row{margin-bottom:10px}
+.pin-research-setup #pin-research-returning-note{margin:0 0 13px}
+.pin-research-setup>.pin-research-connect-row .pin-research-control{min-width:190px}
+
 .pin-research-setup ol{font-size:13px;line-height:1.9;margin:0 0 15px;padding-left:24px}
 .pin-research-setup a{color:#333;text-decoration:underline;text-underline-offset:3px}
 .pin-research-connect-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
