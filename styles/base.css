@@ -18,9 +18,9 @@ body.pin-managing .pin-manager-indicator,body.pin-trash-view .pin-manager-indica
 .pin-search-drawer #q{display:block;width:190px;min-width:190px;height:30px;border:0;outline:0;border-radius:0;padding:4px 2px 0;background:transparent;font-size:12px;line-height:24px;box-shadow:none;color:#111}
 .pin-search-drawer #q:focus{border:0;outline:0}
 .pin-head-actions{position:absolute;top:0;right:-32px;display:flex;align-items:flex-start;gap:0;margin:0;padding:0;height:40px;max-width:calc(100% - 90px)}
-.pin-head-actions .pin-icon-button,.pin-head-actions #site-settings-panel>summary{display:flex;align-items:flex-start;justify-content:center;flex-shrink:0;width:30px;height:40px;margin:0;padding:4px 0 0;border:0;background:transparent;border-radius:0;box-shadow:none;line-height:1}
+.pin-head-actions .pin-icon-button,.pin-head-actions #site-settings-panel>summary{display:flex;align-items:center;justify-content:center;flex-shrink:0;width:30px;height:30px;margin:0;padding:0;border:0;background:transparent;border-radius:5px;box-shadow:none;line-height:1}
 .pin-head-actions button svg,.pin-head-actions summary svg{display:block;width:19px;height:19px}
-.pin-head-actions #site-settings-panel{align-self:flex-start;height:40px;margin-left:12px}
+.pin-head-actions #site-settings-panel{align-self:flex-start;height:30px;margin-left:12px}
 .pin-head-actions #pin-search-toggle:hover{background:transparent;border-radius:0}.pin-head-actions #site-settings-panel>summary:hover{background:#ebebeb;border-radius:5px}
 .pin-icon-button:focus-visible,.site-settings>summary:focus-visible{outline:2px solid #111;outline-offset:2px}
 .pin-search-drawer #q::-webkit-search-cancel-button{cursor:pointer}
