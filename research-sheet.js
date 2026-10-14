@@ -55,6 +55,8 @@
     e.stopPropagation();
     const start = axis === "x" ? e.clientX : e.clientY;
     const origin = getValue();
+    const activeBoundary = e.currentTarget.closest(axis === "x" ? "th" : "tr");
+    activeBoundary?.classList.add(axis === "x" ? "pin-research-dragging-column" : "pin-research-dragging-row");
     document.documentElement.classList.add("pin-research-is-resizing");
     const move = ev => {
       const coordinate = axis === "x" ? ev.clientX : ev.clientY;
@@ -65,6 +67,7 @@
       window.removeEventListener("pointerup", finish);
       window.removeEventListener("pointercancel", finish);
       document.documentElement.classList.remove("pin-research-is-resizing");
+      activeBoundary?.classList.remove(axis === "x" ? "pin-research-dragging-column" : "pin-research-dragging-row");
       saveSizes();
     };
     window.addEventListener("pointermove", move);
@@ -286,8 +289,10 @@
           if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) { e.preventDefault(); input.blur(); }
         });
         td.append(input);
-        if (col === COLS[0]) {
+        {
+          // The visible row border is also the resize target in every column.
           const handle = el("button", "pin-research-row-resize");
+          if (col !== COLS[0]) handle.tabIndex = -1;
           handle.type = "button";
           handle.title = "拖曳調整這一列高度；方向鍵微調";
           handle.setAttribute("aria-label", "第 " + (row + 1) + " 列：調整列高");
