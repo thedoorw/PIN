@@ -79,6 +79,7 @@
   const connectButton = document.getElementById("pin-research-connect");
   const logoutButton = document.getElementById("pin-research-disconnect");
   const reloadButton = document.getElementById("pin-research-reload");
+  const resetSizesButton = document.getElementById("pin-research-reset-size");
   const addButton = document.getElementById("pin-research-add");
   const addCategory = document.getElementById("pin-research-new-category");
   const statusLabel = document.getElementById("pin-research-status");
@@ -418,6 +419,14 @@
     setStatus("已從 PIN 斷開 Google 授權；私人資料已從頁面清除。");
   });
   reloadButton.addEventListener("click", () => { if (canRefresh()) load(); });
+  resetSizesButton.addEventListener("click", () => {
+    sizes = {columns: [...DEFAULT_WIDTHS], rows: {}};
+    for (let i = 0; i < COLS.length; i++) changeColumnWidth(i, DEFAULT_WIDTHS[i]);
+    table.querySelectorAll("tr[data-research-row]").forEach(tr =>
+      applyRowHeight(tr, Number(tr.dataset.researchRow)));
+    saveSizes();
+    setStatus("已還原預設欄寬與列高（僅影響此瀏覽器）。", "success");
+  });
   addButton.addEventListener("click", addResearchRow);
   window.addEventListener("pagehide", () => { token = ""; tokenExpiry = 0; showAuthenticated(false); });
   showAuthenticated(false);
