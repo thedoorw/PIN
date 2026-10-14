@@ -7,10 +7,12 @@
   const API = "https://sheets.googleapis.com/v4/spreadsheets/" + SHEET_ID + "/values/";
   const SCOPE = "https://www.googleapis.com/auth/spreadsheets";
   const CLIENT_KEY = "pin:research:oauth-client-id:v1";
+  const ACCOUNT_HINT_KEY = "pin:research:google-account-hint:v1";
   const COLS = [1, 0, 5, 6, 7, 2, 3, 4];
   const root = document.getElementById("pin-private-research");
   if (!root) return;
   const clientInput = document.getElementById("pin-research-client-id");
+  const accountInput = document.getElementById("pin-research-account-hint");
   const connectButton = document.getElementById("pin-research-connect");
   const logoutButton = document.getElementById("pin-research-disconnect");
   const reloadButton = document.getElementById("pin-research-reload");
@@ -33,6 +35,18 @@
   let savedClientId = "";
   try { savedClientId = localStorage.getItem(CLIENT_KEY) || ""; } catch {}
   clientInput.value = savedClientId;
+  try { accountInput.value = localStorage.getItem(ACCOUNT_HINT_KEY) || ""; } catch {}
+  accountInput.addEventListener("change", () => {
+    const email = accountInput.value.trim();
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setStatus("帳號提示不是有效的電子郵件格式，請修正或清空。", "warning");
+      return;
+    }
+    try {
+      if (email) localStorage.setItem(ACCOUNT_HINT_KEY, email);
+      else localStorage.removeItem(ACCOUNT_HINT_KEY);
+    } catch { setStatus("此瀏覽器無法儲存常用帳號；這次連接仍可使用。", "warning"); }
+  });
   function syncConnectionSetup() {
     const remembered = !!savedClientId && clientInput.value.trim() === savedClientId;
     returningNote.hidden = !remembered;
@@ -240,6 +254,16 @@
   }
   connectButton.addEventListener("click", () => {
     const clientId = clientInput.value.trim();
+    const accountHint = accountInput.value.trim();
+    if (accountHint && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(accountHint)) {
+      setStatus("常用 Google 帳號格式不正確；請修正或清空後再連接。", "warning");
+      accountInput.focus();
+      return;
+    }
+    try {
+      if (accountHint) localStorage.setItem(ACCOUNT_HINT_KEY, accountHint);
+      else localStorage.removeItem(ACCOUNT_HINT_KEY);
+    } catch {}
     if (!/^[\w-]+\.apps\.googleusercontent\.com$/.test(clientId)) {
       setStatus("請先輸入 Google Cloud 的網頁應用程式 OAuth Client ID。", "warning");
       clientInput.focus();
@@ -277,8 +301,8 @@
           error_callback: err => setStatus("Google 登入未完成：" + (err.type || "視窗已關閉或遭封鎖"), "warning")
         });
       }
-      setStatus("正在恢復 Google 存取授權；必要時請在彈出視窗確認帳號。");
-      oauthClient.requestAccessToken({prompt: ""});
+      setStatus(accountHint ? "正在使用常用 Google 帳號提示恢復授權；必要時仍需在 Google 確認。" : "正在恢復 Google 存取授權；必要時請在彈出視窗確認帳號。");
+      oauthClient.requestAccessToken(accountHint ? {prompt: "", login_hint: accountHint} : {prompt: ""});
     } catch (error) { setStatus("登入設定失敗：" + error.message, "error"); }
   });
   logoutButton.addEventListener("click", () => {
