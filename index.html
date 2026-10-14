@@ -1,4 +1,4 @@
-<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PIN</title><link rel="icon" id="site-favicon" type="image/svg+xml" href="./assets/favicon.svg"><link rel="stylesheet" href="./styles/base.css?v=20261014-reference-baseline"><link rel="stylesheet" href="./styles/gallery.css?v=20261013-details3"><link rel="stylesheet" href="./styles/settings.css?v=20261013-gray"><link rel="stylesheet" href="./styles/research-sheet.css?v=20261014-divider1"></head><body><main>
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PIN</title><link rel="icon" id="site-favicon" type="image/svg+xml" href="./assets/favicon.svg"><link rel="stylesheet" href="./styles/base.css?v=20261014-reference-baseline"><link rel="stylesheet" href="./styles/gallery.css?v=20261013-details3"><link rel="stylesheet" href="./styles/settings.css?v=20261013-gray"><link rel="stylesheet" href="./styles/research-sheet.css?v=20261014-compactboard1"></head><body><main>
 <header><div class="site-brand-row"><div class="pin-brand-block"><h1 id="site-name">PIN</h1></div><div class="pin-head-actions"><div id="pin-search-drawer" class="pin-search-drawer" aria-hidden="true"><input id="q" type="search" placeholder="搜尋作品…" aria-label="搜尋作品"></div><button type="button" id="pin-search-toggle" class="pin-icon-button" aria-label="開啟作品搜尋" aria-expanded="false" aria-controls="pin-search-drawer" title="搜尋作品"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg></button>
 <details id="site-settings-panel" class="site-settings">
 <summary class="site-settings-trigger" aria-label="網站設定" title="網站設定"><svg aria-hidden="true" viewBox="0 0 24 24" width="19" height="19" fill="currentColor"><circle cx="5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="19" cy="12" r="1.7"/></svg></summary>
@@ -39,8 +39,7 @@
 </div></div>
 <div class="pin-note" id="pin-help-text">點作品縮圖直接開啟原始作品展示；沒有作品展示的程式／工具，請展開技術來源。縮圖框固定 3:2，不裁切作品。研究編號右側核取方塊用於批次選取；使用上方按鈕一次移至已刪除區，進入已刪除區可批次還原；正式 GitHub 型錄不會被直接修改；「來源」下拉只顯示作品來源。目前只保留海報、字體及成熟作品三類。</div>
 <section id="pin-private-research" hidden aria-label="研究文件">
-<div class="pin-research-sheet-toolbar"><h2>研究文件</h2><a class="pin-research-sheet-open" href="https://docs.google.com/spreadsheets/d/1xyJdKCScnB4Krq8sdSdqaWIrM4EyCoy1hUbk6QFewD0/edit?gid=2034182023" target="_blank" rel="noopener noreferrer">在 Google Sheets 開啟／編輯 ↗</a></div>
-<p class="pin-research-info">PIN × PR 共同研究畫板。可直接編輯、新增及儲存私人研究紀錄；PR 可透過已連接的 Google Drive 在 ChatGPT 中讀取與回覆，但不會自動監聽這裡的修改。</p>
+
 <div class="pin-research-setup" id="pin-research-setup">
 <h3>連接私人研究畫板</h3>
 <p id="pin-research-returning-note" class="pin-research-info" hidden>已記住這台瀏覽器的 PIN Google 用戶端設定，不需要重新輸入 ID。點下方按鈕恢復授權並讀取私人研究資料。</p>
@@ -54,21 +53,22 @@
 <div class="pin-research-connect-row"><input id="pin-research-client-id" type="text" spellcheck="false" autocomplete="off" aria-label="Google OAuth Client ID" placeholder="Google OAuth Client ID（...apps.googleusercontent.com）"></div>
 <p class="pin-research-bottom-note">只儲存非機密的 OAuth Client ID 於此瀏覽器；Google 存取權杖僅暫存在頁面記憶體。授權會要求 Google 試算表讀寫權限，範圍不限這一份檔案；試算表本身仍維持受限制存取。</p>
 </details>
-</div>
 <p class="pin-research-status" id="pin-research-status" role="status" aria-live="polite"></p>
+</div>
 <div class="pin-research-board" id="pin-research-board" hidden>
 <div class="pin-research-board-head">
 <span id="pin-research-count" class="count"></span>
+<p class="pin-research-board-status" id="pin-research-board-status" role="status" aria-live="polite"></p>
 <label class="pin-research-info" for="pin-research-new-category">新增至</label>
 <select id="pin-research-new-category"><option>03 INK 創作與轉譯能力</option><option>02 繪圖幾何腦</option><option>01 成熟作品與原始 Recipe</option></select>
 <button type="button" id="pin-research-add" class="pin-research-control primary">＋ 新增研究項目</button>
 <button type="button" id="pin-research-reload" class="pin-research-control">重新讀取</button>
 <button type="button" id="pin-research-reset-size" class="pin-research-control" title="還原研究表格的預設欄寬與列高">還原欄列尺寸</button>
-<button type="button" id="pin-research-disconnect" class="pin-research-control" hidden>斷開 Google 授權</button>
+<a class="pin-research-control pin-research-open-sheets" href="https://docs.google.com/spreadsheets/d/1xyJdKCScnB4Krq8sdSdqaWIrM4EyCoy1hUbk6QFewD0/edit?gid=2034182023" target="_blank" rel="noopener noreferrer">Google Sheets 開啟／編輯 ↗</a>
 </div>
 <div class="pin-research-scroller" tabindex="0" aria-label="私人研究資料表，可左右捲動"><table class="pin-research-table" id="pin-research-table"></table></div>
 <p class="pin-research-bottom-note">修改儲存格後點到其他位置，即自動寫回 Google Sheets；多行備註也可按 Ctrl+Enter 儲存。若同一欄位已被其他地方更新，PIN 將停止覆寫並提示重新讀取。雙方請盡量在各自的備註欄協作；此版本不提供完整的歷史版本或即時多人鎖定。</p>
 </div>
 </section><section id="cards" class="grid"></section><div class="load-wrap"><button id="load-more" type="button" hidden>顯示更多</button></div>
 <footer><span id="footer-site-name">PIN</span> — INK 個人視覺研究型錄。已確認須付費的來源從本型錄排除；價格／授權未確認的個案仍需另行核查。清理前的研究資料另存於 PIN Repo 的歷史歸檔。個人標記、備註與自選縮圖只儲存在目前瀏覽器；搬遷前請先匯出備份。</footer>
-</main><script src="./site-settings.js?v=20261013-caption" defer></script><script src="./app.js?v=20261013-details3" defer></script><script src="https://accounts.google.com/gsi/client" async defer></script><script src="./research-sheet.js?v=20261014-google-order1" defer></script><script>(()=>{const tab=document.getElementById("pin-private-research-tab");const section=document.getElementById("pin-private-research");const nav=tab.closest("nav");tab.addEventListener("click",()=>{document.body.classList.add("pin-research-view");section.hidden=false;for(const b of nav.querySelectorAll("button")){b.classList.toggle("active",b===tab);b.setAttribute("aria-pressed",String(b===tab));}});for(const b of nav.querySelectorAll("button[data-type]"))b.addEventListener("click",()=>{document.body.classList.remove("pin-research-view");section.hidden=true;tab.classList.remove("active");tab.setAttribute("aria-pressed","false");});})();</script></body></html>
+</main><script src="./site-settings.js?v=20261013-caption" defer></script><script src="./app.js?v=20261013-details3" defer></script><script src="https://accounts.google.com/gsi/client" async defer></script><script src="./research-sheet.js?v=20261014-compactboard1" defer></script><script>(()=>{const tab=document.getElementById("pin-private-research-tab");const section=document.getElementById("pin-private-research");const nav=tab.closest("nav");tab.addEventListener("click",()=>{document.body.classList.add("pin-research-view");section.hidden=false;for(const b of nav.querySelectorAll("button")){b.classList.toggle("active",b===tab);b.setAttribute("aria-pressed",String(b===tab));}});for(const b of nav.querySelectorAll("button[data-type]"))b.addEventListener("click",()=>{document.body.classList.remove("pin-research-view");section.hidden=true;tab.classList.remove("active");tab.setAttribute("aria-pressed","false");});})();</script></body></html>
