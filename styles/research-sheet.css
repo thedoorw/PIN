@@ -41,8 +41,9 @@
 .site-settings-sheet #pin-research-disconnect{width:100%;margin-top:10px;text-align:center}
 .pin-research-board-head select{height:35px;max-width:250px;padding:4px 9px;border:1px solid #ddd;border-radius:5px;background:#fff;font-size:12px}
 .pin-research-board-head .count{font-size:12px;color:#777;margin-right:auto}
-/* Keep the table viewport width stable when its own vertical scrollbar appears. */
-.pin-research-scroller{width:100%;max-width:100%;overflow-x:auto;overflow-y:auto;scrollbar-gutter:stable;max-height:calc(100dvh - 190px);min-height:420px;border:1px solid #ddd;border-radius:7px;background:#fff;overscroll-behavior:contain}
+/* The sheet grows with all rows; only the page scrolls vertically.
+   Horizontal scrolling remains available for the full eight-column sheet. */
+.pin-research-scroller{width:100%;max-width:100%;height:auto;overflow-x:auto;overflow-y:auto;scrollbar-gutter:auto;max-height:none;min-height:0;border:1px solid #ddd;border-radius:7px;background:#fff;overscroll-behavior:contain}
 .pin-research-table{border-collapse:separate;border-spacing:0;table-layout:fixed;width:1740px;min-width:0;text-align:left}
 .pin-research-table th{position:sticky;top:0;z-index:2;background:#f0f0f0;border-bottom:1px solid #d9d9d9;border-right:1px solid #e3e3e3;padding:11px 10px;vertical-align:bottom;color:#333;font-size:12px;font-weight:600}
 /* Colgroup widths are controlled by the visitor's locally saved resize preferences. */
@@ -54,7 +55,7 @@
 .pin-research-table th.pin-research-dragging-column{border-right-color:#777}
 .pin-research-col-resize:focus-visible{outline:1px solid #777;outline-offset:-1px}
 .pin-research-cell{position:relative;padding:7px;border-right:1px solid #ededed;border-bottom:1px solid #ededed;vertical-align:top;transition:background .12s ease}
-.pin-research-table tbody tr{height:var(--pin-research-row-height,100px)}
+.pin-research-table tbody tr{height:var(--pin-research-row-height,64px)}
 /* Each row's existing border is the full-width resize affordance; no persistent grip marks. */
 .pin-research-row-resize{position:absolute;left:0;right:0;bottom:-4px;width:100%;height:10px;z-index:1;padding:0;border:0;background:transparent;cursor:row-resize;touch-action:none}
 .pin-research-table tbody tr:has(.pin-research-row-resize:hover) td,
@@ -66,7 +67,7 @@ html.pin-research-is-resizing,html.pin-research-is-resizing *{user-select:none!i
 .pin-research-table tr:hover .pin-research-cell{background:#fafafa}
 .pin-research-table td:last-child,.pin-research-table th:last-child{border-right:0}
 .pin-research-cell-input{display:block;width:100%;min-width:0;min-height:36px;padding:7px 8px;border:1px solid transparent;border-radius:4px;background:transparent;color:#222;font:inherit;font-size:12px;line-height:1.55;resize:vertical}
-textarea.pin-research-cell-input{height:calc(var(--pin-research-row-height,100px) - 14px);min-height:44px;max-height:none;resize:none}
+textarea.pin-research-cell-input{height:calc(var(--pin-research-row-height,64px) - 14px);min-height:36px;max-height:none;resize:none}
 .pin-research-cell-input:hover{border-color:#ddd;background:#fff}
 .pin-research-cell-input:focus{border:1px solid #777;outline:1px solid #777;background:white}
 .pin-research-cell-input:disabled{opacity:.65}
@@ -80,5 +81,4 @@ body.pin-research-view #cards,body.pin-research-view .load-wrap,body.pin-researc
 @media(max-width:640px){
 #pin-private-research{padding-top:5px}
 .pin-research-setup{padding:14px}
-.pin-research-scroller{min-height:420px;max-height:calc(100dvh - 210px)}
 }
