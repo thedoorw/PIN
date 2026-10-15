@@ -15,7 +15,7 @@
   const PREVIOUS_COLUMN_ORDER = [1, 0, 5, 6, 7, 2, 3, 4];
   const PREVIOUS_DEFAULT_WIDTHS = [230, 190, 280, 280, 250, 230, 110, 170];
   const DEFAULT_WIDTHS = [225, 260, 360, 110, 420, 300, 310, 310];
-  const DEFAULT_ROW_HEIGHT = 100;
+  const DEFAULT_ROW_HEIGHT = 64;
   const clampSize = (v, min, max) => Math.max(min, Math.min(max, v));
   let sizes = {columns: [...DEFAULT_WIDTHS], rows: {}};
   try {
@@ -41,7 +41,7 @@
       if (saved.rows && typeof saved.rows === "object" && !Array.isArray(saved.rows))
         for (const [key, value] of Object.entries(saved.rows))
           if (/^[1-9][0-9]*$/.test(key) && Number.isFinite(value))
-            sizes.rows[key] = clampSize(value, 80, 540);
+            sizes.rows[key] = clampSize(value, 56, 540);
     }
     if (previous) localStorage.setItem(SIZE_KEY, JSON.stringify(sizes));
   } catch {}
@@ -63,7 +63,7 @@
     applyTableWidth();
   }
   function changeRowHeight(index, height) {
-    const value = clampSize(height, 80, 540);
+    const value = clampSize(height, 56, 540);
     if (value === DEFAULT_ROW_HEIGHT) delete sizes.rows[index];
     else sizes.rows[index] = value;
     const tr = table.querySelector('tr[data-research-row="' + index + '"]');
