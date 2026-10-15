@@ -21,6 +21,7 @@
   const clampSize = (v, min, max) => Math.max(min, Math.min(max, v));
   let sizes = {columns: [...DEFAULT_WIDTHS], rows: {}};
   let lastSavedColumnCount = 0;
+  let layoutFittedAfterMount = false;
   try {
     const current = JSON.parse(localStorage.getItem(SIZE_KEY) || "null");
     const previous = current ? null : JSON.parse(localStorage.getItem(PREVIOUS_SIZE_KEY) || "null");
@@ -45,10 +46,11 @@
           if (/^[1-9][0-9]*$/.test(key) && Number.isFinite(height))
             sizes.rows[key] = clampSize(height, 56, 540);
       if (current && Number.isInteger(current.columnCount)) lastSavedColumnCount = current.columnCount;
+      if (current) layoutFittedAfterMount = current.layoutFittedAfterMount === true;
     }
   } catch {}
   function saveSizes() {
-    try { localStorage.setItem(SIZE_KEY, JSON.stringify({...sizes, columnCount: COLS.length})); }
+    try { localStorage.setItem(SIZE_KEY, JSON.stringify({...sizes, columnCount: COLS.length, layoutFittedAfterMount})); }
     catch { setStatus("此瀏覽器無法保存欄寬與列高設定。", "warning"); }
   }
   function rowHeight(index) { return sizes.rows[index] || DEFAULT_ROW_HEIGHT; }
@@ -60,11 +62,11 @@
     // User-drags afterward may deliberately make the table horizontally scrollable.
     const frame = document.querySelector(".pin-research-scroller");
     const space = Math.floor((frame?.clientWidth || 0) - 2);
-    if (space <= 0 || !COLS.length) return;
+    if (space <= 0 || !COLS.length) return false;
     const widths = COLS.map(index => sizes.columns[index] || DEFAULT_WIDTHS[index] || 180);
     const minimum = COLS.map(index => index === 3 ? 88 : 105);
     const floorTotal = minimum.reduce((a, b) => a + b, 0);
-    if (space <= floorTotal) return; // Narrow screens need horizontal scrolling.
+    if (space <= floorTotal) return false; // Narrow screens need horizontal scrolling.
     const total = widths.reduce((a, b) => a + b, 0);
     const excess = Math.max(0, total - floorTotal);
     const availableExcess = space - floorTotal;
@@ -75,8 +77,9 @@
     const remainder = space - resized.reduce((a, b) => a + b, 0);
     resized[resized.length - 1] += remainder;
     COLS.forEach((index, i) => { sizes.columns[index] = resized[i]; });
+    return true;
   }
-    function applyRowHeight(tr, index) {
+  function applyRowHeight(tr, index) {
     tr.style.setProperty("--pin-research-row-height", rowHeight(index) + "px");
   }
   function changeColumnWidth(index, width) {
@@ -304,7 +307,7 @@
     const colgroup = el("colgroup");
     COLS.forEach((_, i) => {
       const col = el("col");
-      col.style.width = sizes.columns[i] + "px";
+      col.style.width = (sizes.columns[i] || DEFAULT_WIDTHS[i] || 180) + "px";
       colgroup.append(col);
     });
     table.append(colgroup);
@@ -403,14 +406,17 @@
       if (lastNamed >= 26) throw new Error("研究表格暫時支援 A～Z 欄。");
       COLS = Array.from({length: lastNamed + 1}, (_, i) => i);
       baseline = data.map(normalized);
-      if (lastSavedColumnCount !== COLS.length) {
-        fitVisibleColumnsToFrame();
-        saveSizes();
-        lastSavedColumnCount = COLS.length;
+      // The board must be visible before measuring its width; hidden elements have width 0.
+      showAuthenticated(true);
+      if (lastSavedColumnCount !== COLS.length || !layoutFittedAfterMount) {
+        if (fitVisibleColumnsToFrame()) {
+          layoutFittedAfterMount = true;
+          lastSavedColumnCount = COLS.length;
+          saveSizes();
+        }
       }
       render();
       setStatus("已讀取私人資料；編輯欄位後離開欄位即自動儲存。", "success");
-      showAuthenticated(true);
     } catch (error) { setStatus("無法載入：" + error.message, "error"); }
   }
   async function addResearchRow() {
@@ -505,7 +511,7 @@
   reloadButton.addEventListener("click", () => { if (canRefresh()) load(); });
   resetSizesButton.addEventListener("click", () => {
     sizes = {columns: [...DEFAULT_WIDTHS], rows: {}};
-    fitVisibleColumnsToFrame();
+    layoutFittedAfterMount = fitVisibleColumnsToFrame();
     for (let i = 0; i < COLS.length; i++) changeColumnWidth(i, sizes.columns[COLS[i]]);
     table.querySelectorAll("tr[data-research-row]").forEach(tr =>
       applyRowHeight(tr, Number(tr.dataset.researchRow)));
