@@ -8,52 +8,75 @@
   const SCOPE = "https://www.googleapis.com/auth/spreadsheets";
   const CLIENT_KEY = "pin:research:oauth-client-id:v1";
   const ACCOUNT_HINT_KEY = "pin:research:google-account-hint:v1";
-  // PIN follows Google Sheets A–H exactly; baseline[0] is the sole header source.
-  const COLS = [0, 1, 2, 3, 4, 5, 6, 7];
-  const SIZE_KEY = "pin:research:table-size:v2";
-  const PREVIOUS_SIZE_KEY = "pin:research:table-size:v1";
-  const PREVIOUS_COLUMN_ORDER = [1, 0, 5, 6, 7, 2, 3, 4];
-  const PREVIOUS_DEFAULT_WIDTHS = [230, 190, 280, 280, 250, 230, 110, 170];
-  const DEFAULT_WIDTHS = [225, 260, 360, 110, 420, 300, 310, 310];
+  // Use only the columns currently named in the real Google Sheet header.
+  // Never recreate cleared/deleted trailing columns merely because the grid has spare cells.
+  let COLS = [];
+  const SIZE_KEY = "pin:research:table-size:v3";
+  const PREVIOUS_SIZE_KEY = "pin:research:table-size:v2";
+  const LEGACY_SIZE_KEY = "pin:research:table-size:v1";
+  const LEGACY_COLUMN_ORDER = [1, 0, 5, 6, 7, 2, 3, 4];
+  const LEGACY_DEFAULT_WIDTHS = [230, 190, 280, 280, 250, 230, 110, 170];
+  const DEFAULT_WIDTHS = [210, 225, 320, 105, 270, 300, 310, 310];
   const DEFAULT_ROW_HEIGHT = 64;
   const clampSize = (v, min, max) => Math.max(min, Math.min(max, v));
   let sizes = {columns: [...DEFAULT_WIDTHS], rows: {}};
+  let lastSavedColumnCount = 0;
   try {
     const current = JSON.parse(localStorage.getItem(SIZE_KEY) || "null");
     const previous = current ? null : JSON.parse(localStorage.getItem(PREVIOUS_SIZE_KEY) || "null");
-    const saved = current || previous;
+    const legacy = current || previous ? null : JSON.parse(localStorage.getItem(LEGACY_SIZE_KEY) || "null");
+    const saved = current || previous || legacy;
     if (saved && typeof saved === "object") {
-      if (Array.isArray(saved.columns) && saved.columns.length === COLS.length) {
-        if (previous) {
-          // Preserve user-adjusted column widths by original Google column identity.
-          // Untouched old defaults use the new Google-aligned defaults.
-          saved.columns.forEach((width, oldDisplayIndex) => {
-            const googleCol = PREVIOUS_COLUMN_ORDER[oldDisplayIndex];
-            if (Number.isFinite(width) && width !== PREVIOUS_DEFAULT_WIDTHS[oldDisplayIndex]) {
-              sizes.columns[googleCol] = clampSize(width, 110, 760);
-            }
+      if (Array.isArray(saved.columns)) {
+        if (legacy && saved.columns.length === LEGACY_COLUMN_ORDER.length) {
+          saved.columns.forEach((width, oldPosition) => {
+            const sheetIndex = LEGACY_COLUMN_ORDER[oldPosition];
+            if (Number.isFinite(width) && width !== LEGACY_DEFAULT_WIDTHS[oldPosition])
+              sizes.columns[sheetIndex] = clampSize(width, 90, 760);
           });
         } else {
-          sizes.columns = saved.columns.map((width, i) =>
-            Number.isFinite(width) ? clampSize(width, 110, 760) : DEFAULT_WIDTHS[i]);
+          saved.columns.forEach((width, sheetIndex) => {
+            if (Number.isFinite(width)) sizes.columns[sheetIndex] = clampSize(width, 90, 760);
+          });
         }
       }
       if (saved.rows && typeof saved.rows === "object" && !Array.isArray(saved.rows))
-        for (const [key, value] of Object.entries(saved.rows))
-          if (/^[1-9][0-9]*$/.test(key) && Number.isFinite(value))
-            sizes.rows[key] = clampSize(value, 56, 540);
+        for (const [key, height] of Object.entries(saved.rows))
+          if (/^[1-9][0-9]*$/.test(key) && Number.isFinite(height))
+            sizes.rows[key] = clampSize(height, 56, 540);
+      if (current && Number.isInteger(current.columnCount)) lastSavedColumnCount = current.columnCount;
     }
-    if (previous) localStorage.setItem(SIZE_KEY, JSON.stringify(sizes));
   } catch {}
   function saveSizes() {
-    try { localStorage.setItem(SIZE_KEY, JSON.stringify(sizes)); }
+    try { localStorage.setItem(SIZE_KEY, JSON.stringify({...sizes, columnCount: COLS.length})); }
     catch { setStatus("此瀏覽器無法保存欄寬與列高設定。", "warning"); }
   }
   function rowHeight(index) { return sizes.rows[index] || DEFAULT_ROW_HEIGHT; }
   function applyTableWidth() {
-    table.style.width = sizes.columns.reduce((sum, width) => sum + width, 0) + "px";
+    table.style.width = COLS.reduce((sum, index) => sum + (sizes.columns[index] || DEFAULT_WIDTHS[index] || 180), 0) + "px";
   }
-  function applyRowHeight(tr, index) {
+  function fitVisibleColumnsToFrame() {
+    // Fit the actual sheet columns once after the column count changes.
+    // User-drags afterward may deliberately make the table horizontally scrollable.
+    const frame = document.querySelector(".pin-research-scroller");
+    const space = Math.floor((frame?.clientWidth || 0) - 2);
+    if (space <= 0 || !COLS.length) return;
+    const widths = COLS.map(index => sizes.columns[index] || DEFAULT_WIDTHS[index] || 180);
+    const minimum = COLS.map(index => index === 3 ? 88 : 105);
+    const floorTotal = minimum.reduce((a, b) => a + b, 0);
+    if (space <= floorTotal) return; // Narrow screens need horizontal scrolling.
+    const total = widths.reduce((a, b) => a + b, 0);
+    const excess = Math.max(0, total - floorTotal);
+    const availableExcess = space - floorTotal;
+    const resized = widths.map((width, i) => {
+      const weight = excess > 0 ? Math.max(0, width - minimum[i]) / excess : 1 / widths.length;
+      return Math.round(minimum[i] + weight * availableExcess);
+    });
+    const remainder = space - resized.reduce((a, b) => a + b, 0);
+    resized[resized.length - 1] += remainder;
+    COLS.forEach((index, i) => { sizes.columns[index] = resized[i]; });
+  }
+    function applyRowHeight(tr, index) {
     tr.style.setProperty("--pin-research-row-height", rowHeight(index) + "px");
   }
   function changeColumnWidth(index, width) {
@@ -174,7 +197,7 @@
   function columnName(i) { return String.fromCharCode(65 + i); }
   function cellAddress(row, col) { return SHEET_RANGE + columnName(col) + (row + 1); }
   function normalized(row) {
-    return Array.from({length: 8}, (_, i) => String(row?.[i] ?? ""));
+    return COLS.map(i => String(row?.[i] ?? ""));
   }
   function validateLink(value) {
     try {
@@ -368,10 +391,23 @@
   async function load() {
     setStatus("讀取私人研究資料中…");
     try {
-      const result = await api(valuesUrl(SHEET_RANGE + "A1:H1000"));
+      const result = await api(valuesUrl(SHEET_RANGE + "1:1000"));
       const data = result.values || [];
       if (!data.length) throw new Error("Google 試算表沒有資料。");
+      // Google Sheets typically omits trailing empty cells in each values row.
+      // Only headers with actual names define the visible columns; spare grid columns are ignored.
+      const headers = data[0] || [];
+      let lastNamed = headers.length - 1;
+      while (lastNamed >= 0 && !String(headers[lastNamed] ?? "").trim()) lastNamed--;
+      if (lastNamed < 0) throw new Error("試算表第一列沒有欄位名稱。");
+      if (lastNamed >= 26) throw new Error("研究表格暫時支援 A～Z 欄。");
+      COLS = Array.from({length: lastNamed + 1}, (_, i) => i);
       baseline = data.map(normalized);
+      if (lastSavedColumnCount !== COLS.length) {
+        fitVisibleColumnsToFrame();
+        saveSizes();
+        lastSavedColumnCount = COLS.length;
+      }
       render();
       setStatus("已讀取私人資料；編輯欄位後離開欄位即自動儲存。", "success");
       showAuthenticated(true);
@@ -383,9 +419,13 @@
     setStatus("正在新增研究紀錄…");
     try {
       const category = addCategory.value;
-      await api(valuesUrl(SHEET_RANGE + "A:H") + ":append?valueInputOption=RAW&insertDataOption=INSERT_ROWS", {
+      if (!COLS.length) throw new Error("請先載入試算表欄位。");
+      const lastColumn = columnName(COLS[COLS.length - 1]);
+      const newRow = COLS.map(index =>
+        index === 0 ? category : index === 1 ? "新研究項目" : index === 3 ? "待研究" : "");
+      await api(valuesUrl(SHEET_RANGE + "A:" + lastColumn) + ":append?valueInputOption=RAW&insertDataOption=INSERT_ROWS", {
         method: "POST",
-        body: JSON.stringify({values: [[category, "新研究項目", "", "待研究", "", "", "", ""]]})
+        body: JSON.stringify({values: [newRow]})
       });
       await load();
       setStatus("已新增研究項目，可以直接編輯標題與備註。", "success");
@@ -465,7 +505,8 @@
   reloadButton.addEventListener("click", () => { if (canRefresh()) load(); });
   resetSizesButton.addEventListener("click", () => {
     sizes = {columns: [...DEFAULT_WIDTHS], rows: {}};
-    for (let i = 0; i < COLS.length; i++) changeColumnWidth(i, DEFAULT_WIDTHS[i]);
+    fitVisibleColumnsToFrame();
+    for (let i = 0; i < COLS.length; i++) changeColumnWidth(i, sizes.columns[COLS[i]]);
     table.querySelectorAll("tr[data-research-row]").forEach(tr =>
       applyRowHeight(tr, Number(tr.dataset.researchRow)));
     saveSizes();
