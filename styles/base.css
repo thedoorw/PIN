@@ -1,7 +1,7 @@
 /* PIN UI / base.css — one owner for global layout and typography */
 :root{font-family:system-ui,-apple-system,"Noto Sans TC",sans-serif;color:#111;background:#f8f8f8}
-/* Reserve the viewport scrollbar lane across gallery and research views. */
-html{scrollbar-gutter:stable}
+/* Keep both sides of the viewport symmetric, including the right-hand scrollbar. */
+html{scrollbar-gutter:stable both-edges}
 *{box-sizing:border-box}body{margin:0;color:#111}button,input,select,textarea{font:inherit;color:#111}button{cursor:pointer}a{color:#111} [hidden]{display:none!important}
 main{max-width:1580px;margin:auto;padding:16px 59px 44px}
 .site-brand-row{display:flex;align-items:flex-start;gap:16px;min-width:0;min-height:40px;position:relative}
