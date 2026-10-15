@@ -173,6 +173,9 @@
   let oauthClient = null;
   let lastClientId = "";
   let baseline = [];
+  // Rich-text hyperlinks have a display label (e.g. "連結") and separate URL metadata.
+  // Keep URL metadata in memory, only after the authorized user's OAuth request.
+  let linkTargets = new Map();
   let pending = 0;
 
   const configuration = document.getElementById("pin-research-configuration");
@@ -244,6 +247,7 @@
     researchSettings.hidden = !isAuthenticated;
     if (!isAuthenticated) {
       baseline = [];
+      linkTargets.clear();
       table.replaceChildren();
       count.textContent = "";
     }
@@ -281,6 +285,30 @@
     return response.json();
   }
   const valuesUrl = range => API + encodeURIComponent(range);
+  async function readLinkTargets() {
+    // Values API intentionally omits hyperlinks attached to text cells.
+    // Request the source E-column CellData from Sheets API with the same user OAuth token.
+    const meta = new URL("https://sheets.googleapis.com/v4/spreadsheets/" + SHEET_ID);
+    meta.searchParams.set("ranges", SHEET_RANGE + "E2:E1000");
+    meta.searchParams.set("includeGridData", "true");
+    meta.searchParams.set("fields", "sheets(data(startRow,rowData(values(hyperlink,userEnteredFormat(textFormat(link)),textFormatRuns(format(link))))))");
+    const response = await api(meta.toString());
+    const targets = new Map();
+    for (const sheet of response.sheets || []) {
+      for (const block of sheet.data || []) {
+        for (const [offset, row] of (block.rowData || []).entries()) {
+          const cell = row.values?.[0];
+          if (!cell) continue;
+          const richRun = cell.textFormatRuns?.find(run => run.format?.link?.uri);
+          const rawUrl = cell.hyperlink || cell.userEnteredFormat?.textFormat?.link?.uri || richRun?.format?.link?.uri;
+          const href = validateLink(String(rawUrl || ""));
+          if (href) targets.set((block.startRow ?? 1) + offset, href);
+        }
+      }
+    }
+    return targets;
+  }
+
   async function readCell(row, col) {
     const result = await api(valuesUrl(cellAddress(row, col)));
     return String(result.values?.[0]?.[0] ?? "");
@@ -372,7 +400,19 @@
         if (multi) input.addEventListener("keydown", e => {
           if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) { e.preventDefault(); input.blur(); }
         });
-        td.append(input);
+        const richLinkUrl = col === 4 ? linkTargets.get(row) : "";
+        if (richLinkUrl) {
+          // Preserve the exact label from Google Sheets and make it clickable.
+          // Don't write the label as a raw value: that would erase the rich-text link.
+          const richLink = el("a", "pin-research-source-link pin-research-rich-link", value || "開啟連結");
+          richLink.href = richLinkUrl;
+          richLink.target = "_blank";
+          richLink.rel = "noopener noreferrer";
+          richLink.title = "開啟原始文件；若需更改網址，請到 Google Sheets 編輯此連結";
+          td.append(richLink);
+        } else {
+          td.append(input);
+        }
         {
           // The visible row border is also the resize target in every column.
           const handle = el("button", "pin-research-row-resize");
@@ -389,7 +429,7 @@
           });
           td.append(handle);
         }
-        if (col === 4) {
+        if (col === 4 && !richLinkUrl) {
           const link = el("a", "pin-research-source-link", "開啟來源 ↗");
           link.target = "_blank";
           link.rel = "noopener noreferrer";
@@ -425,6 +465,13 @@
       if (lastNamed >= 26) throw new Error("研究表格暫時支援 A～Z 欄。");
       COLS = Array.from({length: lastNamed + 1}, (_, i) => i);
       baseline = data.map(normalized);
+      let linkWarning = "";
+      try {
+        linkTargets = await readLinkTargets();
+      } catch (error) {
+        linkTargets = new Map();
+        linkWarning = "原始連結暫時無法讀取：" + error.message;
+      }
       // The board must be visible before measuring its width; hidden elements have width 0.
       showAuthenticated(true);
       if (lastSavedColumnCount !== COLS.length) {
@@ -437,7 +484,7 @@
       lastSavedColumnCount = COLS.length;
       render();
       saveSizes();
-      setStatus("已讀取私人資料；編輯欄位後離開欄位即自動儲存。", "success");
+      setStatus(linkWarning || "已讀取私人資料；編輯欄位後離開欄位即自動儲存。", linkWarning ? "warning" : "success");
     } catch (error) { setStatus("無法載入：" + error.message, "error"); }
   }
   async function addResearchRow() {
