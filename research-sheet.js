@@ -22,6 +22,7 @@
   let sizes = {columns: [...DEFAULT_WIDTHS], rows: {}};
   let lastSavedColumnCount = 0;
   let layoutFittedAfterMount = false;
+  let manualColumnWidths = false;
   try {
     const current = JSON.parse(localStorage.getItem(SIZE_KEY) || "null");
     const previous = current ? null : JSON.parse(localStorage.getItem(PREVIOUS_SIZE_KEY) || "null");
@@ -47,21 +48,37 @@
             sizes.rows[key] = clampSize(height, 56, 540);
       if (current && Number.isInteger(current.columnCount)) lastSavedColumnCount = current.columnCount;
       if (current) layoutFittedAfterMount = current.layoutFittedAfterMount === true;
+      if (current) manualColumnWidths = current.manualColumnWidths === true;
     }
   } catch {}
   function saveSizes() {
-    try { localStorage.setItem(SIZE_KEY, JSON.stringify({...sizes, columnCount: COLS.length, layoutFittedAfterMount})); }
+    try { localStorage.setItem(SIZE_KEY, JSON.stringify({...sizes, columnCount: COLS.length, layoutFittedAfterMount, manualColumnWidths})); }
     catch { setStatus("此瀏覽器無法保存欄寬與列高設定。", "warning"); }
   }
   function rowHeight(index) { return sizes.rows[index] || DEFAULT_ROW_HEIGHT; }
   function applyTableWidth() {
-    table.style.width = COLS.reduce((sum, index) => sum + (sizes.columns[index] || DEFAULT_WIDTHS[index] || 180), 0) + "px";
+    const frame = table.parentElement;
+    const total = COLS.reduce((sum, index) => sum + (sizes.columns[index] || DEFAULT_WIDTHS[index] || 180), 0);
+    // Hide the horizontal scrollbar altogether when the table fits.
+    // Use CSS width:100% rather than a rounded pixel sum, which used to overflow by a few pixels.
+    const fits = frame && frame.clientWidth > 0 && total <= frame.clientWidth - 2;
+    frame?.classList.toggle("pin-research-needs-horizontal-scroll", !fits);
+    table.style.width = fits ? "100%" : total + "px";
+  }
+  function syncColumnLayout() {
+    if (!COLS.length || board.hidden) return;
+    if (!manualColumnWidths) fitVisibleColumnsToFrame();
+    const cols = table.querySelector("colgroup")?.children;
+    if (cols) COLS.forEach((index, i) => {
+      if (cols[i]) cols[i].style.width = (sizes.columns[index] || DEFAULT_WIDTHS[index] || 180) + "px";
+    });
+    applyTableWidth();
   }
   function fitVisibleColumnsToFrame() {
     // Fit the actual sheet columns once after the column count changes.
     // User-drags afterward may deliberately make the table horizontally scrollable.
     const frame = document.querySelector(".pin-research-scroller");
-    const space = Math.floor((frame?.clientWidth || 0) - 2);
+    const space = Math.floor((frame?.clientWidth || 0) - 8);
     if (space <= 0 || !COLS.length) return false;
     const widths = COLS.map(index => sizes.columns[index] || DEFAULT_WIDTHS[index] || 180);
     const minimum = COLS.map(index => index === 3 ? 88 : 105);
@@ -101,6 +118,7 @@
     e.stopPropagation();
     const start = axis === "x" ? e.clientX : e.clientY;
     const origin = getValue();
+    if (axis === "x") manualColumnWidths = true;
     const activeBoundary = e.currentTarget.closest(axis === "x" ? "th" : "tr");
     activeBoundary?.classList.add(axis === "x" ? "pin-research-dragging-column" : "pin-research-dragging-row");
     document.documentElement.classList.add("pin-research-is-resizing");
@@ -324,6 +342,7 @@
       handle.addEventListener("keydown", e => {
         if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
         e.preventDefault();
+        manualColumnWidths = true;
         changeColumnWidth(i, sizes.columns[i] + (e.key === "ArrowRight" ? 10 : -10));
         saveSizes();
       });
@@ -408,14 +427,16 @@
       baseline = data.map(normalized);
       // The board must be visible before measuring its width; hidden elements have width 0.
       showAuthenticated(true);
-      if (lastSavedColumnCount !== COLS.length || !layoutFittedAfterMount) {
-        if (fitVisibleColumnsToFrame()) {
-          layoutFittedAfterMount = true;
-          lastSavedColumnCount = COLS.length;
-          saveSizes();
-        }
+      if (lastSavedColumnCount !== COLS.length) {
+        manualColumnWidths = false; // The source sheet structure changed.
+        layoutFittedAfterMount = false;
       }
+      if (!manualColumnWidths) {
+        layoutFittedAfterMount = fitVisibleColumnsToFrame();
+      }
+      lastSavedColumnCount = COLS.length;
       render();
+      saveSizes();
       setStatus("已讀取私人資料；編輯欄位後離開欄位即自動儲存。", "success");
     } catch (error) { setStatus("無法載入：" + error.message, "error"); }
   }
@@ -509,8 +530,17 @@
     setStatus("已從 PIN 斷開 Google 授權；私人資料已從頁面清除。");
   });
   reloadButton.addEventListener("click", () => { if (canRefresh()) load(); });
+  // Respond to browser width changes without destroying focused or unsaved cells.
+  const frame = document.querySelector(".pin-research-scroller");
+  if (frame && typeof ResizeObserver !== "undefined") {
+    const observer = new ResizeObserver(() => { if (!board.hidden) syncColumnLayout(); });
+    observer.observe(frame);
+  } else {
+    window.addEventListener("resize", syncColumnLayout);
+  }
   resetSizesButton.addEventListener("click", () => {
     sizes = {columns: [...DEFAULT_WIDTHS], rows: {}};
+    manualColumnWidths = false;
     layoutFittedAfterMount = fitVisibleColumnsToFrame();
     for (let i = 0; i < COLS.length; i++) changeColumnWidth(i, sizes.columns[COLS[i]]);
     table.querySelectorAll("tr[data-research-row]").forEach(tr =>
