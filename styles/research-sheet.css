@@ -76,6 +76,8 @@ textarea.pin-research-cell-input{height:calc(var(--pin-research-row-height,64px)
 .pin-research-cell[data-phase="saved"]{background:#f2faf4!important}
 .pin-research-cell[data-phase="conflict"],.pin-research-cell[data-phase="error"]{background:#fff0ee!important}
 .pin-research-source-link{display:inline-block;margin:2px 8px 5px;font-size:11px;color:#555;text-decoration:underline;text-underline-offset:2px}
+.pin-research-rich-link{display:inline-block;margin:3px 0;padding:7px 8px;font-size:12px;line-height:1.55;text-decoration:underline;text-underline-offset:3px}
+.pin-research-rich-link:hover{text-decoration-thickness:1.5px}
 .pin-research-source-link[hidden]{display:none}
 .pin-research-bottom-note{margin:11px 0 0;font-size:11px;line-height:1.7;color:#777}
 body.pin-research-view #cards,body.pin-research-view .load-wrap,body.pin-research-view .pin-note,body.pin-research-view .pin-controls{display:none}
