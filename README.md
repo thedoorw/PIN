@@ -13,6 +13,7 @@
 - [網站發布、備份與驗證規則](./governance/PIN_PUBLISH_RULES.md)。
 - [網站名稱與 Favicon](./governance/PIN_SITE_SETTINGS.md) — 本機預覽與正式公開設定。
 - [PIN 目前工作狀態／待辦](./governance/PIN_UI_PENDING_REVIEW_20261011.md) — 最新完成版本、未完成關卡、下個動作（換窗從此接續）。
+- [共用排版模矩探索](./governance/PIN_SHARED_LAYOUT_GRID_EXPLORATION.md) — 1280px 四欄配置候選，尚非正式 CSS 規格。
 - [建立來源及移轉紀錄](./research/ORIGIN_AND_MIGRATION_20261011.md)。
 
 ## 工作分工
