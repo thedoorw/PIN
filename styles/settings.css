@@ -3,6 +3,12 @@
 .site-settings>summary{list-style:none;cursor:pointer}.site-settings>summary::-webkit-details-marker{display:none}
 .site-settings-sheet{position:absolute;right:0;top:calc(100% + 8px);width:min(440px,calc(100vw - 28px));max-height:min(78vh,780px);overflow:auto;z-index:30;display:flex;flex-direction:column;gap:11px;padding:18px;background:white;border:1px solid #ddd;border-radius:12px;box-shadow:0 12px 38px #233e2c29;font-size:12px;line-height:1.5}
 .site-settings-sheet h2{font-size:16px;margin:0}.site-settings-sheet label{font-size:12px;font-weight:600}
+.pin-settings-logo-fields{display:flex;flex-direction:column;align-items:stretch;gap:7px;border-top:1px solid #e5e5e5;padding-top:12px}
+.pin-settings-logo-fields h3{font-size:13px;line-height:1.5;margin:0}
+.pin-settings-logo-fields small{font-size:11px;line-height:1.55;color:#666}
+.pin-settings-logo-fields #pin-nav-logo-file{font-size:11px;max-width:100%}
+.pin-settings-logo-fields #pin-nav-logo-clear{align-self:flex-start}
+
 .site-settings-sheet input[type=text],.site-settings-sheet input[type=url],.site-settings-sheet textarea{width:100%;max-width:100%;min-width:0;background:white;border:1px solid #ddd;border-radius:7px;padding:9px;font-size:12px}
 .site-settings-sheet textarea{min-height:65px;resize:vertical}
 .site-settings-sheet button,.site-settings-sheet select{border:1px solid #ddd;border-radius:7px;padding:8px 10px;background:white;font-size:12px;max-width:100%}
