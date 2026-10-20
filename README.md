@@ -15,7 +15,7 @@
 - [PIN 目前工作狀態／待辦](./governance/PIN_UI_PENDING_REVIEW_20261011.md) — 最新完成版本、未完成關卡、下個動作（換窗從此接續）。
 - [共用排版模矩探索](./governance/PIN_SHARED_LAYOUT_GRID_EXPLORATION.md) — 1280px 四欄配置候選，尚非正式 CSS 規格。
 - [PIN UI 模組化與共用排版契約 v0.2](./governance/PIN_UI_MODULE_LAYOUT_CONTRACT_v0.2.md) — 00 頂部導覽列預留、01 標頭、02 分類導覽、03 內容切換，以及全站共用對齊規律；尚未修改網站。
-- [G0 共用外框實作設計 v0.1](./governance/PIN_G0_SHARED_SHELL_DESIGN_v0.1.md) — 16px 模矩、左右總留白含捲軸、1440px 最大內容寬及統一垂直間距的候選規格。
+- [G0 共用外框設計與實作狀態](./governance/PIN_G0_SHARED_SHELL_DESIGN_v0.1.md) — 16px 模矩及共用 PageShell 已套用到正式 PIN；GitHub Pages 已部署，等待 USER 實際瀏覽器驗收。
 - [建立來源及移轉紀錄](./research/ORIGIN_AND_MIGRATION_20261011.md)。
 
 ## 工作分工
