@@ -1,6 +1,6 @@
 # PIN UI 共用排版與模組界線 v0.2
 
-狀態：**模組結構基準／首輪實作中**；依 USER 2026-10-20 對話接續 v0.1。G0 與 01～03 已部署且獲 USER 視覺確認，**00 頂部導覽列已實作，待 USER 瀏覽器互動驗收**。原始檢查範圍：`index.html`、`styles/base.css`、`styles/gallery.css`、`styles/research-sheet.css`、`styles/settings.css`、`app.js`，以 GitHub `thedoorw/PIN/main` 為準。
+狀態：**模組結構基準／首輪實作中**；依 USER 2026-10-20 對話接續 v0.1。G0 與 01～03 已部署且獲 USER 視覺確認，**00 頂部導覽列已實作且 USER 指定的三項瀏覽器驗收通過**。原始檢查範圍：`index.html`、`styles/base.css`、`styles/gallery.css`、`styles/research-sheet.css`、`styles/settings.css`、`app.js`，以 GitHub `thedoorw/PIN/main` 為準。
 
 ## 1. 核心目標
 
@@ -12,7 +12,7 @@
 
 | 編號 | 模組 | 狀態 | 實際／預定內容 | 與外框的關係 |
 | --- | --- | --- | --- | --- |
-| **00** | **頂部導覽列 TopNav** | **已實作，待操作驗收** | 48px 高度；左側獨立可自訂文字／圖片 LOGO；右側沿用搜尋作品及 `⋯` 設定 | LOGO 位於 G0 左基準 L，右側入口靠 R；不使用 01 標頭的 16px 內縮 |
+| **00** | **頂部導覽列 TopNav** | **已實作，指定項目已驗收** | 48px 高度；左側獨立可自訂文字／圖片 LOGO；右側沿用搜尋作品及 `⋯` 設定 | LOGO 位於 G0 左基準 L，右側入口靠 R；不使用 01 標頭的 16px 內縮 |
 | **01** | **網站標頭 Header** | **現有** | PIN 名稱、自訂文字、右上搜尋／設定入口 | 模組外框依 L/R；**標題與自訂文字一律從 L+16px 起**；右側操作仍靠 R，不以負外距越界 |
 | **02** | **分類導覽 CategoryNav** | **現有** | 全部／海報／字體／成熟作品／研究文件 | 共用 L／R；專管頁面內的視圖切換；**不與 00 合併** |
 | **03** | **主要內容 MainContent** | **現有** | **03A Gallery**（四欄照片牆＋顯示更多）或 **03B Research**（登入與私人研究表格） | 兩個視圖互斥；共用同一 L／R 及內容起始線 Y；內部各自管理縮圖或欄位 |
@@ -87,11 +87,21 @@
 
 - 本文 **取代** `PIN_UI_MODULE_LAYOUT_CONTRACT_v0.1.md` 成為**目前有效的模組排版草案**；v0.1 留作歷史記錄。1280px 公式研究仍參照 `PIN_SHARED_LAYOUT_GRID_EXPLORATION.md`。
 - 自首版以來已有後續實作提交：`index.html`、`styles/base.css`、`styles/settings.css`、`site-settings.js` 已更新；此文件作為排版契約保持維護，不存入私人 Google Sheets 資料。
-- 00 TopNav **已採 48px 高度實作**，以 G0 左右共用 L/R 對齊；已部署，尚待使用者就真實 Chrome 互動及小尺寸畫面驗收。
+- 00 TopNav **已採 48px 高度實作**，以 G0 左右共用 L/R 對齊；已部署；USER 已確認 LOGO 左側對齊、搜尋／設定操作及 LOGO 自訂後重新整理保留設定。其他小尺寸及回歸項目未因此宣告通過。
 
 ## 8. 00 TopNav 發布與功能範圍（2026-10-20）
 
 - USER 同意 48px 導覽列、LOGO 從照片牆 L 起、右側移入**既有**搜尋作品與設定控制；原始按鈕保留相同 id，避免重製功能。
 - `site-settings.js` 的兩個新增設定欄位：`navLogoText`、`navLogoUrl`；使用原本本機預覽／匯出 `config/site.json` 流程，與 `siteName`、`faviconUrl` 分離。
 - 00 為**正常文流（not sticky）**。01 的 `L+16px`、03A 四欄及 03B 私人表格外框均保持原契約。
-- GitHub Pages 版已部署；程式靜態檢查已通過，但不得將它等同 USER 於 Chrome 完成搜尋、設定與 LOGO 編輯驗收。
+- GitHub Pages 版已部署；2026-10-20 USER 已回覆「通過」，確認前次提出的三項 Chrome 驗收：LOGO 與照片牆第一欄左緣對齊、搜尋／設定正常、LOGO 自訂後重新整理仍保留。此確認不延伸為所有手機寬度或 Google Sheets 操作均已驗收。
+
+## 9. USER 驗收紀錄（2026-10-20）
+
+**00 TopNav USER_ACCEPTANCE = PASS（限本次三項驗收）**：
+
+1. LOGO 與照片牆第一欄左基準線 L 對齊。
+2. 搜尋作品與 `⋯` 設定控制正常。
+3. 自訂 LOGO 後重新整理，設定仍保留。
+
+此項與既有 G0 的三項對齊驗收均已通過，列為後續變更的回歸保護基準。小尺寸裝置、所有瀏覽器與私人 Google Sheets 的完整功能，不因這次回覆而自動標為 PASS。
