@@ -6,7 +6,7 @@
 html{scrollbar-gutter:stable both-edges}
 *{box-sizing:border-box}body{margin:0;color:#111}button,input,select,textarea{font:inherit;color:#111}button{cursor:pointer}a{color:#111} [hidden]{display:none!important}
 /* G0 owns the shared L/R edges. Reuse .pin-shell for future top-nav inner content. */
-.pin-shell{box-sizing:border-box;width:100%;max-width:calc(var(--pin-content-max) + 2 * var(--pin-shell-padding));margin-inline:auto;padding-inline:var(--pin-shell-padding)}
+.pin-shell{box-sizing:border-box;width:100%;max-width:calc(var(--pin-content-max) + var(--pin-shell-padding) + var(--pin-shell-padding));margin-inline:auto;padding-inline:var(--pin-shell-padding)}
 main.pin-shell{padding-block:16px 44px}
 #pin-private-research,#cards{margin-block-start:var(--pin-nav-content-gap)}
 .site-brand-row{display:flex;align-items:flex-start;gap:16px;min-width:0;min-height:40px;position:relative}
