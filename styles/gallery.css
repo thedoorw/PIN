@@ -1,6 +1,6 @@
 /* PIN UI / gallery.css — card size and image rules */
-/* Align the four-column gallery with the research sheet's outer frame. */
-.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px;margin:13px 0 0;align-items:stretch}
+/* Gallery owns only the internal four-column grid; G0 owns its outer edges and top gap. */
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--pin-gallery-gap);align-items:stretch}
 .card{min-width:0;display:flex;flex-direction:column;overflow:hidden;background:#fff;border:1px solid #e2e2e2;border-radius:10px;box-shadow:0 1px 5px #22222210}
 .card:hover{box-shadow:0 4px 14px #22222215}
 .art{position:relative;width:100%;aspect-ratio:3/2;background:#f0f0f0;display:flex;align-items:center;justify-content:center;overflow:hidden}
@@ -30,7 +30,7 @@ body.pin-managing .art .chip,body.pin-managing .art .style-badge,body.pin-managi
 .load-wrap{text-align:center;margin:22px 0}.load-wrap button{background:white;border:1px solid #ddd;border-radius:8px;padding:11px 22px}
 #pin-trash-batch:disabled{opacity:.45;cursor:default}
 @media(max-width:960px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:640px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.cardbody{padding:8px}.cardbody .name{font-size:11px}}
+@media(max-width:640px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.cardbody{padding:8px}.cardbody .name{font-size:11px}}
 @media(max-width:355px){.grid{grid-template-columns:1fr}}
 
 /* Direct source link, no disclosure arrow. */
@@ -46,4 +46,4 @@ body.pin-managing .art .chip,body.pin-managing .art .style-badge,body.pin-managi
 .card-research[open]>.card-research-body{order:2;flex:0 0 100%;width:100%}
 .card-research-body a{color:#111}
 .card-source-link:hover{text-decoration:underline}
-@media(max-width:640px){.grid{margin-left:0;margin-right:0}}
+
