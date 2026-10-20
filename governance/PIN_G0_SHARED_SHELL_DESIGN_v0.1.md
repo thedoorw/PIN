@@ -1,6 +1,6 @@
 # PIN G0 共用外框實作設計 v0.1
 
-**狀態：已提出可實作的幾何方案，待 USER 視覺核准；非正式網站已完成。**
+**狀態：G0 首輪版面已實作於 PIN main，GitHub Pages 部署成功；正式網站的 USER 瀏覽器視覺與功能驗收尚未完成。1280px 範例仍是模矩研究基準，不是寫死的框寬。**
 2026-10-20；依據 [PIN UI 模組化與共用排版契約 v0.2](./PIN_UI_MODULE_LAYOUT_CONTRACT_v0.2.md) 與 [16px 模矩探索](./PIN_SHARED_LAYOUT_GRID_EXPLORATION.md)。
 `thedoorw/PIN/main` 為唯一來源。本文件不更動正式 HTML／CSS／JS、Google Sheets 或私人研究資料。
 
@@ -152,3 +152,17 @@ html { scrollbar-gutter: stable both-edges; }
 5. **狀態**：文件已建立不等於原始碼已落地；提交 GitHub 不等於 Pages 已載入；部署成功也不等於 Chrome／USER 視覺驗收成功。
 
 **下一個交付閘門**：待 USER 接受 G0 的水平與垂直分配，再以最小必要變更改正式 CSS／HTML，搭配實際截圖及功能核對。不可在研究文件階段搶先宣稱功能完成。
+
+## 七、2026-10-20 G0 首輪實作與驗證紀錄
+
+USER 在確認 01 標頭左側文字 `L+16px` 構想後指示「就先這樣，你可以繼續了」，首輪實作依此範圍進行。**僅正式套用 G0 排版，不增加 00 頂部導覽列功能。**
+
+- `styles/base.css`：建立 `--pin-*` tokens、可重用 `.pin-shell`，最大內容寬 1440px；桌面／中尺寸／手機的單側內距 48／32／16px。保留 `scrollbar-gutter:stable both-edges`；標題與自訂文字相對 Gallery 左緣 `+16px`；設定按鈕 `right:0`；標頭→導覽 24px、導覽→照片牆／研究文件 16px。
+- `styles/gallery.css`：保留桌面四欄與原 RWD 欄數，欄距／列距採共用 16px token；移除原 13px 自定上距與手機 9px 框距。
+- `styles/research-sheet.css`：取消研究模組自身 6px（手機 5px）頂部內距，改由 G0 統一提供；維持原有動態欄位、表格讀寫與必要時的水平捲動。
+- `index.html`：`<main class="pin-shell">`，更新三份 CSS 的 cache-busting 版本。未改動 `app.js`、`research-sheet.js`、Google Sheets、型錄或 INK。
+- 相關 CSS/HTML 最後一筆實作提交：`5f612ff993d4c638fd1352b3fe4305ce7a19e38e`，GitHub Pages run `39366528881`：`success`。
+- 本機 Chromium **獨立版面測試夾具**驗證 1920／1440／1280／960／640／390／320px：左右總留白對稱、標題與自訂文字 `L+16px`、Gallery／Research 外框及起點一致、主要內容無水平溢出等測試全部通過。**測試夾具不是從正式 PIN 載入的瀏覽器頁面**，不能以此宣稱 Live UI/Google OAuth/私人研究操作 PASS。
+- **下一個 USER checkpoint**：打開 `https://thedoorw.github.io/PIN/`，驗收「全部」照片牆和「研究文件」的邊界、標頭 16px 內縮、捲軸、右側設定位置；實際畫面可接受後，再推進 00 頂部導覽列或恢復 INK 的轉譯研究，不因額外美化持續阻塞創作。
+
+**設計數值的性質**：48／32／16px PageShell padding 與 16px Gallery gap 是本輪實作值；若 USER 後續釐清更穩定的模矩規律，可由唯一 G0 token 統一調整，而不再修改各個模組的硬編碼。
