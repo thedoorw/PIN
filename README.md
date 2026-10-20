@@ -14,7 +14,7 @@
 - [網站名稱與 Favicon](./governance/PIN_SITE_SETTINGS.md) — 本機預覽與正式公開設定。
 - [PIN 目前工作狀態／待辦](./governance/PIN_UI_PENDING_REVIEW_20261011.md) — 最新完成版本、未完成關卡、下個動作（換窗從此接續）。
 - [共用排版模矩探索](./governance/PIN_SHARED_LAYOUT_GRID_EXPLORATION.md) — 1280px 四欄配置候選，尚非正式 CSS 規格。
-- [PIN UI 模組化與共用排版契約 v0.2](./governance/PIN_UI_MODULE_LAYOUT_CONTRACT_v0.2.md) — 00 頂部導覽列預留、01 標頭、02 分類導覽、03 內容切換，以及全站共用對齊規律；尚未修改網站。
+- [PIN UI 模組化與共用排版契約 v0.2](./governance/PIN_UI_MODULE_LAYOUT_CONTRACT_v0.2.md) — G0 與 01～03 已實作；00 的 48px 頂部導覽列／獨立 LOGO／原有搜尋與設定已部署，待使用者瀏覽器功能驗收。
 - [G0 共用外框設計與實作狀態](./governance/PIN_G0_SHARED_SHELL_DESIGN_v0.1.md) — PageShell 已部署；2026-10-20 USER 已確認標頭 16px 內縮、照片牆左右留白及研究文件外框對齊三項視覺驗收通過。
 - [建立來源及移轉紀錄](./research/ORIGIN_AND_MIGRATION_20261011.md)。
 
