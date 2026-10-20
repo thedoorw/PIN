@@ -1,11 +1,21 @@
-<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PIN</title><link rel="icon" id="site-favicon" type="image/svg+xml" href="./assets/favicon.svg"><link rel="stylesheet" href="./styles/base.css?v=20261020-g0-shell1"><link rel="stylesheet" href="./styles/gallery.css?v=20261020-g0-gap1"><link rel="stylesheet" href="./styles/settings.css?v=20261013-gray"><link rel="stylesheet" href="./styles/research-sheet.css?v=20261020-g0-gap1"></head><body><main class="pin-shell">
-<header><div class="site-brand-row"><div class="pin-brand-block"><h1 id="site-name">PIN</h1></div><div class="pin-head-actions"><div id="pin-search-drawer" class="pin-search-drawer" aria-hidden="true"><input id="q" type="search" placeholder="搜尋作品…" aria-label="搜尋作品"></div><button type="button" id="pin-search-toggle" class="pin-icon-button" aria-label="開啟作品搜尋" aria-expanded="false" aria-controls="pin-search-drawer" title="搜尋作品"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg></button>
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PIN</title><link rel="icon" id="site-favicon" type="image/svg+xml" href="./assets/favicon.svg"><link rel="stylesheet" href="./styles/base.css?v=20261020-topnav48"><link rel="stylesheet" href="./styles/gallery.css?v=20261020-g0-gap1"><link rel="stylesheet" href="./styles/settings.css?v=20261020-topnav-logo"><link rel="stylesheet" href="./styles/research-sheet.css?v=20261020-g0-gap1"></head><body><nav class="pin-top-nav" aria-label="網站頂部導覽"><div class="pin-shell pin-top-nav-inner"><a class="pin-nav-logo" id="pin-nav-logo" href="./" aria-label="PIN 首頁"><span id="pin-nav-logo-text">PIN</span><img id="pin-nav-logo-image" alt="" hidden></a><div class="pin-head-actions"><div id="pin-search-drawer" class="pin-search-drawer" aria-hidden="true"><input id="q" type="search" placeholder="搜尋作品…" aria-label="搜尋作品"></div><button type="button" id="pin-search-toggle" class="pin-icon-button" aria-label="開啟作品搜尋" aria-expanded="false" aria-controls="pin-search-drawer" title="搜尋作品"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg></button>
 <details id="site-settings-panel" class="site-settings">
 <summary class="site-settings-trigger" aria-label="網站設定" title="網站設定"><svg aria-hidden="true" viewBox="0 0 24 24" width="19" height="19" fill="currentColor"><circle cx="5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="19" cy="12" r="1.7"/></svg></summary>
 <div class="site-settings-sheet">
 <h2>網站外觀</h2>
 <label for="site-name-input">網頁名稱</label>
 <input id="site-name-input" type="text" value="PIN" maxlength="50" placeholder="例如 PIN"><label for="site-caption-input">標題下方自訂文案</label><textarea id="site-caption-input" maxlength="240" rows="3" placeholder="輸入要顯示在 PIN 標題下方的文字（可留白）"></textarea>
+<div class="pin-settings-logo-fields">
+<h3>頂部導覽列 LOGO</h3>
+<label for="pin-nav-logo-text-input">LOGO 文字（與網頁名稱獨立）</label>
+<input id="pin-nav-logo-text-input" type="text" value="PIN" maxlength="50" placeholder="例如 PIN">
+<label for="pin-nav-logo-url">LOGO 圖片網址（選填，會優先顯示圖片）</label>
+<input id="pin-nav-logo-url" type="url" autocomplete="off" placeholder="https:// 圖片網址">
+<label for="pin-nav-logo-file">或上傳 LOGO 圖片</label>
+<input id="pin-nav-logo-file" type="file" accept=".png,.jpg,.jpeg,.webp,image/png,image/jpeg,image/webp">
+<button id="pin-nav-logo-clear" type="button">移除 LOGO 圖片，顯示文字</button>
+<small>支援 PNG、JPG、WebP，256 KB 以內。LOGO 顯示於 48px 導覽列，不影響標頭名稱與 Favicon。</small>
+</div>
 <label for="site-icon-file">Favicon（分頁小圖示）</label>
 <div class="site-icon-field">
 <div class="site-icon-preview"><img id="site-icon-preview" alt="圖示預覽" hidden><span id="site-icon-fallback">P</span></div>
@@ -20,7 +30,8 @@
 <button id="site-settings-reset" type="button">還原公開版本</button>
 </div>
 <p id="site-settings-status" class="site-settings-status" role="status" aria-live="polite">儲存本機只影響此瀏覽器。公開設定需要把 site.json 提交至 PIN Repo。</p>
-</div></details></div></div><p id="pin-custom-caption" class="pin-custom-caption"></p><p class="subhead" id="pin-archive-description" hidden>先集中瀏覽海報、字體與成熟作品，其他研究資料已退出現行型錄。</p>
+</div></details></div></div></nav><main class="pin-shell">
+<header><div class="site-brand-row"><div class="pin-brand-block"><h1 id="site-name">PIN</h1></div></div><p id="pin-custom-caption" class="pin-custom-caption"></p><p class="subhead" id="pin-archive-description" hidden>先集中瀏覽海報、字體與成熟作品，其他研究資料已退出現行型錄。</p>
 <div class="stats"><div class="stat"><b id="listed">—</b>非付費研究紀錄</div><div class="stat"><b id="thumbnailCount">—</b>附圖紀錄</div><div class="stat"><b id="excludedCount">0</b>已標記不考慮</div></div></header>
 <div class="filter-shell">
 <nav class="category-bar" aria-label="保留作品類別"><button type="button" data-type="ALL" class="active" aria-pressed="true">全部</button><button type="button" data-type="POSTER" aria-pressed="false">海報</button><button type="button" data-type="TYPOGRAPHY" aria-pressed="false">字體</button><button type="button" data-type="MATURE" aria-pressed="false">成熟作品</button><button type="button" id="pin-private-research-tab" aria-pressed="false" aria-controls="pin-private-research">研究文件</button></nav>
@@ -71,4 +82,4 @@
 </div>
 </section><section id="cards" class="grid"></section><div class="load-wrap"><button id="load-more" type="button" hidden>顯示更多</button></div>
 <footer><span id="footer-site-name">PIN</span> — INK 個人視覺研究型錄。已確認須付費的來源從本型錄排除；價格／授權未確認的個案仍需另行核查。清理前的研究資料另存於 PIN Repo 的歷史歸檔。個人標記、備註與自選縮圖只儲存在目前瀏覽器；搬遷前請先匯出備份。</footer>
-</main><script src="./site-settings.js?v=20261013-caption" defer></script><script src="./app.js?v=20261013-details3" defer></script><script src="https://accounts.google.com/gsi/client" async defer></script><script src="./research-sheet.js?v=20261015-richlinks5" defer></script><script>(()=>{const tab=document.getElementById("pin-private-research-tab");const section=document.getElementById("pin-private-research");const nav=tab.closest("nav");tab.addEventListener("click",()=>{document.body.classList.add("pin-research-view");section.hidden=false;for(const b of nav.querySelectorAll("button")){b.classList.toggle("active",b===tab);b.setAttribute("aria-pressed",String(b===tab));}});for(const b of nav.querySelectorAll("button[data-type]"))b.addEventListener("click",()=>{document.body.classList.remove("pin-research-view");section.hidden=true;tab.classList.remove("active");tab.setAttribute("aria-pressed","false");});})();</script></body></html>
+</main><script src="./site-settings.js?v=20261020-topnav-logo" defer></script><script src="./app.js?v=20261013-details3" defer></script><script src="https://accounts.google.com/gsi/client" async defer></script><script src="./research-sheet.js?v=20261015-richlinks5" defer></script><script>(()=>{const tab=document.getElementById("pin-private-research-tab");const section=document.getElementById("pin-private-research");const nav=tab.closest("nav");tab.addEventListener("click",()=>{document.body.classList.add("pin-research-view");section.hidden=false;for(const b of nav.querySelectorAll("button")){b.classList.toggle("active",b===tab);b.setAttribute("aria-pressed",String(b===tab));}});for(const b of nav.querySelectorAll("button[data-type]"))b.addEventListener("click",()=>{document.body.classList.remove("pin-research-view");section.hidden=true;tab.classList.remove("active");tab.setAttribute("aria-pressed","false");});})();</script></body></html>
