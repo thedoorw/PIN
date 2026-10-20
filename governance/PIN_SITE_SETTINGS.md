@@ -21,4 +21,4 @@
 - 網站外觀面板新增 `navLogoText`（預設 PIN）及 `navLogoUrl`（可空）兩個**與 siteName／faviconUrl 完全分離**的公開設定欄位。圖片存在時優先顯示圖片，圖片無法載入時回退至文字；可按「移除 LOGO 圖片，顯示文字」。
 - LOGO 圖片可輸入 HTTPS URL 或上傳 PNG／JPG／WebP，256 KB 以內。文字支援最多 50 字，超出可用寬度時省略顯示而不影響其他模組。
 - 仍使用原先的 `pin:site-appearance-preview:v1` 本機預覽／儲存與「匯出公開設定檔」→ `config/site.json` 發布流程；既有設定若無新欄位即回退預設值，避免破壞舊版設定。
-- GitHub Pages 已部署。**正式 Chrome 的 LOGO 編輯、設定開闔、搜尋與手機尺寸操作仍等待 USER 實測；程式與部署通過不等於瀏覽器使用驗收。**
+- GitHub Pages 已部署。**USER 已於 2026-10-20 確認：LOGO 對齊、搜尋與設定正常，以及自訂 LOGO 重新整理後仍保留（PASS）。手機尺寸與其他未指定操作沒有一併驗收。**
