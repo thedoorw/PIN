@@ -1,5 +1,6 @@
 /* PIN research board: Google Sheets is private; no data is bundled in this stylesheet or HTML. */
-#pin-private-research{padding:6px 0 20px;max-width:none;width:100%}
+/* G0 owns the top gap and outer edges; research owns only its own content. */
+#pin-private-research{padding:0 0 20px;max-width:none;width:100%}
 #pin-private-research[hidden],#pin-research-setup[hidden],#pin-research-board[hidden]{display:none!important}
 .pin-research-info{font-size:12px;line-height:1.7;color:#666;margin:7px 0 12px}
 .pin-research-setup{max-width:700px;margin:16px 0 30px;padding:18px 20px;border:1px solid #ddd;border-radius:8px;background:#fff}
@@ -82,6 +83,5 @@ textarea.pin-research-cell-input{height:calc(var(--pin-research-row-height,64px)
 .pin-research-bottom-note{margin:11px 0 0;font-size:11px;line-height:1.7;color:#777}
 body.pin-research-view #cards,body.pin-research-view .load-wrap,body.pin-research-view .pin-note,body.pin-research-view .pin-controls{display:none}
 @media(max-width:640px){
-#pin-private-research{padding-top:5px}
 .pin-research-setup{padding:14px}
 }
