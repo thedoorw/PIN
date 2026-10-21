@@ -8,7 +8,7 @@ PIN 的 Recipe 與型錄是同一套長期創作資料庫，**不必跨 Repo Pub
 
 ## 目前研究個案（非 INK 可執行 Recipe）
 
-- [DC002 — flowshape Truchet 策展海報／來源與 INK 轉譯 Gate](./drafts/DC002.md)：已固定來源 Git SHA、原作 URL、幾何與海報參數，完成 Translator Registry 靜態 admission 檢查；**尚未**在 INK Runtime 執行、沒有合法 Recipe translation 或 Native Preview PASS。沿用既有型錄 ID；不新增 PIN 卡片。
+- [DC002 — flowshape Truchet／已完成 PUBLIC Native Path 編輯驗收](./drafts/DC002.md)：**PUBLIC INK File→Open／640 Path 顯示／單一節點編輯／History／Undo／Redo／Save→Reopen PASS**（[Issue #2 收據](https://github.com/thedoorw/PIN/issues/2#issuecomment-6313403538)）。使用的是來源衍生灰階 QA 圖案，**不是**原作者完整 A3 海報重現，也沒有 TypeScript→Recipe Translator PASS；原 Issue／Draft PR 測試線已關閉、不重啟。
 
 ## 工作狀態
 
