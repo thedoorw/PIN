@@ -69,7 +69,7 @@ const svg=[
   '<!-- Colors are grayscale QA substitutes, not flowshape OKLCH palette. Source pinned to flowshape b39b76012aaa040345c30f3373243d920945b746 MIT. -->',
   ...nodes,
   '</svg>', ''
-].join('\\n');
+].join('\n');
 const output=process.argv[2];
 if(!output){throw new Error('Output path required: node recipes/tools/DC002_pattern_fixture.mjs /path/to/out.svg');}
 writeFileSync(output,svg,'utf8');
