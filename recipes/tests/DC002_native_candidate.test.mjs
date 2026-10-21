@@ -4,8 +4,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 const content = readFileSync(new URL('../evidence/DC002_A3_native_candidate.ink', import.meta.url));
-const file = JSON.parse(content.toString('utf8'));
-const document = file.document;
+const document = JSON.parse(content.toString('utf8'));
 const paths = document.pages[0].layers[0].objects;
 const canonicalize = v => Array.isArray(v) ? v.map(canonicalize) : v && typeof v === 'object' ? Object.fromEntries(Object.keys(v).sort().map(k => [k, canonicalize(v[k])])) : (typeof v === 'number' && !Number.isFinite(v) ? null : v);
 const fingerprint = v => {
@@ -13,15 +12,14 @@ const fingerprint = v => {
   for(let i=0;i<text.length;i++){hash^=text.charCodeAt(i); hash=Math.imul(hash,0x01000193);}
   return 'fnv1a32:'+(hash>>>0).toString(16).padStart(8,'0');
 };
-test('DC002 .ink candidate has exact A3 Native envelope and sealed identity',()=>{
-  assert.equal(content.length,2228960);
-  assert.equal(createHash('sha256').update(content).digest('hex'),'ea378603a5c68f81390a762ce6898fc68a0f98438888f205bc51355df51b30c1');
-  assert.equal(file.schema,'INK-FILE-ENVELOPE'); assert.equal(file.version,'1.0');
+test('DC002 .ink candidate has exact A3 raw INK document accepted by the File→Open schema',()=>{
+  assert.equal(content.length,2095036);
+  assert.equal(createHash('sha256').update(content).digest('hex'),'0fa565cec43cfedd2fb0f8dce3995d80810df361cd8d1d63c22dd4edc8798d7a');
+  assert.equal(document.schema,undefined); // PUBLIC src/ink.js saveProject/openProjectFile use raw document
+  assert.ok(Array.isArray(document.pages));
   assert.equal(document.format,'INK'); assert.equal(document.formatVersion,4);
-  assert.equal(file.fileId,document.id); assert.equal(file.documentFormatVersion,4);
-  assert.equal(file.revision,1); assert.deepEqual(file.extensions,[]);
-  assert.equal(file.integrity.fingerprint,fingerprint(document));
-  assert.equal(file.integrity.fingerprint,'fnv1a32:b2781eee');
+  assert.equal(document.id,'dc002-a3-source-derived-native-candidate');
+  assert.equal(fingerprint(document),'fnv1a32:b2781eee');
   assert.equal(document.pages[0].artboard.widthMm,297);
   assert.equal(document.pages[0].artboard.heightMm,420);
 });
