@@ -8,10 +8,10 @@ html{scrollbar-gutter:stable both-edges}
 /* G0 owns the shared L/R edges. Reuse .pin-shell for future top-nav inner content. */
 .pin-shell{box-sizing:border-box;width:100%;max-width:calc(var(--pin-content-max) + var(--pin-shell-padding) + var(--pin-shell-padding));margin-inline:auto;padding-inline:var(--pin-shell-padding)}
 main.pin-shell{padding-block:16px 44px}
-/* 00 TopNav: exactly 48px tall; reuse G0 L/R without its own page margins. */
-.pin-top-nav{position:relative;z-index:25;height:48px;background:#f8f8f8;border-bottom:1px solid #e6e6e6}
-.pin-top-nav-inner{height:100%;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.pin-nav-logo{min-width:0;max-width:45%;height:48px;display:inline-flex;align-items:center;overflow:hidden;text-decoration:none;font-size:16px;font-weight:700;line-height:1.2;white-space:nowrap}
+/* 00 TopNav: viewport-edge 48px controls, independent of G0 content margins. */
+.pin-top-nav{position:relative;z-index:25;height:48px;width:100vw;margin-inline-start:calc(50% - 50vw);background:#f8f8f8;border-bottom:1px solid #e6e6e6}
+.pin-top-nav-inner{height:100%;width:100%;display:flex;align-items:center;justify-content:space-between;gap:0}
+.pin-nav-logo{width:48px;min-width:48px;max-width:48px;height:48px;flex:0 0 48px;display:flex;align-items:center;justify-content:center;overflow:hidden;text-align:center;text-decoration:none;font-size:16px;font-weight:700;line-height:1.2;white-space:nowrap}
 .pin-nav-logo span{overflow:hidden;text-overflow:ellipsis}
 .pin-nav-logo img{max-width:100%;max-height:36px;width:auto;height:auto;object-fit:contain}
 .pin-nav-logo img[hidden],.pin-nav-logo span[hidden]{display:none!important}
@@ -28,18 +28,18 @@ header>.subhead,header>.stats,.pin-note,footer{display:none}
 .category-bar button.active{background:#444;color:white}
 .pin-controls{display:flex;gap:8px;align-items:center}.pin-manager-indicator{display:none;font-size:11px}
 body.pin-managing .pin-manager-indicator,body.pin-trash-view .pin-manager-indicator{display:inline}
-.pin-search-drawer{position:relative;align-self:flex-start;flex:0 0 auto;width:0;height:36px;min-width:0;overflow:hidden;pointer-events:none;transition:width .38s ease-in-out}
+.pin-search-drawer{position:relative;align-self:center;flex:0 0 auto;width:0;height:36px;min-width:0;overflow:hidden;pointer-events:none;transition:width .38s ease-in-out}
 .pin-search-drawer.is-open{width:190px;pointer-events:auto}
 .pin-search-drawer::after{content:"";position:absolute;right:0;bottom:0;width:100%;height:1px;background:#999;pointer-events:none}
 .pin-search-drawer #q{display:block;width:190px;min-width:190px;height:36px;border:0;outline:0;border-radius:0;padding:8px 2px 0;background:transparent;font-size:12px;line-height:24px;box-shadow:none;color:#111}
 .pin-search-drawer #q:focus{border:0;outline:0}
-.pin-head-actions{position:relative;display:flex;align-items:center;flex:0 0 auto;gap:0;margin:0;padding:0;height:48px;max-width:calc(100% - 52px)}
-.pin-head-actions .pin-icon-button,.pin-head-actions #site-settings-panel>summary{display:grid;place-items:center;flex-shrink:0;width:36px;height:36px;margin:0;padding:0;border:0;background:transparent;border-radius:10px;box-shadow:none;line-height:1;cursor:pointer;transition:background-color .12s ease}
+.pin-head-actions{position:relative;display:flex;align-items:center;flex:0 0 auto;gap:0;margin:0;padding:0;height:48px;max-width:calc(100% - 48px)}
+.pin-head-actions .pin-icon-button,.pin-head-actions #site-settings-panel>summary{display:grid;place-items:center;flex-shrink:0;width:48px;height:48px;margin:0;padding:0;border:0;background:transparent;border-radius:0;box-shadow:none;line-height:1;cursor:pointer;transition:background-color .12s ease}
 .pin-head-actions button svg,.pin-head-actions summary svg{display:block;width:19px;height:19px}
-.pin-head-actions #site-settings-panel{align-self:center;height:36px;margin-left:6px}
+.pin-head-actions #site-settings-panel{align-self:center;height:48px;margin-left:0}
 .pin-head-actions #pin-search-toggle:hover{background:transparent}.pin-head-actions #site-settings-panel>summary:hover,.pin-head-actions #site-settings-panel[open]>summary{background:#eee}
 .pin-icon-button:focus-visible,.site-settings>summary:focus-visible{outline:2px solid #111;outline-offset:2px}
 .pin-search-drawer #q::-webkit-search-cancel-button{cursor:pointer}
 @media(max-width:960px){:root{--pin-shell-padding:32px}}
-@media(max-width:640px){:root{--pin-shell-padding:16px}main.pin-shell{padding-block:12px 30px}.pin-top-nav-inner{gap:8px}.pin-nav-logo{max-width:34%;font-size:14px}.pin-head-actions{gap:3px}.pin-search-drawer.is-open{width:min(160px,32vw)}.pin-search-drawer #q{width:100%;min-width:0}.category-bar{gap:3px}.category-bar button{padding:6px 10px;font-size:11px}}
+@media(max-width:640px){:root{--pin-shell-padding:16px}main.pin-shell{padding-block:12px 30px}.pin-nav-logo{font-size:14px}.pin-search-drawer.is-open{width:min(160px,32vw)}.pin-search-drawer #q{width:100%;min-width:0}.category-bar{gap:3px}.category-bar button{padding:6px 10px;font-size:11px}}
 @media(prefers-reduced-motion:reduce){.pin-search-drawer{transition:none}}
