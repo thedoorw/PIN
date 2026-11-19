@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>PIN｜創作手札・隔離候選 v0</title>
+  <meta name="description" content="PIN 雙頁創作手札的隔離式設計候選；不含私人研究資料。">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <div class="studio-shell">
+    <header class="studio-topbar">
+      <a class="wordmark" href="../../index.html" aria-label="返回原有 PIN 型錄">P<span>i</span>N<span class="wordmark-sub">/ CREATIVE NOTES</span></a>
+      <nav class="view-tabs" aria-label="手札視圖">
+        <button type="button" class="view-tab is-active" data-view="notebook" aria-current="page">手札</button>
+        <button type="button" class="view-tab" data-view="collect">自由輯錄</button>
+        <button type="button" class="view-tab" data-view="timeline">開發年表</button>
+        <a class="view-tab gallery-link" href="../../index.html">原有型錄 <span aria-hidden="true">↗</span></a>
+      </nav>
+      <span class="candidate-label">DESIGN STUDY / 00</span>
+    </header>
+
+    <main>
+      <section class="view is-visible" id="view-notebook" aria-labelledby="notebook-heading">
+        <div class="view-intro">
+          <div>
+            <p class="eyebrow">THE SPACE BETWEEN SEEING & MAKING</p>
+            <h1 id="notebook-heading">一冊，慢慢成形的手札<span class="terminal-dot">.</span></h1>
+            <p class="intro-copy">收集、對照、書寫與編排，先讓想法找到位置。</p>
+          </div>
+          <div class="view-actions">
+            <span class="local-only-badge">公開展示資料／無私人連線</span>
+            <button type="button" class="text-button" id="print-spread">輸出這一對頁 PDF <span aria-hidden="true">↗</span></button>
+          </div>
+        </div>
+
+        <div class="book-stage">
+          <div class="spread" id="spread" aria-label="A4 橫向雙頁創作手札預覽">
+            <article class="paper-page paper-left" aria-labelledby="left-page-title">
+              <header class="paper-running-head"><span>PIN / RESEARCH</span><span id="spread-left-index">01</span></header>
+              <p class="paper-kicker" id="left-kicker">FOUND OBJECT / PUBLIC SOURCE</p>
+              <h2 class="paper-title" id="left-page-title">從觀看開始</h2>
+              <div class="paper-visual"><a id="source-link" href="https://github.com/Volorf/Processing-Posters" target="_blank" rel="noopener noreferrer"><img id="source-image" src="" alt="已公開的研究原作示意"></a></div>
+              <footer class="paper-annotation"><span id="source-credit">來源作品</span><span id="source-id">PIN / G007</span></footer>
+            </article>
+            <article class="paper-page paper-right" aria-labelledby="right-page-title">
+              <header class="paper-running-head"><span>STUDIO JOURNAL</span><span id="spread-right-index">02</span></header>
+              <p class="paper-kicker" id="right-kicker">NOTES / UNWRITTEN</p>
+              <h2 class="paper-title paper-title-large" id="right-page-title">收藏之後，<br>讓創作發生。</h2>
+              <div class="paper-body" id="paper-body">
+                <p>此處將能放入自由獨白、與 AI 的對話、研究節錄，或一段還沒有目的的文字。</p>
+                <p>現在只顯示設計示意，不讀取任何私人 Google 文件。</p>
+              </div>
+              <div class="paper-rule" aria-hidden="true"></div>
+              <div class="paper-signoff"><span>PRIVATE NOTES / NOT CONNECTED</span><span id="paper-date">DRAFT 00</span></div>
+            </article>
+          </div>
+        </div>
+        <div class="spread-controls">
+          <button type="button" id="previous-spread" class="folio-button" aria-label="上一個對頁">← <span>上一頁</span></button>
+          <span id="spread-counter" class="spread-counter" role="status" aria-live="polite">01 / 02</span>
+          <button type="button" id="next-spread" class="folio-button"><span>下一頁</span> →</button>
+        </div>
+        <p class="prototype-disclosure">視覺候選：對頁尺寸以 A4 橫向為基準；手機改成單頁閱讀。長文自動分頁、私人同步及正式成冊拼版尚未實作。</p>
+      </section>
+
+      <section class="view" id="view-collect" aria-labelledby="collect-heading" hidden>
+        <div class="view-intro">
+          <div>
+            <p class="eyebrow">COLLECT FIRST, ORDER LATER</p>
+            <h1 id="collect-heading">自由輯錄<span class="terminal-dot">.</span></h1>
+            <p class="intro-copy">不必先分類。先留下正在想到的事。</p>
+          </div>
+          <span class="local-only-badge">本頁暫存，不連 Google</span>
+        </div>
+        <div class="collect-layout">
+          <form id="capture-form" class="capture-panel">
+            <label for="capture-text" class="capture-label">片段／獨白／摘錄</label>
+            <textarea id="capture-text" maxlength="3000" rows="7" placeholder="寫下一個片段……" required></textarea>
+            <div class="capture-actions">
+              <button class="solid-button" type="submit">放入暫存輯錄</button>
+              <button class="text-button" id="export-capture" type="button">下載暫存 JSON</button>
+            </div>
+            <p class="capture-warning">此頁只是隔離原型：輸入只保留在當前分頁記憶體，重新整理即消失。重要內容請先下載備份，私人 Google 儲存將另行驗證。</p>
+          </form>
+          <div class="capture-shelf">
+            <div class="shelf-head"><h2>暫存的片段</h2><span id="capture-count">0 ITEMS</span></div>
+            <div id="capture-list" class="capture-list" aria-live="polite"><p class="empty-shelf">尚未放入片段。這裡會是一面開放的標本牆。</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="view-timeline" aria-labelledby="timeline-heading" hidden>
+        <div class="view-intro">
+          <div>
+            <p class="eyebrow">A HISTORY OF MAKING</p>
+            <h1 id="timeline-heading">開發年表<span class="terminal-dot">.</span></h1>
+            <p class="intro-copy">讓每一次改造留下時間、證據與可以回顧的方法。</p>
+          </div>
+          <span class="local-only-badge">已核查的 PIN 公開紀錄節選</span>
+        </div>
+        <div class="timeline-note">以下僅為公開 PIN Repo 的三筆示範紀錄，不是從 INK-Browser-QA 建庫首日開始的完整年表；全量回溯待逐筆證據核對。</div>
+        <ol class="timeline-list">
+          <li><div class="timeline-date">2026<span>10 / 11</span></div><div class="timeline-entry"><p class="timeline-tag">CURATION / PIN</p><h2>型錄重新整理</h2><p>留下海報、字體與成熟作品三個觀看入口，保留研究歷史與版本。</p><a href="../../governance/PIN_UI_PENDING_REVIEW_20261011.md" target="_blank" rel="noopener noreferrer">查閱 GitHub 來源紀錄 ↗</a></div></li>
+          <li><div class="timeline-date">2026<span>10 / 20</span></div><div class="timeline-entry"><p class="timeline-tag">LAYOUT / PIN</p><h2>共用外框完成驗收</h2><p>頁首、照片牆與研究文件採同一組水平對齊規則；指定視覺驗收通過。</p><a href="../../governance/PIN_G0_SHARED_SHELL_DESIGN_v0.1.md" target="_blank" rel="noopener noreferrer">查閱 GitHub 來源紀錄 ↗</a></div></li>
+          <li><div class="timeline-date">2026<span>10 / 22</span></div><div class="timeline-entry"><p class="timeline-tag">COLLABORATION / PIN</p><h2>確認私人研究表的 CHAT 讀取途徑</h2><p>記錄既有 Google Sheets 私人資料與 CHAT 連接器的獨立授權邊界；寫入尚未實證。</p><a href="../../governance/PIN_OPERATING_RULES.md" target="_blank" rel="noopener noreferrer">查閱 GitHub 來源紀錄 ↗</a></div></li>
+        </ol>
+      </section>
+    </main>
+
+    <footer class="studio-footer"><span>PIN / PERSONAL VISUAL RESEARCH</span><span>PRIVATE BY CHOICE · PUBLIC ONLY BY REVIEW</span><span>DESIGN CANDIDATE, NOT THE LIVE PIN</span></footer>
+  </div>
+</body>
+</html>
