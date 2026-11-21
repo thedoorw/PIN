@@ -209,6 +209,12 @@
   window.addEventListener("pin:google-disconnect", () => clear("Google 授權已斷開，私人文件已清除。"));
   window.addEventListener("pagehide", () => clear("私人文件已清除。"));
   document.addEventListener("visibilitychange", () => {
-    if (!document.hidden && session) void recheckAccess(session);
+    // Avoid retaining a previously visible private document in the DOM while
+    // another browser tab is active (including after remote access revocation).
+    if (document.hidden && session?.picked) {
+      clear("已離開分頁，私人文件已清除。請重新選取文件。");
+    } else if (!document.hidden && session) {
+      void recheckAccess(session);
+    }
   });
 })();
