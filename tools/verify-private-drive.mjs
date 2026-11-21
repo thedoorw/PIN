@@ -29,7 +29,7 @@ function setup({ name = "fixture.md", mime = "text/plain", error, pause } = {}) 
   };
   const tab = new Element("catalog-tab");
   const document = Object.assign(new EventTarget(), {
-    getElementById: get, createElement: tag => new Element(tag),
+    hidden: false, getElementById: get, createElement: tag => new Element(tag),
     head: { append: script => script.onload() }, querySelectorAll: () => [tab]
   });
   const window = new EventTarget();
@@ -90,7 +90,7 @@ function setup({ name = "fixture.md", mime = "text/plain", error, pause } = {}) 
     }
   });
   return {
-    get, tab, window, requests, revoked,
+    get, tab, window, document, requests, revoked,
     preview: get("pin-drive-preview"),
     status: get("pin-drive-status"),
     close: get("pin-drive-close"),
@@ -196,4 +196,34 @@ test("global logout and pagehide prevent in-flight responses from restoring priv
     assert.equal(env.preview.children.length, 0);
     assert.ok(env.requests[1].signal.aborted);
   }
+});
+
+test("backgrounding an already visible private document clears the DOM and revokes image URLs", async () => {
+  const env = setup({mime: "image/png"});
+  await env.select();
+  await env.pick();
+  assert.equal(env.preview.children.length, 2);
+  env.document.hidden = true;
+  env.document.dispatchEvent(new Event("visibilitychange"));
+  assert.equal(env.preview.children.length, 0);
+  assert.deepEqual(env.revoked, ["blob:fixture"]);
+  assert.ok(env.requests[1].signal.aborted);
+  assert.match(env.status.textContent, /已離開分頁/);
+  env.document.hidden = false;
+  env.document.dispatchEvent(new Event("visibilitychange"));
+  await flush();
+  assert.equal(env.preview.children.length, 0);
+});
+
+test("backgrounding during an in-flight file download cannot restore its contents", async () => {
+  let release;
+  const env = setup({pause: new Promise(resolve => { release = resolve; })});
+  await env.select();
+  await env.pick();
+  env.document.hidden = true;
+  env.document.dispatchEvent(new Event("visibilitychange"));
+  release();
+  await flush();
+  assert.equal(env.preview.children.length, 0);
+  assert.ok(env.requests[1].signal.aborted);
 });
