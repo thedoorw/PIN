@@ -567,6 +567,7 @@
       setStatus("仍有未完成儲存的欄位，請先處理。", "warning");
       return;
     }
+    window.dispatchEvent(new Event("pin:google-disconnect"));
     const previous = token;
     token = "";
     tokenExpiry = 0;

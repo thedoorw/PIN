@@ -51,6 +51,23 @@
 <div class="pin-note" id="pin-help-text">點作品縮圖直接開啟原始作品展示；沒有作品展示的程式／工具，請展開技術來源。縮圖框固定 3:2，不裁切作品。研究編號右側核取方塊用於批次選取；使用上方按鈕一次移至已刪除區，進入已刪除區可批次還原；正式 GitHub 型錄不會被直接修改；「來源」下拉只顯示作品來源。目前只保留海報、字體及成熟作品三類。</div>
 <section id="pin-private-research" hidden aria-label="研究文件">
 
+<details class="pin-research-setup" id="pin-drive">
+<summary>私人 Drive 文件</summary>
+<div class="pin-research-connect-row">
+<button type="button" id="pin-drive-open" class="pin-research-control primary">選取 Drive 文件</button>
+<button type="button" id="pin-drive-close" class="pin-research-control" hidden>登出 Drive 預覽</button>
+</div>
+<details class="pin-research-configuration">
+<summary>設定 Google Picker</summary>
+<p>沿用研究畫板的 OAuth Client ID。請輸入同一 Google Cloud 專案的專案編號及受限的瀏覽器 API key。</p>
+<div class="pin-research-connect-row">
+<label>Cloud 專案編號 <input id="pin-drive-project" inputmode="numeric" autocomplete="off"></label>
+<label>Picker API key <input id="pin-drive-key" autocomplete="off" spellcheck="false"></label>
+</div>
+</details>
+<p id="pin-drive-status" role="status">可唯讀預覽 Markdown、Google Docs、PNG、JPEG 和 WebP。</p>
+<div id="pin-drive-preview"></div>
+</details>
 <div class="pin-research-setup" id="pin-research-setup">
 <h3>連接私人研究畫板</h3>
 <p id="pin-research-returning-note" class="pin-research-info" hidden>已記住這台瀏覽器的 PIN Google 用戶端設定，不需要重新輸入 ID。點下方按鈕恢復授權並讀取私人研究資料。</p>
@@ -82,4 +99,4 @@
 </div>
 </section><section id="cards" class="grid"></section><div class="load-wrap"><button id="load-more" type="button" hidden>顯示更多</button></div>
 <footer><span id="footer-site-name">PIN</span> — INK 個人視覺研究型錄。已確認須付費的來源從本型錄排除；價格／授權未確認的個案仍需另行核查。清理前的研究資料另存於 PIN Repo 的歷史歸檔。個人標記、備註與自選縮圖只儲存在目前瀏覽器；搬遷前請先匯出備份。</footer>
-</main><script src="./site-settings.js?v=20261020-topnav-logo" defer></script><script src="./app.js?v=20261013-details3" defer></script><script src="https://accounts.google.com/gsi/client" async defer></script><script src="./research-sheet.js?v=20261015-richlinks5" defer></script><script>(()=>{const tab=document.getElementById("pin-private-research-tab");const section=document.getElementById("pin-private-research");const nav=tab.closest("nav");tab.addEventListener("click",()=>{document.body.classList.add("pin-research-view");section.hidden=false;for(const b of nav.querySelectorAll("button")){b.classList.toggle("active",b===tab);b.setAttribute("aria-pressed",String(b===tab));}});for(const b of nav.querySelectorAll("button[data-type]"))b.addEventListener("click",()=>{document.body.classList.remove("pin-research-view");section.hidden=true;tab.classList.remove("active");tab.setAttribute("aria-pressed","false");});})();</script></body></html>
+</main><script src="./site-settings.js?v=20261020-topnav-logo" defer></script><script src="./app.js?v=20261013-details3" defer></script><script src="https://accounts.google.com/gsi/client" async defer></script><script src="./research-sheet.js?v=20261121-drive" defer></script><script src="./private-drive.js?v=20261121" defer></script><script>(()=>{const tab=document.getElementById("pin-private-research-tab");const section=document.getElementById("pin-private-research");const nav=tab.closest("nav");tab.addEventListener("click",()=>{document.body.classList.add("pin-research-view");section.hidden=false;for(const b of nav.querySelectorAll("button")){b.classList.toggle("active",b===tab);b.setAttribute("aria-pressed",String(b===tab));}});for(const b of nav.querySelectorAll("button[data-type]"))b.addEventListener("click",()=>{document.body.classList.remove("pin-research-view");section.hidden=true;tab.classList.remove("active");tab.setAttribute("aria-pressed","false");});})();</script></body></html>
