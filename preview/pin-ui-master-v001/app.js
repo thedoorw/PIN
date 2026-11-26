@@ -78,16 +78,17 @@ function chooseActivePane(pane) {
 }
 
 document.addEventListener("click", (event) => {
-  const sceneButton = event.target.closest("[data-scene]");
+  const sceneButton = event.target.closest("button[data-scene]");
   if (sceneButton) return openScene(sceneButton.dataset.scene);
 
-  const templateButton = event.target.closest("[data-template]");
+  // The notebook itself has data-template for styling; only a button changes it.
+  const templateButton = event.target.closest("button[data-template]");
   if (templateButton) return chooseTemplate(templateButton.dataset.template);
 
-  const viewButton = event.target.closest("[data-pane][data-view]");
+  const viewButton = event.target.closest("button[data-pane][data-view]");
   if (viewButton) return chooseView(viewButton.dataset.pane, viewButton.dataset.view);
 
-  const paneButton = event.target.closest("[data-show-pane]");
+  const paneButton = event.target.closest("button[data-show-pane]");
   if (paneButton) return chooseActivePane(paneButton.dataset.showPane);
 });
 
