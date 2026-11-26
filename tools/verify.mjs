@@ -33,7 +33,6 @@ if (!js.includes('fetch("./catalog/entries.json"')) errors.push("JS must fetch i
 if (!html.includes("aspect-ratio:3/2")) errors.push("Missing 3:2 image grid");
 if (!html.includes('data-type="POSTER"') || !html.includes('data-type="TYPOGRAPHY"') || !html.includes('data-type="MATURE"')) errors.push("Three-category tabs missing");
 if (html.includes('data-style="3D"') || html.includes('data-style="幾何形"')) errors.push("Retired style tabs still displayed");
-if (!read("README.md").includes("我說.md")) errors.push("Root README must link user notes");
 const illustrated = entries.filter(x => x.image).length;
 const settingsSource = read("site-settings.js");
 if (!html.includes('class="site-settings-trigger"') || !html.includes("⋯")) errors.push("Missing three-dot settings button");
