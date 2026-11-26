@@ -30,14 +30,14 @@ if (!read("site-settings.js").includes('fetch("./config/site.json"')) errors.pus
 if (!read("assets/favicon.svg").includes("<svg")) errors.push("Missing default favicon");
 if (!html.includes("./app.js?v=")) errors.push("GitHub Pages JS script is not relative");
 if (!js.includes('fetch("./catalog/entries.json"')) errors.push("JS must fetch its own catalog");
-if (!html.includes("aspect-ratio:3/2")) errors.push("Missing 3:2 image grid");
+if (!read("styles/gallery.css").includes("aspect-ratio:3/2")) errors.push("Missing 3:2 image grid");
 if (!html.includes('data-type="POSTER"') || !html.includes('data-type="TYPOGRAPHY"') || !html.includes('data-type="MATURE"')) errors.push("Three-category tabs missing");
 if (html.includes('data-style="3D"') || html.includes('data-style="幾何形"')) errors.push("Retired style tabs still displayed");
 const illustrated = entries.filter(x => x.image).length;
 const settingsSource = read("site-settings.js");
-if (!html.includes('class="site-settings-trigger"') || !html.includes("⋯")) errors.push("Missing three-dot settings button");
+if (!html.includes('class="site-settings-trigger"') || !html.includes('aria-label="網站設定"')) errors.push("Missing three-dot settings button");
 if (!settingsSource.includes('document.addEventListener("pointerdown"') || !settingsSource.includes('event.key === "Escape"')) errors.push("Missing settings click-away or Escape support");
-if (!js.includes('className = "pin-reject"') || !js.includes('"detail-toggle", "來源"')) errors.push("Missing source-only PIN card layout");
+if (!js.includes('className="pin-batch-select"') || !js.includes('"card-source-link", "來源"')) errors.push("Missing source-only PIN card layout");
 if (js.includes('"image-edit-trigger"') || js.includes('"memo-label"') || js.includes('"linked-record"')) errors.push("Legacy per-card editor remains in render function");
 
 console.log(JSON.stringify({catalog:"PIN",items:entries.length,illustrated,linkOnly:entries.length-illustrated,errors},null,2));
