@@ -17,6 +17,28 @@
 - [PIN UI 模組化與共用排版契約 v0.2](./governance/PIN_UI_MODULE_LAYOUT_CONTRACT_v0.2.md) — G0 與 01～03 已實作；00 的 48px 頂部導覽列已部署；2026-10-20 USER 已通過 LOGO 對齊、搜尋／設定及 LOGO 自訂保留三項驗收。
 - [G0 共用外框設計與實作狀態](./governance/PIN_G0_SHARED_SHELL_DESIGN_v0.1.md) — PageShell 已部署；2026-10-20 USER 已確認標頭 16px 內縮、照片牆左右留白及研究文件外框對齊三項視覺驗收通過。
 - [建立來源及移轉紀錄](./research/ORIGIN_AND_MIGRATION_20261011.md)。
+- [創作手札改造計畫／隔離候選 Draft PR #7](https://github.com/thedoorw/PIN/pull/7) — 尚未整合正式站。
+- [私人 Google Drive 文件唯讀預覽 Draft PR #9](https://github.com/thedoorw/PIN/pull/9) — 驗收與授權尚未完成。
+
+## PIN 創作手札｜2026-11-26 設計方向
+
+**狀態：USER 已確認核心互動方向；此節是需求與研究入口，不代表正式 PIN 網站已改造或部署。** 原有 Gallery／Recipe 研究與已完成的 UI 不能因此被覆蓋。
+
+- **美感與定位**：PIN 從作品型錄延伸為精緻、帶有科技感的個人創作手札／AI 研究空間，保留既有 Notebook v0 候選的溫度與書頁感。
+- **左右雙獨立視窗（已確認）**：左右可以各自捲動、切換內容而不影響另一側；中央分隔線可調整比例。參考 [Semirare Panels](https://demo-panels.semirare.com/) 的左右構成與空間感，但不照搬其切換方式；[Material Design Split screen](https://m1.material.io/layout/split-screen.html) 只作雙窗互動參考（原規範針對 Android）。
+- **自由輯錄與創作**：生活見聞、圖像、草圖、個人獨白、CHAT／AI 對話及研究文件可以並置、對照、整理；公開／私人內容有明確界線。
+- **開發年鑑與方法**：以 `INK-Browser-QA` 建庫首日為起點，依可核實時間與 GitHub 證據記錄開發大事記、回顧經驗；並與 WEB 網站設計方法研究相互參照。
+- **工作與出版分離**：日常使用可自由調整雙窗；需要排版出版時才整理為 A4 橫式雙頁，成冊拼版另行設計。
+- **私人資料及人機協作**：以使用者帳號控管的 Google Drive／Docs／Sheets 為候選，不把私人對話、憑證或原始檔寫入公開 Repo；不新增付費 API／MCP。現有私人 Drive 預覽另由 [Issue #8](https://github.com/thedoorw/PIN/issues/8) 與 [Draft PR #9](https://github.com/thedoorw/PIN/pull/9) 處理，仍待真實驗收。
+
+設計工作單與隔離 Notebook v0 見 [Draft PR #7](https://github.com/thedoorw/PIN/pull/7)；**雙獨立視窗需求是 2026-11-26 新確認的方向，既有 v0 翻頁候選尚未實現此規格**。
+
+## BLOG 文章計畫｜荒漠甘泉讀書會（標題登記，內容待定）
+
+- **新計畫標題**：BLOG｜荒漠甘泉讀書會文章計畫。
+- **來源網站**：[荒漠甘泉讀書會](https://stmdst.blogspot.com/)（USER 本人網誌）。
+- **狀態**：先保留名稱與來源；具體用途、整理方式及是否與 PIN 整合，待 USER 後續決定。不得據此自行轉換、搬移或出版文章。
+- **資料邊界**：原始 Blogger 備份 `feed.atom`、私人資料及未公開內容不提交到 Public PIN Repo／Pages。
 
 ## 工作分工
 
