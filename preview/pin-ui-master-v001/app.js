@@ -1,16 +1,14 @@
 "use strict";
 
-// PIN UI Master v001. This is a public, browser-only design draft:
+// PIN UI Master v002. Flat independent-panels design draft:
 // no Google authorization, network data writes, or private notes.
 const state = {
-  scene: "cover",
-  template: "folio",
+  scene: "body",
   activePane: "left",
-  views: { left: "research", right: "dialogue" },
+  views: { left: "research", right: "collection" },
 };
 
 const sceneNames = ["cover", "body", "back"];
-const templateNames = ["folio", "index", "exhibit"];
 const viewNames = ["research", "dialogue", "timeline", "collection"];
 const viewLabels = {
   research: ["研究摘錄", "自由輯錄 / FIELD NOTES"],
@@ -35,18 +33,7 @@ function openScene(name) {
       else button.removeAttribute("aria-current");
     }
   }
-  document.title = "PIN — " + ({ cover: "封面", body: "雙頁手札", back: "封底" })[name] + " / UI Master v001";
-}
-
-function chooseTemplate(name) {
-  if (!templateNames.includes(name)) return;
-  state.template = name;
-  document.getElementById("notebook").dataset.template = name;
-  for (const button of document.querySelectorAll("[data-template]")) {
-    const selected = button.dataset.template === name;
-    button.classList.toggle("is-selected", selected);
-    button.setAttribute("aria-pressed", String(selected));
-  }
+  document.title = "PIN — " + ({ cover: "封面", body: "雙視窗", back: "封底" })[name] + " / UI Master v002";
 }
 
 function chooseView(pane, name) {
@@ -81,10 +68,6 @@ document.addEventListener("click", (event) => {
   const sceneButton = event.target.closest("button[data-scene]");
   if (sceneButton) return openScene(sceneButton.dataset.scene);
 
-  // The notebook itself has data-template for styling; only a button changes it.
-  const templateButton = event.target.closest("button[data-template]");
-  if (templateButton) return chooseTemplate(templateButton.dataset.template);
-
   const viewButton = event.target.closest("button[data-pane][data-view]");
   if (viewButton) return chooseView(viewButton.dataset.pane, viewButton.dataset.view);
 
@@ -95,7 +78,6 @@ document.addEventListener("click", (event) => {
 document.getElementById("print-spread").addEventListener("click", () => window.print());
 
 chooseView("left", "research");
-chooseView("right", "dialogue");
-chooseTemplate("folio");
+chooseView("right", "collection");
 chooseActivePane("left");
-openScene("cover");
+openScene("body");
