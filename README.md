@@ -4,7 +4,7 @@
 
 ## 永久入口
 
-- [我說.md](./我說.md)：使用者本人想說的話，專用空白文件；沒有明確授權不得改寫。
+- 私人創作筆記已移往使用者帳號管理的 Google Drive SSOT；公開 Repo 不保存私人原文。
 - [型錄首頁](./index.html)：PIN Gallery 的 HTML／CSS。
 - [型錄唯一權威索引](./catalog/entries.json) · [資料規則](./catalog/README.md)。
 - [Recipe 工作區](./recipes/README.md) · [Recipe 格式](./recipes/RECIPE_FORMAT_v0.1.md)。
