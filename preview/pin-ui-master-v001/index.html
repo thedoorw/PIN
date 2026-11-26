@@ -3,188 +3,91 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#17211f">
-  <meta name="description" content="PIN UI Master v001 — 封面、雙頁手札、封底的互動設計草稿。">
-  <title>PIN — The Living Notebook / UI Master v001</title>
+  <meta name="theme-color" content="#eeeae4">
+  <meta name="description" content="PIN UI Master v002 — 以 Panels 為參考的極簡獨立雙視窗草稿。">
+  <title>PIN — Independent Panels / UI Master v002</title>
   <link rel="stylesheet" href="./styles.css">
   <script src="./app.js" defer></script>
 </head>
 <body>
   <div class="app-frame">
     <header class="global-header">
-      <button type="button" class="brand" data-scene="cover" aria-label="PIN，回到封面">
-        <span class="brand-symbol" aria-hidden="true">✳</span>
-        <span class="brand-name">PIN</span>
-        <span class="brand-divider" aria-hidden="true"></span>
-        <span class="brand-descriptor">THE LIVING NOTEBOOK</span>
-      </button>
+      <button type="button" class="brand" data-scene="body" aria-label="PIN，回到雙視窗">PIN</button>
+      <span class="global-subtitle">A living notebook</span>
       <nav class="scene-nav" aria-label="手札場景">
-        <button type="button" data-scene="cover" aria-current="page">封面 <span>01</span></button>
-        <button type="button" data-scene="body">內頁 <span>02</span></button>
-        <button type="button" data-scene="back">封底 <span>03</span></button>
+        <button type="button" data-scene="cover">封面</button>
+        <button type="button" data-scene="body" aria-current="page">內頁</button>
+        <button type="button" data-scene="back">封底</button>
       </nav>
-      <div class="master-id"><span class="master-pulse" aria-hidden="true"></span>UI MASTER <b>001</b></div>
+      <span class="master-id">UI STUDY / 002</span>
     </header>
 
     <main id="main-content">
-      <section class="scene cover-scene is-active" id="scene-cover" aria-labelledby="cover-title">
-        <div class="cover-layout">
-          <aside class="cover-aside cover-aside-left" aria-hidden="true">
-            <span>PERSONAL ARCHIVE / 001</span>
-            <span class="rotate-note">COLLECT · THINK · MAKE</span>
-            <span>EST. IN PROGRESS</span>
-          </aside>
-          <article class="cover-object">
-            <div class="cover-binding" aria-hidden="true"></div>
-            <div class="cover-inner">
-              <div class="cover-topline">
-                <span>PRIVATE WORLD / OPEN IDEAS</span>
-                <span class="cover-emblem" aria-hidden="true">✳</span>
+      <section class="scene notebook-scene is-active" id="scene-body" aria-label="獨立雙視窗">
+        <div class="notebook" id="notebook" data-active-pane="left">
+          <section class="page page-left" aria-label="左視窗">
+            <header class="page-header">
+              <div class="page-label-line"><strong id="left-page-label">研究摘錄</strong><span>自由輯錄 / FIELD NOTES</span></div>
+              <div class="view-tabs" role="group" aria-label="左側內容">
+                <button type="button" data-pane="left" data-view="research" aria-pressed="true">研究</button>
+                <button type="button" data-pane="left" data-view="dialogue" aria-pressed="false">對話</button>
+                <button type="button" data-pane="left" data-view="timeline" aria-pressed="false">年表</button>
+                <button type="button" data-pane="left" data-view="collection" aria-pressed="false">收藏</button>
               </div>
-              <div class="cover-title-group">
-                <p class="eyebrow">AN ATLAS OF EVERYDAY THOUGHT</p>
-                <h1 id="cover-title">PIN<span class="cover-period">.</span></h1>
-                <p class="cover-chinese">我的創作手札</p>
-                <div class="cover-hairline"></div>
-                <p class="cover-intro">從眼見、所想、對話與創作，<br>慢慢形成屬於自己的小宇宙。</p>
-              </div>
-              <div class="cover-bottomline">
-                <div>
-                  <span>NOTEBOOK SERIES</span>
-                  <strong>VOL. 001 — ALWAYS OPEN</strong>
-                </div>
-                <div class="cover-roundel" aria-hidden="true">
-                  <span>P</span>
-                  <small>✳</small>
-                </div>
-              </div>
+            </header>
+            <div class="page-scroll" id="left-scroll" tabindex="0" aria-label="左視窗獨立捲動區">
+              <div class="page-content" id="left-content"></div>
             </div>
-          </article>
-          <aside class="cover-aside cover-aside-right" aria-hidden="true">
-            <span>ARCHIVE NO. 001</span>
-            <div class="vertical-measure"></div>
-            <span>FORM / FEEL / FUNCTION</span>
-          </aside>
-        </div>
-        <div class="scene-action-row">
-          <span class="scene-caption">01 — A COVER IS A PROMISE</span>
-          <button type="button" class="text-action" data-scene="body">展開手札 <span class="action-mark" aria-hidden="true">＋</span></button>
-          <span class="scene-caption scene-caption-right">DESIGN STUDY / NOT PUBLISHED</span>
+            <footer class="page-footer"><span>01 / LEFT PANEL</span><span>SCROLL & CHANGE INDEPENDENTLY</span></footer>
+          </section>
+          <section class="page page-right" aria-label="右視窗">
+            <header class="page-header">
+              <div class="page-label-line"><strong id="right-page-label">視覺收藏</strong><span>IMAGE / FORM / IDEA</span></div>
+              <div class="view-tabs" role="group" aria-label="右側內容">
+                <button type="button" data-pane="right" data-view="research" aria-pressed="false">研究</button>
+                <button type="button" data-pane="right" data-view="dialogue" aria-pressed="false">對話</button>
+                <button type="button" data-pane="right" data-view="timeline" aria-pressed="false">年表</button>
+                <button type="button" data-pane="right" data-view="collection" aria-pressed="true">收藏</button>
+              </div>
+            </header>
+            <div class="page-scroll" id="right-scroll" tabindex="0" aria-label="右視窗獨立捲動區">
+              <div class="page-content" id="right-content"></div>
+            </div>
+            <footer class="page-footer"><span>02 / RIGHT PANEL</span><span>COLLECT · THINK · MAKE</span></footer>
+          </section>
         </div>
       </section>
 
-      <section class="scene notebook-scene" id="scene-body" aria-label="展開的雙頁手札" hidden>
-        <div class="workspace-toolbar">
-          <div class="workspace-intro">
-            <span class="micro-label">02 / THE OPEN SPREAD</span>
-            <h2>留給生活的一整頁<span class="title-spark" aria-hidden="true"> ✳</span></h2>
-          </div>
-          <div class="template-picker" role="group" aria-label="內頁設計模板">
-            <span class="template-label">TEMPLATE</span>
-            <button type="button" class="template-button is-selected" data-template="folio" aria-pressed="true">Folio <span>書頁</span></button>
-            <button type="button" class="template-button" data-template="index" aria-pressed="false">Index <span>索引</span></button>
-            <button type="button" class="template-button" data-template="exhibit" aria-pressed="false">Exhibit <span>展藏</span></button>
-          </div>
+      <section class="scene cover-scene" id="scene-cover" aria-labelledby="cover-title" hidden>
+        <div class="quiet-panel cover-primary">
+          <span class="quiet-index">01 / THE COVER</span>
+          <div class="quiet-bottom"><h1 id="cover-title">PIN.</h1><p>我的創作手札</p></div>
         </div>
-
-        <div class="notebook-stage">
-          <div class="outer-bookmark" aria-hidden="true"><span>P</span><span>I</span><span>N</span></div>
-          <div class="notebook" id="notebook" data-template="folio" data-active-pane="left">
-            <div class="book-spine" aria-hidden="true"></div>
-
-            <section class="page page-left" aria-label="左頁">
-              <header class="page-header">
-                <div class="page-overline">
-                  <span><span class="page-icon" aria-hidden="true">✳</span> PIN / LEFT LEAF</span>
-                  <span class="page-leaf-number">001</span>
-                </div>
-                <div class="page-label-line">
-                  <strong id="left-page-label">研究摘錄</strong>
-                  <span>自由輯錄 / FIELD NOTES</span>
-                </div>
-                <div class="view-tabs" role="group" aria-label="左頁內容">
-                  <button type="button" data-pane="left" data-view="research" aria-pressed="true">研究</button>
-                  <button type="button" data-pane="left" data-view="dialogue" aria-pressed="false">對話</button>
-                  <button type="button" data-pane="left" data-view="timeline" aria-pressed="false">年表</button>
-                  <button type="button" data-pane="left" data-view="collection" aria-pressed="false">收藏</button>
-                </div>
-              </header>
-              <div class="page-scroll" id="left-scroll" tabindex="0" aria-label="左頁獨立捲動區">
-                <div class="page-content" id="left-content"></div>
-              </div>
-              <footer class="page-footer"><span>PIN / NOTES IN MOTION</span><span>01 — L</span></footer>
-            </section>
-
-            <section class="page page-right" aria-label="右頁">
-              <header class="page-header">
-                <div class="page-overline">
-                  <span><span class="page-icon" aria-hidden="true">✳</span> PIN / RIGHT LEAF</span>
-                  <span class="page-leaf-number">002</span>
-                </div>
-                <div class="page-label-line">
-                  <strong id="right-page-label">對話紀錄</strong>
-                  <span>我說 / 你詮釋</span>
-                </div>
-                <div class="view-tabs" role="group" aria-label="右頁內容">
-                  <button type="button" data-pane="right" data-view="research" aria-pressed="false">研究</button>
-                  <button type="button" data-pane="right" data-view="dialogue" aria-pressed="true">對話</button>
-                  <button type="button" data-pane="right" data-view="timeline" aria-pressed="false">年表</button>
-                  <button type="button" data-pane="right" data-view="collection" aria-pressed="false">收藏</button>
-                </div>
-              </header>
-              <div class="page-scroll" id="right-scroll" tabindex="0" aria-label="右頁獨立捲動區">
-                <div class="page-content" id="right-content"></div>
-              </div>
-              <footer class="page-footer"><span>EVERY THOUGHT HAS A PLACE</span><span>02 — R</span></footer>
-            </section>
-          </div>
-          <div class="book-edge" aria-hidden="true"></div>
-        </div>
-        <div class="workspace-bottom">
-          <div class="mobile-pane-picker" role="group" aria-label="手機左右頁切換">
-            <button type="button" class="is-selected" data-show-pane="left" aria-pressed="true">左頁 / LEFT</button>
-            <button type="button" data-show-pane="right" aria-pressed="false">右頁 / RIGHT</button>
-          </div>
-          <p><span class="little-square" aria-hidden="true"></span> 左右內容各自操作 · 模板共用同一骨架</p>
-          <div class="workspace-actions">
-            <button type="button" id="print-spread" class="utility-button">列印 A4 雙頁</button>
-            <button type="button" class="utility-button utility-button-next" data-scene="back">查看封底 <span aria-hidden="true">＋</span></button>
-          </div>
+        <div class="quiet-panel cover-secondary">
+          <div class="quiet-art" aria-hidden="true"><span></span><i></i></div>
+          <p>AN ATLAS OF EVERYDAY THOUGHT</p>
         </div>
       </section>
 
       <section class="scene back-scene" id="scene-back" aria-labelledby="back-title" hidden>
-        <div class="back-layout">
-          <div class="back-object">
-            <div class="back-binding" aria-hidden="true"></div>
-            <div class="back-inner">
-              <div class="back-topline"><span>PIN / THE LIVING NOTEBOOK</span><span aria-hidden="true">✳</span></div>
-              <div class="back-center">
-                <div class="back-symbol" aria-hidden="true">P<span>✳</span></div>
-                <div class="back-rule"></div>
-                <h2 id="back-title">把日子<br>好好收藏。</h2>
-                <p>KEEP WHAT YOU NOTICE.<br>MAKE ROOM FOR WHAT COMES NEXT.</p>
-              </div>
-              <div class="back-bottomline">
-                <span>AN OPEN-ENDED PERSONAL ATLAS</span>
-                <span>VOL. 001 — PIN</span>
-              </div>
-            </div>
-          </div>
-          <div class="back-annotation">
-            <span>03 / BACK COVER</span>
-            <h3>一本沒有最後一頁的手札。</h3>
-            <p>封面的標誌、細線、字距和色彩，在此輕輕回應；內容可以無限延伸，這個空間仍保有自己的性格。</p>
-            <button type="button" class="text-action" data-scene="body">回到內頁 <span class="action-mark" aria-hidden="true">＋</span></button>
-            <div class="back-meta">THIS IS AN INTERACTIVE DESIGN DRAFT.<br>NO PRIVATE DATA · NO CLOUD AUTH</div>
-          </div>
+        <div class="quiet-panel back-primary">
+          <span class="quiet-index">03 / THE BACK COVER</span>
+          <div class="quiet-bottom"><h2 id="back-title">把日子<br>好好收藏。</h2><p>KEEP WHAT YOU NOTICE.</p></div>
+        </div>
+        <div class="quiet-panel back-secondary">
+          <span class="back-mark">P.</span>
+          <p>MAKE ROOM FOR WHAT COMES NEXT.</p>
         </div>
       </section>
     </main>
 
     <footer class="global-footer">
-      <span><span class="footer-flower" aria-hidden="true">✳</span> PIN — CREATIVE NOTEBOOK</span>
-      <span>UI MASTER V001 <i aria-hidden="true"></i> VISUAL STUDY ONLY</span>
+      <span>PIN — CREATIVE NOTEBOOK</span>
+      <div class="mobile-pane-picker" role="group" aria-label="小螢幕左右視窗切換">
+        <button type="button" class="is-selected" data-show-pane="left" aria-pressed="true">左側</button>
+        <button type="button" data-show-pane="right" aria-pressed="false">右側</button>
+      </div>
+      <div class="footer-actions"><span>INDEPENDENT PANELS / DESIGN DRAFT</span><button type="button" id="print-spread">列印 A4</button></div>
     </footer>
   </div>
 
