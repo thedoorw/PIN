@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#eeeae4">
+  <meta name="description" content="PIN UI Master v002 — 以 Panels 為參考的極簡獨立雙視窗草稿。">
+  <title>PIN — Independent Panels / UI Master v002</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <div class="app-frame">
+    <header class="global-header">
+      <button type="button" class="brand" data-scene="body" aria-label="PIN，回到雙視窗">PIN</button>
+      <span class="global-subtitle">A living notebook</span>
+      <nav class="scene-nav" aria-label="手札場景">
+        <button type="button" data-scene="cover">封面</button>
+        <button type="button" data-scene="body" aria-current="page">內頁</button>
+        <button type="button" data-scene="back">封底</button>
+      </nav>
+      <span class="master-id">UI STUDY / 002</span>
+    </header>
+
+    <main id="main-content">
+      <section class="scene notebook-scene is-active" id="scene-body" aria-label="獨立雙視窗">
+        <div class="notebook" id="notebook" data-active-pane="left">
+          <section class="page page-left" aria-label="左視窗">
+            <header class="page-header">
+              <div class="page-label-line"><strong id="left-page-label">研究摘錄</strong><span>自由輯錄 / FIELD NOTES</span></div>
+              <div class="view-tabs" role="group" aria-label="左側內容">
+                <button type="button" data-pane="left" data-view="research" aria-pressed="true">研究</button>
+                <button type="button" data-pane="left" data-view="dialogue" aria-pressed="false">對話</button>
+                <button type="button" data-pane="left" data-view="timeline" aria-pressed="false">年表</button>
+                <button type="button" data-pane="left" data-view="collection" aria-pressed="false">收藏</button>
+              </div>
+            </header>
+            <div class="page-scroll" id="left-scroll" tabindex="0" aria-label="左視窗獨立捲動區">
+              <div class="page-content" id="left-content"></div>
+            </div>
+            <footer class="page-footer"><span>01 / LEFT PANEL</span><span>SCROLL & CHANGE INDEPENDENTLY</span></footer>
+          </section>
+          <section class="page page-right" aria-label="右視窗">
+            <header class="page-header">
+              <div class="page-label-line"><strong id="right-page-label">視覺收藏</strong><span>IMAGE / FORM / IDEA</span></div>
+              <div class="view-tabs" role="group" aria-label="右側內容">
+                <button type="button" data-pane="right" data-view="research" aria-pressed="false">研究</button>
+                <button type="button" data-pane="right" data-view="dialogue" aria-pressed="false">對話</button>
+                <button type="button" data-pane="right" data-view="timeline" aria-pressed="false">年表</button>
+                <button type="button" data-pane="right" data-view="collection" aria-pressed="true">收藏</button>
+              </div>
+            </header>
+            <div class="page-scroll" id="right-scroll" tabindex="0" aria-label="右視窗獨立捲動區">
+              <div class="page-content" id="right-content"></div>
+            </div>
+            <footer class="page-footer"><span>02 / RIGHT PANEL</span><span>COLLECT · THINK · MAKE</span></footer>
+          </section>
+        </div>
+      </section>
+
+      <section class="scene cover-scene" id="scene-cover" aria-labelledby="cover-title" hidden>
+        <div class="quiet-panel cover-primary">
+          <span class="quiet-index">01 / THE COVER</span>
+          <div class="quiet-bottom"><h1 id="cover-title">PIN.</h1><p>我的創作手札</p></div>
+        </div>
+        <div class="quiet-panel cover-secondary">
+          <div class="quiet-art" aria-hidden="true"><span></span><i></i></div>
+          <p>AN ATLAS OF EVERYDAY THOUGHT</p>
+        </div>
+      </section>
+
+      <section class="scene back-scene" id="scene-back" aria-labelledby="back-title" hidden>
+        <div class="quiet-panel back-primary">
+          <span class="quiet-index">03 / THE BACK COVER</span>
+          <div class="quiet-bottom"><h2 id="back-title">把日子<br>好好收藏。</h2><p>KEEP WHAT YOU NOTICE.</p></div>
+        </div>
+        <div class="quiet-panel back-secondary">
+          <span class="back-mark">P.</span>
+          <p>MAKE ROOM FOR WHAT COMES NEXT.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="global-footer">
+      <span>PIN — CREATIVE NOTEBOOK</span>
+      <div class="mobile-pane-picker" role="group" aria-label="小螢幕左右視窗切換">
+        <button type="button" class="is-selected" data-show-pane="left" aria-pressed="true">左側</button>
+        <button type="button" data-show-pane="right" aria-pressed="false">右側</button>
+      </div>
+      <div class="footer-actions"><span>INDEPENDENT PANELS / DESIGN DRAFT</span><button type="button" id="print-spread">列印 A4</button></div>
+    </footer>
+  </div>
+
+  <template id="view-research">
+    <div class="folio-content">
+      <p class="content-kicker"><span>OBSERVATION / 001</span><span>REFERENCE STUDY</span></p>
+      <h3 class="content-title">讓靈感<br>慢慢成形<span class="title-dot">.</span></h3>
+      <p class="content-lead">一種靠近生活的紀錄方式：看見的圖像、讀過的文章、忽然浮現的念頭，都能找到位置。</p>
+      <div class="illustration-block" role="img" aria-label="以 CSS 幾何造形示意的圖片收藏位置">
+        <div class="illustration-circle"></div>
+        <div class="illustration-shape"></div>
+        <span class="illustration-tag">VISUAL PLACEHOLDER / 01</span>
+      </div>
+      <div class="content-caption"><span>01 — FRAME</span><span>IMAGE / REFERENCE / NOTE</span></div>
+      <div class="research-grid">
+        <div><span>01 / SEE</span><strong>眼見</strong><p>先保存感受到的秩序、色彩與細節。</p></div>
+        <div><span>02 / THINK</span><strong>所想</strong><p>留下自己的判斷，而不急著替它定義。</p></div>
+        <div><span>03 / MAKE</span><strong>創作</strong><p>讓片段彼此相遇，逐漸形成一件作品。</p></div>
+      </div>
+      <blockquote class="content-quote">“好的紀錄方式，應該讓人更願意觀察。”<small>示意排版文字 / NON-ARCHIVAL</small></blockquote>
+      <div class="note-rules" aria-hidden="true"><span>NOTES</span><i></i><i></i><i></i></div>
+    </div>
+  </template>
+
+  <template id="view-dialogue">
+    <div class="folio-content dialogue-content">
+      <p class="content-kicker"><span>DIALOGUE / 002</span><span>TWO VOICES</span></p>
+      <h3 class="content-title">我說，<br>你詮釋<span class="title-dot">.</span></h3>
+      <p class="content-lead">原話與理解分開保存。這裡只放示意內容，不代表任何真實對話或歸檔紀錄。</p>
+      <article class="voice-card human-voice">
+        <div class="voice-top"><span>01</span><strong>我說 / ORIGINAL</strong><span>VERBATIM</span></div>
+        <p>「這裡將保留我的原話，不替我重寫，也不急著替想法分類。」</p>
+        <small>佔位示例，不是真實使用者發言</small>
+      </article>
+      <div class="conversation-connector" aria-hidden="true"><span>✳</span></div>
+      <article class="voice-card assistant-voice">
+        <div class="voice-top"><span>02</span><strong>你詮釋 / RESPONSE</strong><span>INTERPRETATION</span></div>
+        <p>這裡明確標示 AI 的理解、建議與推論，避免與使用者的真正意圖混為一談。</p>
+        <small>佔位示例，不是真實 AI 歷史紀錄</small>
+      </article>
+      <div class="conversation-footer">
+        <span>CAPTURE → REFLECT → ARCHIVE</span>
+        <p>值得保留的不是只有結論，還有一個念頭逐漸長出輪廓的過程。</p>
+      </div>
+      <div class="note-rules" aria-hidden="true"><span>AFTERTHOUGHTS</span><i></i><i></i></div>
+    </div>
+  </template>
+
+  <template id="view-timeline">
+    <div class="folio-content timeline-content">
+      <p class="content-kicker"><span>CHRONICLE / 003</span><span>WORK IN TIME</span></p>
+      <h3 class="content-title">時間也<br>值得排版<span class="title-dot">.</span></h3>
+      <p class="content-lead">大事記不只用來追蹤完成了什麼，也用來回望方法是如何改變的。</p>
+      <div class="timeline-warning">示意條目 / DUMMY CONTENT — 並非真實專案日期或成就</div>
+      <div class="timeline-list">
+        <article class="timeline-item"><div class="timeline-index"><span>01</span><i></i></div><div><small>STAGE / OBSERVE</small><h4>看見一個問題</h4><p>從生活或工具的不足開始，寫下想做的事。</p><span class="timeline-foot">IDEA → QUESTION</span></div></article>
+        <article class="timeline-item"><div class="timeline-index"><span>02</span><i></i></div><div><small>STAGE / RESEARCH</small><h4>收集與比較</h4><p>不同作品、工具和方法，在同一頁形成對照。</p><span class="timeline-foot">REFERENCE → METHOD</span></div></article>
+        <article class="timeline-item"><div class="timeline-index"><span>03</span><i></i></div><div><small>STAGE / MAKE</small><h4>第一次真正做出來</h4><p>不把草稿當成果，讓瀏覽器裡出現可操作的作品。</p><span class="timeline-foot">DRAFT → PROTOTYPE</span></div></article>
+        <article class="timeline-item"><div class="timeline-index"><span>04</span><i></i></div><div><small>STAGE / REVIEW</small><h4>回頭看自己的方法</h4><p>留住成功的做法，也坦然記錄失敗與調整。</p><span class="timeline-foot">EVIDENCE → NEXT</span></div></article>
+      </div>
+    </div>
+  </template>
+
+  <template id="view-collection">
+    <div class="folio-content collection-content">
+      <p class="content-kicker"><span>COLLECTION / 004</span><span>IMAGE & FORM</span></p>
+      <h3 class="content-title">把喜歡的<br>放在一起<span class="title-dot">.</span></h3>
+      <p class="content-lead">沒有必要一開始就知道它們的用途。像標本，也像尚未排好的展覽。</p>
+      <div class="collection-grid">
+        <figure class="collection-figure collection-a"><div class="collection-art art-a"><span></span><i></i></div><figcaption><b>01 / FORM</b><span>光與形 / 示意</span></figcaption></figure>
+        <figure class="collection-figure collection-b"><div class="collection-art art-b"><span></span><i></i></div><figcaption><b>02 / COLOR</b><span>色彩筆記 / 示意</span></figcaption></figure>
+        <figure class="collection-figure collection-c"><div class="collection-art art-c"><span>p</span><i>i</i><b>n</b></div><figcaption><b>03 / TYPE</b><span>字形實驗 / 示意</span></figcaption></figure>
+      </div>
+      <div class="collection-endnote"><span>COLLECTED WITHOUT HURRY</span><p>這裡的幾何只是 CSS 版面佔位，不包含任何外部圖像或個人作品。</p></div>
+      <div class="note-rules" aria-hidden="true"><span>INDEX</span><i></i><i></i></div>
+    </div>
+  </template>
+</body>
+</html>
